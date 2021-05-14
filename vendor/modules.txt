@@ -337,6 +337,9 @@ github.com/spf13/pflag
 # github.com/spf13/viper v1.7.0
 ## explicit
 github.com/spf13/viper
+# github.com/streadway/amqp v1.0.0
+## explicit
+github.com/streadway/amqp
 # github.com/stretchr/testify v1.6.1
 ## explicit
 github.com/stretchr/testify/assert
