@@ -53,18 +53,18 @@ func GetConfig(systemType string) (map[string]string, map[string]string, error) 
 	configs := make(map[string]string)
 
 	if systemType == "nats" {
-		configs["MF_NATS_URL"] = mainflux.Env(envNatsURL, defNatsURL)
-		configs["MF_NATS_TLS_CONFIG"] = mainflux.Env(envNatsTLSConfig, defNatsTLSConfig)
+		configs[envNatsURL] = mainflux.Env(envNatsURL, defNatsURL)
+		configs[envNatsTLSConfig] = mainflux.Env(envNatsTLSConfig, defNatsTLSConfig)
 		return configs, nil, nil
 	} else if systemType == "rabbitmq" {
-		configs["MF_RABBITMQ_URL"] = mainflux.Env(envRabbitmqURL, defRabbitmqURL)
-		configs["MF_RABBITMQ_TLS_CONFIG"] = mainflux.Env(envRabbitmqTLSConfig, defRabbitmqTLSConfig)
-		configs["MF_RABBITMQ_DURABLE"] = mainflux.Env(envRabbitmqDurable, defRabbitmqDurable)
-		configs["MF_RABBITMQ_TTL"] = mainflux.Env(envRabbitmqTTL, defRabbitmqTTL)
-		configs["MF_RABBITMQ_PRIORITY"] = mainflux.Env(envRabbitmqPriority, defRabbitmqPriority)
-		configs["MF_RABBITMQ_CONTENT_TYPE"] = mainflux.Env(envRabbitmqContentType, defRabbitmqContentType)
-		configs["MF_RABBITMQ_SUB_SYSTEM"] = mainflux.Env(envRabbitmqSubSystem, defRabbitmqSubSystem)
-		configs["MF_RABBITMQ_SEVERITY"] = mainflux.Env(envRabbitmqSeverity, defRabbitmqSeverity)
+		configs[envRabbitmqURL] = mainflux.Env(envRabbitmqURL, defRabbitmqURL)
+		configs[envRabbitmqTLSConfig] = mainflux.Env(envRabbitmqTLSConfig, defRabbitmqTLSConfig)
+		configs[envRabbitmqDurable] = mainflux.Env(envRabbitmqDurable, defRabbitmqDurable)
+		configs[envRabbitmqTTL] = mainflux.Env(envRabbitmqTTL, defRabbitmqTTL)
+		configs[envRabbitmqPriority] = mainflux.Env(envRabbitmqPriority, defRabbitmqPriority)
+		configs[envRabbitmqContentType] = mainflux.Env(envRabbitmqContentType, defRabbitmqContentType)
+		configs[envRabbitmqSubSystem] = mainflux.Env(envRabbitmqSubSystem, defRabbitmqSubSystem)
+		configs[envRabbitmqSeverity] = mainflux.Env(envRabbitmqSeverity, defRabbitmqSeverity)
 		
 		queue := make(map[string]string)
 		qString := mainflux.Env(envRabbitmqQueues, defRabbitmqQueues)
