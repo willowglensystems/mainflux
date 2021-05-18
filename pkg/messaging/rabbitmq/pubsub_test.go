@@ -26,7 +26,7 @@ var (
 
 func TestPubsub(t *testing.T) {
 	err := pubsub.Subscribe(topic, handler)
-	
+
 	cases := []struct {
 		desc     string
 		channel  string
@@ -71,7 +71,7 @@ func TestPubsub(t *testing.T) {
 		require.Nil(t, err, fmt.Sprintf("got unexpected error: %s", err))
 
 		err = pubsub.Publish(topic, expectedMsg)
-		
+
 		require.Nil(t, err, fmt.Sprintf("got unexpected error: %s", err))
 
 		receivedMsg := <-msgChan

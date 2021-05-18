@@ -4,13 +4,15 @@
 package rabbitmq
 
 import (
+	"context"
 	"fmt"
+	"time"
 
 	"github.com/gogo/protobuf/proto"
 
 	log "github.com/mainflux/mainflux/logger"
 	"github.com/mainflux/mainflux/pkg/messaging"
-	"github.com/streadway/amqp"
+	"github.com/Azure/go-amqp"
 )
 
 const SubjectAllChannels = "channels.*"
@@ -22,8 +24,8 @@ type PubSub interface {
 }
 
 type pubsub struct {
-	conn          *amqp.Connection
-	channel       *amqp.Channel
+	conn          *amqp.Client
+	session       *amqp.Session
 	logger        log.Logger
 	queue         string
 }
@@ -34,14 +36,14 @@ func NewPubSub(url, queue string, logger log.Logger) (PubSub, error) {
 		return nil, err
 	}
 
-	channel, err := conn.Channel()
+	session, err := conn.NewSession()
 	if err != nil {
 		return nil, fmt.Errorf("Channel: %s", err)
 	}
 
 	ret := &pubsub{
 		conn:          conn,
-		channel:       channel,
+		session:       session,
 		queue:         queue,
 		logger:        logger,
 	}
@@ -55,137 +57,47 @@ func (pubsub *pubsub) Publish(topic string, msg messaging.Message) error {
 		return err
 	}
 
-	exchangeName := topic
-	exchangeType := "topic"
-	queueName := msg.Subtopic
-	routingKey := msg.Subtopic
+	ctx := context.Background()
 
-	if err := pubsub.channel.ExchangeDeclare(
-		exchangeName, // name
-		exchangeType, // type
-		true,         // durable
-		false,        // auto-deleted
-		false,        // internal
-		false,        // noWait
-		nil,          // arguments
-	); err != nil {
-		return fmt.Errorf("Exchange Declare: %s", err)
-	}
-
-	_, err = pubsub.channel.QueueDeclare( 
-		queueName, // name
-		true,      // durable
-		false,     // autoDelete
-		false,     // exclusive
-		false,     // noWait
-		nil,       // args
-	);
+	sender, err := pubsub.session.NewSender(amqp.LinkTargetAddress(topic))
 	if err != nil {
-		return fmt.Errorf("Queue Declare: %s", err)
+		pubsub.logger.Error( fmt.Sprintf( "Creating sender link: %s ", err) )
 	}
 
-	if err := pubsub.channel.QueueBind( 
-		queueName,    // name
-		routingKey,   // key
-		exchangeName, // exchange
-		false,        // noWait
-		nil,          // args
-	); err != nil {
-		return fmt.Errorf("Queue Bind: %s", err)
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+
+	// Send message
+	err = sender.Send(ctx, amqp.NewMessage([]byte(data)))
+	if err != nil {
+		pubsub.logger.Error( fmt.Sprintf( "Sending message: %s", err ) )
 	}
 
-	if err = pubsub.channel.Publish(
-		exchangeName, // publish to an exchange
-		routingKey,   // routing to 0 or more queues
-		false,        // mandatory
-		false,        // immediate
-		amqp.Publishing{
-			Headers:         amqp.Table{},
-			ContentType:     "text/plain",
-			ContentEncoding: "",
-			Body:            []byte(data),
-			DeliveryMode:    amqp.Transient, // 1=non-persistent, 2=persistent
-			Priority:        0,              // 0-9
-			// a bunch of application/implementation-specific fields
-		},
-	); err != nil {
-		return fmt.Errorf("Exchange Publish: %s", err)
-	}
+	cancel()
+	sender.Close(ctx)
 
 	return nil
 }
 
 func (pubsub *pubsub) Subscribe(topic string, handler messaging.MessageHandler) error {
-
-	exchangeName := topic
-	exchangeType := "topic"
-	queueName := pubsub.queue
-	routingKey := pubsub.queue
-
-	channel, err := pubsub.conn.Channel()
-	if err != nil {
-		return fmt.Errorf("Channel: %s", err)
-	}
-
-	if err := channel.ExchangeDeclare(
-		exchangeName, // name
-		exchangeType, // type
-		true,         // durable
-		false,        // auto-deleted
-		false,        // internal
-		false,        // noWait
-		nil,          // arguments
-	); err != nil {
-		return fmt.Errorf("Exchange Declare: %s", err)
-	}
-
-	_, err = channel.QueueDeclare( 
-		queueName, // name
-		true,      // durable
-		false,     // autoDelete
-		false,     // exclusive
-		false,     // noWait
-		nil,       // args
-	);
-	if err != nil {
-		return fmt.Errorf("Queue Declare: %s", err)
-	}
-
-	if err := channel.QueueBind( 
-		queueName,    // name
-		routingKey,   // key
-		exchangeName, // exchange
-		false,        // noWait
-		nil,          // args
-	); err != nil {
-		return fmt.Errorf("Queue Bind: %s", err)
-	}
-
-	messages, err := channel.Consume(
-		queueName,  // name
-		"",         // consumerTag,
-		false,      // noAck
-		false,      // exclusive
-		false,      // noLocal
-		false,      // noWait
-		nil,        // arguments
+	receiver, err := pubsub.session.NewReceiver(
+		amqp.LinkSourceAddress(topic),
+		amqp.LinkCredit(10),
 	)
 	if err != nil {
-		return fmt.Errorf("Queue Consume: %s", err)
+		pubsub.logger.Error(fmt.Sprintf("Creating receiver link: %s", err))
 	}
 
-	go handle(messages, handler)
+	messages := make(chan *amqp.Message)
+	go handleMessages(messages, handler)
+	go receiveMessages(messages, receiver)
 
 	return nil
 }
 
-func handle(messages <-chan amqp.Delivery, handler messaging.MessageHandler) {
+func handleMessages(messages chan *amqp.Message, handler messaging.MessageHandler) {
 	for message := range messages {
-		//fmt.Printf( "got %dB delivery: [%v] %q", len(message.Body), message.DeliveryTag, message.Body )
-		message.Ack(false)
-
 		var msg messaging.Message
-		if err := proto.Unmarshal(message.Body, &msg); err != nil {
+		if err := proto.Unmarshal(message.GetData(), &msg); err != nil {
 			fmt.Println(fmt.Sprintf("Failed to unmarshal received message: %s", err))
 			return
 		}
@@ -194,10 +106,37 @@ func handle(messages <-chan amqp.Delivery, handler messaging.MessageHandler) {
 	}
 }
 
+func receiveMessages(messages chan *amqp.Message, receiver *amqp.Receiver) {
+	ctx := context.Background()
+
+	defer func() {
+		ctx, cancel := context.WithTimeout(ctx, 1*time.Second)
+		receiver.Close(ctx)
+		cancel()
+	}()
+
+
+	for {
+		msg, err := receiver.Receive(ctx)
+		if err != nil {
+			fmt.Println(fmt.Sprintf("Reading message from AMQP: %s", err))
+			return
+		}
+
+		// Accept message
+		msg.Accept(context.Background())
+
+		messages <- msg
+	}
+}
+
 func (pubsub *pubsub) Unsubscribe(topic string) error {
-	if err := pubsub.channel.Cancel("", true); err != nil {
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	if err := pubsub.session.Close(ctx); err != nil {
 		return fmt.Errorf("Consumer cancel failed: %s", err)
 	}
+	cancel()
 	return nil
 }
 

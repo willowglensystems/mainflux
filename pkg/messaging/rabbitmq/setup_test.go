@@ -28,18 +28,16 @@ func TestMain(m *testing.M) {
 		log.Fatalf("Could not connect to docker: %s", err)
 	}
 
-	container, err := pool.Run("rabbitmq", "3-management-alpine", []string{})
-	if err != nil {
-		log.Fatalf("Could not start container: %s", err)
-	}
+	container, err := pool.BuildAndRun("rabbitmq-amqp1.0", "./Dockerfile", []string{})
+
 	handleInterrupt(pool, container)
 
-	address := fmt.Sprintf("%s:%s", "amqp://localhost", container.GetPort("5672/tcp"))
+	address := fmt.Sprintf("%s:%s", "amqp://guest:guest@localhost", container.GetPort("5672/tcp"))
 	if err := pool.Retry(func() error {
 		publisher, err = rabbitmq.NewPublisher(address)
 		return err
 	}); err != nil {
-		log.Fatalf("Could not connect to docker: %s", err)
+		log.Fatalf("Failed to create publisher: %s", err)
 	}
 
 	logger, err := logger.New(os.Stdout, "error")
@@ -50,7 +48,7 @@ func TestMain(m *testing.M) {
 		pubsub, err = rabbitmq.NewPubSub(address, "queue", logger)
 		return err
 	}); err != nil {
-		log.Fatalf("Could not connect to docker: %s", err)
+		log.Fatalf("Failed to create pubsub: %s", err)
 	}
 
 	code := m.Run()
