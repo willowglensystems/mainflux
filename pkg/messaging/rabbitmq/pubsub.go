@@ -6,15 +6,19 @@ package rabbitmq
 import (
 	"context"
 	"fmt"
+	"strconv"
 	"time"
 
 	log "github.com/mainflux/mainflux/logger"
+	"github.com/mainflux/mainflux/queue-configuration"
 	"github.com/mainflux/mainflux/pkg/messaging"
 	"github.com/Azure/go-amqp"
+	"github.com/google/uuid"
 )
 
 const (
 	maxMessages            = 10
+	pubTimeout             = 5
 	receiveTimeout         = 1
 )
 
@@ -61,10 +65,10 @@ func (pubsub *pubsub) Publish(topic string, msg messaging.Message) error {
 		pubsub.logger.Error( fmt.Sprintf( "Creating sender link: %s ", err) )
 	}
 
-	ctx, cancel := context.WithTimeout(ctx, publishTimeout * time.Second)
+	ctx, cancel := context.WithTimeout(ctx, pubTimeout * time.Second)
 
 	// Send message
-	err = sender.Send(ctx, createMessage(topic,msg))
+	err = sender.Send(ctx, pubsub.createMessage(topic,msg))
 	if err != nil {
 		pubsub.logger.Error( fmt.Sprintf( "Sending message: %s", err ) )
 	}
@@ -136,4 +140,44 @@ func (pubsub *pubsub) Unsubscribe(topic string) error {
 
 func (pubsub *pubsub) Close() {
 	pubsub.conn.Close()
+}
+
+func (pubsub *pubsub) createMessage(topic string, msg messaging.Message) *amqp.Message {
+	configs, queues, _ := queueConfiguration.GetConfig()
+
+	durableValue, err := strconv.ParseBool(configs[queueConfiguration.EnvRabbitmqDurable])
+
+	if err != nil {
+		fmt.Println("Unable to parse Durable configuration, defaulting to false")
+		durableValue = false
+	}
+
+	priorityValue, err := strconv.ParseUint(configs[queueConfiguration.EnvRabbitmqPriority], 10, 64)
+
+	if err != nil {
+		fmt.Println("Unable to parse Priority configuration, defaulting to 1")
+		priorityValue = 1
+	}
+
+
+	ttlValue, err := strconv.ParseUint(configs[queueConfiguration.EnvRabbitmqTTL], 10, 64)
+
+	if err != nil {
+		fmt.Println("Unable to parse TTL configuration, defaulting to 3600000 milliseconds")
+		ttlValue = 3600000
+	}
+
+	message := amqp.NewMessage([]byte(msg.Payload))
+	message.Header = &amqp.MessageHeader {
+		Durable: durableValue,
+		Priority: uint8(priorityValue),
+		TTL: time.Duration( ttlValue ) * time.Millisecond,
+	}
+	message.Properties = &amqp.MessageProperties {
+		ReplyTo: queues[topic],
+		CorrelationID: uuid.New().String(),
+		ContentType: configs[queueConfiguration.EnvRabbitmqContentType],
+	}
+
+	return message
 }

@@ -12,15 +12,11 @@ import (
 	"github.com/mainflux/mainflux/queue-configuration"
 	"github.com/mainflux/mainflux/pkg/messaging"
 	"github.com/Azure/go-amqp"
+	"github.com/google/uuid"
 )
 
 const (
 	publishTimeout         = 5
-	envRabbitmqDurable     = "MF_RABBITMQ_DURABLE"
-	envRabbitmqTTL         = "MF_RABBITMQ_TTL"
-	envRabbitmqPriority    = "MF_RABBITMQ_PRIORITY"
-	envRabbitmqContentType = "MF_RABBITMQ_CONTENT_TYPE"
-	envRabbitmqQueues      = "MF_RABBITMQ_QUEUES"
 )
 
 var _ messaging.Publisher = (*publisher)(nil)
@@ -63,9 +59,9 @@ func (pub *publisher) Publish(topic string, msg messaging.Message) error {
 	}
 
 	ctx, cancel := context.WithTimeout(ctx, publishTimeout * time.Second)
-	
+
 	// Send message
-	err = sender.Send(ctx, createMessage(topic,msg))
+	err = sender.Send(ctx, pub.createMessage(topic,msg))
 	if err != nil {
 		fmt.Println("Sending message:", err)
 	}
@@ -80,27 +76,28 @@ func (pub *publisher) Close() {
 	pub.conn.Close()
 }
 
-func createMessage(topic string, msg messaging.Message) *amqp.Message {
-	systemType := queueConfiguration.GetSystem()
-	
-	configs, queues, _ := queueConfiguration.GetConfig(systemType)
+func (pub *publisher) createMessage(topic string, msg messaging.Message) *amqp.Message {
+	configs, queues, _ := queueConfiguration.GetConfig()
 
-	durableValue, err := strconv.ParseBool(configs[envRabbitmqDurable])
+	durableValue, err := strconv.ParseBool(configs[queueConfiguration.EnvRabbitmqDurable])
 
 	if err != nil {
+		fmt.Println("Unable to parse Durable configuration, defaulting to false")
 		durableValue = false
 	}
 
-	priorityValue, err := strconv.ParseUint(configs[envRabbitmqPriority], 10, 64)
+	priorityValue, err := strconv.ParseUint(configs[queueConfiguration.EnvRabbitmqPriority], 10, 64)
 
 	if err != nil {
+		fmt.Println("Unable to parse Priority configuration, defaulting to 1")
 		priorityValue = 1
 	}
 
 
-	ttlValue, err := strconv.ParseUint(configs[envRabbitmqTTL], 10, 64)
+	ttlValue, err := strconv.ParseUint(configs[queueConfiguration.EnvRabbitmqTTL], 10, 64)
 
 	if err != nil {
+		fmt.Println("Unable to parse TTL configuration, defaulting to 3600000 milliseconds")
 		ttlValue = 3600000
 	}
 
@@ -112,7 +109,8 @@ func createMessage(topic string, msg messaging.Message) *amqp.Message {
 	}
 	message.Properties = &amqp.MessageProperties {
 		ReplyTo: queues[topic],
-		ContentType: configs[envRabbitmqContentType],
+		CorrelationID: uuid.New(),
+		ContentType: configs[queueConfiguration.EnvRabbitmqContentType],
 	}
 
 	return message

@@ -18,7 +18,6 @@ import (
 )
 
 var (
-	publisher messaging.Publisher
 	pubsub    messaging.PubSub
 )
 
@@ -37,13 +36,6 @@ func TestMain(m *testing.M) {
 	}
 
 	address := fmt.Sprintf("%s:%s", "amqp://guest:guest@localhost", container.GetPort("5672/tcp"))
-
-	if err := pool.Retry(func() error {
-		publisher, err = rabbitmq.NewPublisher(address)
-		return err
-	}); err != nil {
-		log.Fatalf("Failed to create publisher: %s", err)
-	}
 
 	logger, err := logger.New(os.Stdout, "error")
 	if err != nil {
