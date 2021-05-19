@@ -8,11 +8,14 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/gogo/protobuf/proto"
-
 	log "github.com/mainflux/mainflux/logger"
 	"github.com/mainflux/mainflux/pkg/messaging"
 	"github.com/Azure/go-amqp"
+)
+
+const (
+	maxMessages            = 10
+	receiveTimeout         = 1
 )
 
 const SubjectAllChannels = "channels.*"
@@ -51,12 +54,6 @@ func NewPubSub(url, queue string, logger log.Logger) (PubSub, error) {
 }
 
 func (pubsub *pubsub) Publish(topic string, msg messaging.Message) error {
-	data, err := proto.Marshal(&msg)
-
-	if err != nil {
-		return err
-	}
-
 	ctx := context.Background()
 
 	sender, err := pubsub.session.NewSender(amqp.LinkTargetAddress(topic))
@@ -64,10 +61,10 @@ func (pubsub *pubsub) Publish(topic string, msg messaging.Message) error {
 		pubsub.logger.Error( fmt.Sprintf( "Creating sender link: %s ", err) )
 	}
 
-	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	ctx, cancel := context.WithTimeout(ctx, publishTimeout * time.Second)
 
 	// Send message
-	err = sender.Send(ctx, amqp.NewMessage([]byte(data)))
+	err = sender.Send(ctx, createMessage(topic,msg))
 	if err != nil {
 		pubsub.logger.Error( fmt.Sprintf( "Sending message: %s", err ) )
 	}
@@ -81,7 +78,7 @@ func (pubsub *pubsub) Publish(topic string, msg messaging.Message) error {
 func (pubsub *pubsub) Subscribe(topic string, handler messaging.MessageHandler) error {
 	receiver, err := pubsub.session.NewReceiver(
 		amqp.LinkSourceAddress(topic),
-		amqp.LinkCredit(10),
+		amqp.LinkCredit(maxMessages),
 	)
 	if err != nil {
 		pubsub.logger.Error(fmt.Sprintf("Creating receiver link: %s", err))
@@ -96,12 +93,9 @@ func (pubsub *pubsub) Subscribe(topic string, handler messaging.MessageHandler) 
 
 func handleMessages(messages chan *amqp.Message, handler messaging.MessageHandler) {
 	for message := range messages {
-		var msg messaging.Message
-		if err := proto.Unmarshal(message.GetData(), &msg); err != nil {
-			fmt.Println(fmt.Sprintf("Failed to unmarshal received message: %s", err))
-			return
+		var msg = messaging.Message {
+			Payload: message.GetData(),
 		}
-
 		handler( msg )
 	}
 }
@@ -110,7 +104,7 @@ func receiveMessages(messages chan *amqp.Message, receiver *amqp.Receiver) {
 	ctx := context.Background()
 
 	defer func() {
-		ctx, cancel := context.WithTimeout(ctx, 1*time.Second)
+		ctx, cancel := context.WithTimeout(ctx, receiveTimeout * time.Second)
 		receiver.Close(ctx)
 		cancel()
 	}()
@@ -132,7 +126,7 @@ func receiveMessages(messages chan *amqp.Message, receiver *amqp.Receiver) {
 
 func (pubsub *pubsub) Unsubscribe(topic string) error {
 	ctx := context.Background()
-	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	ctx, cancel := context.WithTimeout(ctx, receiveTimeout * time.Second)
 	if err := pubsub.session.Close(ctx); err != nil {
 		return fmt.Errorf("Consumer cancel failed: %s", err)
 	}
@@ -143,4 +137,3 @@ func (pubsub *pubsub) Unsubscribe(topic string) error {
 func (pubsub *pubsub) Close() {
 	pubsub.conn.Close()
 }
-

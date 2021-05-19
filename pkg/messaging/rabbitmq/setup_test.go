@@ -32,7 +32,12 @@ func TestMain(m *testing.M) {
 
 	handleInterrupt(pool, container)
 
+	if err != nil {
+		log.Fatalf("Container creation failed: %s", err)
+	}
+
 	address := fmt.Sprintf("%s:%s", "amqp://guest:guest@localhost", container.GetPort("5672/tcp"))
+
 	if err := pool.Retry(func() error {
 		publisher, err = rabbitmq.NewPublisher(address)
 		return err

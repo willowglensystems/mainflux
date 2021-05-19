@@ -6,11 +6,21 @@ package rabbitmq
 import (
 	"context"
 	"fmt"
+	"strconv"
 	"time"
 
-	"github.com/gogo/protobuf/proto"
+	"github.com/mainflux/mainflux/queue-configuration"
 	"github.com/mainflux/mainflux/pkg/messaging"
 	"github.com/Azure/go-amqp"
+)
+
+const (
+	publishTimeout         = 5
+	envRabbitmqDurable     = "MF_RABBITMQ_DURABLE"
+	envRabbitmqTTL         = "MF_RABBITMQ_TTL"
+	envRabbitmqPriority    = "MF_RABBITMQ_PRIORITY"
+	envRabbitmqContentType = "MF_RABBITMQ_CONTENT_TYPE"
+	envRabbitmqQueues      = "MF_RABBITMQ_QUEUES"
 )
 
 var _ messaging.Publisher = (*publisher)(nil)
@@ -45,12 +55,6 @@ func NewPublisher(url string) (Publisher, error) {
 }
 
 func (pub *publisher) Publish(topic string, msg messaging.Message) error {
-	data, err := proto.Marshal(&msg)
-
-	if err != nil {
-		return err
-	}
-
 	ctx := context.Background()
 
 	sender, err := pub.session.NewSender(amqp.LinkTargetAddress(topic))
@@ -58,10 +62,10 @@ func (pub *publisher) Publish(topic string, msg messaging.Message) error {
 		fmt.Println("Creating sender link:", err)
 	}
 
-	ctx, cancel := context.WithTimeout(ctx, 5 * time.Second)
-
+	ctx, cancel := context.WithTimeout(ctx, publishTimeout * time.Second)
+	
 	// Send message
-	err = sender.Send(ctx, amqp.NewMessage([]byte(data)))
+	err = sender.Send(ctx, createMessage(topic,msg))
 	if err != nil {
 		fmt.Println("Sending message:", err)
 	}
@@ -74,4 +78,42 @@ func (pub *publisher) Publish(topic string, msg messaging.Message) error {
 
 func (pub *publisher) Close() {
 	pub.conn.Close()
+}
+
+func createMessage(topic string, msg messaging.Message) *amqp.Message {
+	systemType := queueConfiguration.GetSystem()
+	
+	configs, queues, _ := queueConfiguration.GetConfig(systemType)
+
+	durableValue, err := strconv.ParseBool(configs[envRabbitmqDurable])
+
+	if err != nil {
+		durableValue = false
+	}
+
+	priorityValue, err := strconv.ParseUint(configs[envRabbitmqPriority], 10, 64)
+
+	if err != nil {
+		priorityValue = 1
+	}
+
+
+	ttlValue, err := strconv.ParseUint(configs[envRabbitmqTTL], 10, 64)
+
+	if err != nil {
+		ttlValue = 3600000
+	}
+
+	message := amqp.NewMessage([]byte(msg.Payload))
+	message.Header = &amqp.MessageHeader {
+		Durable: durableValue,
+		Priority: uint8(priorityValue),
+		TTL: time.Duration( ttlValue ) * time.Millisecond,
+	}
+	message.Properties = &amqp.MessageProperties {
+		ReplyTo: queues[topic],
+		ContentType: configs[envRabbitmqContentType],
+	}
+
+	return message
 }
