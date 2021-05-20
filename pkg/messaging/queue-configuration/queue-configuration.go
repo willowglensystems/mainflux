@@ -8,6 +8,9 @@ import (
 )
 
 const (
+	NatsMessagingSystem     = "nats"
+	RabbitmqMessagingSystem = "rabbitmq"
+
 	DefQueueSystem         = "nats"
 	DefRabbitmqURL         = "amqp://guest:guest@rabbitmq/"
 	DefRabbitmqTLSConfig   = ""
@@ -50,11 +53,11 @@ func GetConfig() (map[string]string, map[string]string, error) {
 	configs := make(map[string]string)
 	systemType := mainflux.Env(EnvQueueSystem, DefQueueSystem)
 
-	if systemType == "nats" {
+	if systemType == NatsMessagingSystem {
 		configs[EnvNatsURL] = mainflux.Env(EnvNatsURL, DefNatsURL)
 		configs[EnvNatsTLSConfig] = mainflux.Env(EnvNatsTLSConfig, DefNatsTLSConfig)
 		return configs, nil, nil
-	} else if systemType == "rabbitmq" {
+	} else if systemType == RabbitmqMessagingSystem {
 		configs[EnvRabbitmqURL] = mainflux.Env(EnvRabbitmqURL, DefRabbitmqURL)
 		configs[EnvRabbitmqTLSConfig] = mainflux.Env(EnvRabbitmqTLSConfig, DefRabbitmqTLSConfig)
 		configs[EnvRabbitmqDurable] = mainflux.Env(EnvRabbitmqDurable, DefRabbitmqDurable)
