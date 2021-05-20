@@ -8,18 +8,18 @@ import (
 )
 
 const (
-	defQueueSystem         = "nats"
-	defRabbitmqURL         = "amqp://guest:guest@rabbitmq/"
-	defRabbitmqTLSConfig   = ""
-	defRabbitmqDurable     = "true"
-	defRabbitmqTTL         = "345600"
-	defRabbitmqPriority    = "5"
-	defRabbitmqContentType = "applicationnn/json"
-	defRabbitmqSubSystem   = "smc"
-	defRabbitmqSeverity    = "6"
-	defRabbitmqQueues      = ""
-	defNatsURL             = "nats://nats:4222"
-	defNatsTLSConfig       = ""
+	DefQueueSystem         = "nats"
+	DefRabbitmqURL         = "amqp://guest:guest@rabbitmq/"
+	DefRabbitmqTLSConfig   = ""
+	DefRabbitmqDurable     = "false"
+	DefRabbitmqTTL         = "3600000" // Milliseconds
+	DefRabbitmqPriority    = "1"
+	DefRabbitmqContentType = "application/json"
+	DefRabbitmqSubSystem   = "smc"
+	DefRabbitmqSeverity    = "6"
+	DefRabbitmqQueues      = ""
+	DefNatsURL             = "nats://nats:4222"
+	DefNatsTLSConfig       = ""
 
 	EnvQueueSystem         = "MF_QUEUE_SYSTEM"
 	EnvRabbitmqURL         = "MF_RABBITMQ_URL"
@@ -38,7 +38,7 @@ const (
 // GetSystem returns the type of queue system. 
 // If no queue system is specified, it returns the default system.
 func GetSystem() string {
-	systemType := mainflux.Env(EnvQueueSystem, defQueueSystem)
+	systemType := mainflux.Env(EnvQueueSystem, DefQueueSystem)
 	return systemType
 }
 
@@ -48,24 +48,24 @@ func GetSystem() string {
 // The third parameter is the error in the case that the provided systemType is not valid.
 func GetConfig() (map[string]string, map[string]string, error) {
 	configs := make(map[string]string)
-	systemType := mainflux.Env(EnvQueueSystem, defQueueSystem)
+	systemType := mainflux.Env(EnvQueueSystem, DefQueueSystem)
 
 	if systemType == "nats" {
-		configs[EnvNatsURL] = mainflux.Env(EnvNatsURL, defNatsURL)
-		configs[EnvNatsTLSConfig] = mainflux.Env(EnvNatsTLSConfig, defNatsTLSConfig)
+		configs[EnvNatsURL] = mainflux.Env(EnvNatsURL, DefNatsURL)
+		configs[EnvNatsTLSConfig] = mainflux.Env(EnvNatsTLSConfig, DefNatsTLSConfig)
 		return configs, nil, nil
 	} else if systemType == "rabbitmq" {
-		configs[EnvRabbitmqURL] = mainflux.Env(EnvRabbitmqURL, defRabbitmqURL)
-		configs[EnvRabbitmqTLSConfig] = mainflux.Env(EnvRabbitmqTLSConfig, defRabbitmqTLSConfig)
-		configs[EnvRabbitmqDurable] = mainflux.Env(EnvRabbitmqDurable, defRabbitmqDurable)
-		configs[EnvRabbitmqTTL] = mainflux.Env(EnvRabbitmqTTL, defRabbitmqTTL)
-		configs[EnvRabbitmqPriority] = mainflux.Env(EnvRabbitmqPriority, defRabbitmqPriority)
-		configs[EnvRabbitmqContentType] = mainflux.Env(EnvRabbitmqContentType, defRabbitmqContentType)
-		configs[EnvRabbitmqSubSystem] = mainflux.Env(EnvRabbitmqSubSystem, defRabbitmqSubSystem)
-		configs[EnvRabbitmqSeverity] = mainflux.Env(EnvRabbitmqSeverity, defRabbitmqSeverity)
+		configs[EnvRabbitmqURL] = mainflux.Env(EnvRabbitmqURL, DefRabbitmqURL)
+		configs[EnvRabbitmqTLSConfig] = mainflux.Env(EnvRabbitmqTLSConfig, DefRabbitmqTLSConfig)
+		configs[EnvRabbitmqDurable] = mainflux.Env(EnvRabbitmqDurable, DefRabbitmqDurable)
+		configs[EnvRabbitmqTTL] = mainflux.Env(EnvRabbitmqTTL, DefRabbitmqTTL)
+		configs[EnvRabbitmqPriority] = mainflux.Env(EnvRabbitmqPriority, DefRabbitmqPriority)
+		configs[EnvRabbitmqContentType] = mainflux.Env(EnvRabbitmqContentType, DefRabbitmqContentType)
+		configs[EnvRabbitmqSubSystem] = mainflux.Env(EnvRabbitmqSubSystem, DefRabbitmqSubSystem)
+		configs[EnvRabbitmqSeverity] = mainflux.Env(EnvRabbitmqSeverity, DefRabbitmqSeverity)
 
 		queue := make(map[string]string)
-		qString := mainflux.Env(EnvRabbitmqQueues, defRabbitmqQueues)
+		qString := mainflux.Env(EnvRabbitmqQueues, DefRabbitmqQueues)
 		if qString != "" {
 			items := strings.Split(qString, ",")
 			for _, item := range items {

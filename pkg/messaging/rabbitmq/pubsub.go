@@ -149,22 +149,21 @@ func (pubsub *pubsub) createMessage(topic string, msg messaging.Message) *amqp.M
 
 	if err != nil {
 		fmt.Println("Unable to parse Durable configuration, defaulting to false")
-		durableValue = false
+		durableValue, _ = strconv.ParseBool(queueConfiguration.DefRabbitmqDurable)
 	}
 
 	priorityValue, err := strconv.ParseUint(configs[queueConfiguration.EnvRabbitmqPriority], 10, 64)
 
 	if err != nil {
 		fmt.Println("Unable to parse Priority configuration, defaulting to 1")
-		priorityValue = 1
+		priorityValue, _ = strconv.ParseUint(queueConfiguration.DefRabbitmqPriority, 10, 64)
 	}
-
 
 	ttlValue, err := strconv.ParseUint(configs[queueConfiguration.EnvRabbitmqTTL], 10, 64)
 
 	if err != nil {
 		fmt.Println("Unable to parse TTL configuration, defaulting to 3600000 milliseconds")
-		ttlValue = 3600000
+		ttlValue, _ = strconv.ParseUint(queueConfiguration.DefRabbitmqTTL, 10, 64)
 	}
 
 	message := amqp.NewMessage([]byte(msg.Payload))
@@ -175,7 +174,7 @@ func (pubsub *pubsub) createMessage(topic string, msg messaging.Message) *amqp.M
 	}
 	message.Properties = &amqp.MessageProperties {
 		ReplyTo: queues[topic],
-		CorrelationID: uuid.New().String(),
+		CorrelationID: uuid.New(),
 		ContentType: configs[queueConfiguration.EnvRabbitmqContentType],
 	}
 
