@@ -9,8 +9,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/mainflux/mainflux/queue-configuration"
 	"github.com/mainflux/mainflux/pkg/messaging"
+	"github.com/mainflux/mainflux/pkg/messaging/queue-configuration"
 	"github.com/Azure/go-amqp"
 	"github.com/google/uuid"
 )

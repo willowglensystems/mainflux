@@ -2,7 +2,6 @@ package queueConfiguration
 
 import (
 	"errors"
-	"fmt"
 	"strings"
 
 	"github.com/mainflux/mainflux"
@@ -40,8 +39,6 @@ const (
 // If no queue system is specified, it returns the default system.
 func GetSystem() string {
 	systemType := mainflux.Env(EnvQueueSystem, defQueueSystem)
-	fmt.Println("Queue system is ", systemType)
-
 	return systemType
 }
 
