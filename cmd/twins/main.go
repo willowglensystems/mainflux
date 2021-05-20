@@ -21,7 +21,7 @@ import (
 	authapi "github.com/mainflux/mainflux/auth/api/grpc"
 	"github.com/mainflux/mainflux/logger"
 	"github.com/mainflux/mainflux/pkg/messaging"
-	"github.com/mainflux/mainflux/pkg/messaging/nats"
+	"github.com/mainflux/mainflux/pkg/messaging/factory"
 	"github.com/mainflux/mainflux/pkg/uuid"
 	localusers "github.com/mainflux/mainflux/things/users"
 	"github.com/mainflux/mainflux/twins"
@@ -128,7 +128,7 @@ func main() {
 	defer authCloser.Close()
 	auth, _ := createAuthClient(cfg, authTracer, logger)
 
-	pubSub, err := nats.NewPubSub(cfg.natsURL, queue, logger)
+	pubSub, err := factory.NewPubSub(queue, logger)
 	if err != nil {
 		logger.Error(fmt.Sprintf("Failed to connect to NATS: %s", err))
 		os.Exit(1)
@@ -291,7 +291,7 @@ func newService(ps messaging.PubSub, chanID string, users mainflux.AuthServiceCl
 		}, []string{"method"}),
 	)
 
-	err := ps.Subscribe(nats.SubjectAllChannels, func(msg messaging.Message) error {
+	err := ps.Subscribe(factory.GetAllChannels(), func(msg messaging.Message) error {
 		if msg.Channel == chanID {
 			return nil
 		}
