@@ -55,6 +55,6 @@ func GetAllChannels() (string) {
 		return nats.SubjectAllChannels;
 	} else {
 		fmt.Println("Invalid messaging system type for creating a pubsub:", systemType)
-		return nil;
+		return "";
 	}
 }
