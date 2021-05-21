@@ -15,6 +15,7 @@ const (
 	rabbitmqSystem = "rabbitmq"
 )
 
+// Generates a NATS or RabbitMQ publisher based on the messaging queue configuration
 func NewPublisher() (messaging.Publisher, error) {
 	systemType := queueConfiguration.GetSystem()
 	configs, _, _ := queueConfiguration.GetConfig()
@@ -29,6 +30,7 @@ func NewPublisher() (messaging.Publisher, error) {
 	}
 }
 
+// Generates a NATS or RabbitMQ publisher/subscriber based on the messaging queue configuration
 func NewPubSub(queue string, logger log.Logger) (messaging.PubSub, error) {
 	systemType := queueConfiguration.GetSystem()
 	configs, _, _ := queueConfiguration.GetConfig()
@@ -43,12 +45,16 @@ func NewPubSub(queue string, logger log.Logger) (messaging.PubSub, error) {
 	}
 }
 
+// Returns the string representing all channels
 func GetAllChannels() (string) {
 	systemType := queueConfiguration.GetSystem()
 
 	if systemType == rabbitmqSystem {
 		return rabbitmq.SubjectAllChannels;
-	} else {
+	} else if systemType == queueConfiguration.NatsMessagingSystem {
 		return nats.SubjectAllChannels;
+	} else {
+		fmt.Println("Invalid messaging system type for creating a pubsub:", systemType)
+		return nil;
 	}
 }
