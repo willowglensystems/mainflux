@@ -84,7 +84,7 @@ func (pub *publisher) Close() {
 }
 
 func (pub *publisher) createMessage(topic string, msg messaging.Message) (*amqp.Message, error) {
-	configs, queues, _ := queueConfiguration.GetConfig()
+	configs, _, _ := queueConfiguration.GetConfig()
 
 	durableValue, err := strconv.ParseBool(configs[queueConfiguration.EnvRabbitmqDurable])
 
@@ -120,7 +120,6 @@ func (pub *publisher) createMessage(topic string, msg messaging.Message) (*amqp.
 		TTL: time.Duration( ttlValue ) * time.Millisecond,
 	}
 	message.Properties = &amqp.MessageProperties {
-		ReplyTo: queues[topic],
 		CorrelationID: correlationID,
 		ContentType: configs[queueConfiguration.EnvRabbitmqContentType],
 	}
