@@ -8,11 +8,11 @@ import (
 	"fmt"
 	"strconv"
 	"time"
-
+	
 	"github.com/mainflux/mainflux/pkg/messaging"
 	"github.com/mainflux/mainflux/pkg/messaging/queue-configuration"
+	"github.com/mainflux/mainflux/pkg/uuid"
 	"github.com/Azure/go-amqp"
-	"github.com/google/uuid"
 )
 
 const (
@@ -100,6 +100,13 @@ func (pub *publisher) createMessage(topic string, msg messaging.Message) *amqp.M
 		ttlValue, _ = strconv.ParseUint(queueConfiguration.DefRabbitmqTTL, 10, 64)
 	}
 
+	correlationID, err := uuid.New().ID()
+
+	if err != nil {
+		fmt.Println("Unable to parse generate uuid")
+		return nil
+	}
+
 	message := amqp.NewMessage([]byte(msg.Payload))
 	message.Header = &amqp.MessageHeader {
 		Durable: durableValue,
@@ -108,7 +115,7 @@ func (pub *publisher) createMessage(topic string, msg messaging.Message) *amqp.M
 	}
 	message.Properties = &amqp.MessageProperties {
 		ReplyTo: queues[topic],
-		CorrelationID: uuid.New(),
+		CorrelationID: correlationID,
 		ContentType: configs[queueConfiguration.EnvRabbitmqContentType],
 	}
 
