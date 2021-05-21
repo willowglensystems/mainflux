@@ -5,6 +5,7 @@ package rabbitmq
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"strconv"
 	"time"
@@ -67,8 +68,14 @@ func (pubsub *pubsub) Publish(topic string, msg messaging.Message) error {
 
 	ctx, cancel := context.WithTimeout(ctx, pubTimeout * time.Second)
 
+	message, err := pubsub.createMessage(topic, msg)
+
+	if err != nil {
+		pubsub.logger.Error( fmt.Sprintf( "Error creating message: %s", err ) )
+	}
+
 	// Send message
-	err = sender.Send(ctx, pubsub.createMessage(topic,msg))
+	err = sender.Send(ctx, message)
 	if err != nil {
 		pubsub.logger.Error( fmt.Sprintf( "Sending message: %s", err ) )
 	}
@@ -142,7 +149,7 @@ func (pubsub *pubsub) Close() {
 	pubsub.conn.Close()
 }
 
-func (pubsub *pubsub) createMessage(topic string, msg messaging.Message) *amqp.Message {
+func (pubsub *pubsub) createMessage(topic string, msg messaging.Message) (*amqp.Message, error) {
 	configs, queues, _ := queueConfiguration.GetConfig()
 
 	durableValue, err := strconv.ParseBool(configs[queueConfiguration.EnvRabbitmqDurable])
@@ -169,8 +176,7 @@ func (pubsub *pubsub) createMessage(topic string, msg messaging.Message) *amqp.M
 	correlationID, err := uuid.New().ID()
 
 	if err != nil {
-		fmt.Println("Unable to parse generate uuid")
-		return nil
+		return nil, errors.New("Unable to parse generate uuid")
 	}
 
 	message := amqp.NewMessage([]byte(msg.Payload))
@@ -185,5 +191,5 @@ func (pubsub *pubsub) createMessage(topic string, msg messaging.Message) *amqp.M
 		ContentType: configs[queueConfiguration.EnvRabbitmqContentType],
 	}
 
-	return message
+	return message, nil
 }
