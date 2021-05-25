@@ -5,14 +5,13 @@ package rabbitmq
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"strconv"
 	"time"
-	
+
+	"github.com/gogo/protobuf/proto"
 	"github.com/mainflux/mainflux/pkg/messaging"
 	"github.com/mainflux/mainflux/pkg/messaging/queue-configuration"
-	"github.com/mainflux/mainflux/pkg/uuid"
 	"github.com/Azure/go-amqp"
 )
 
@@ -52,6 +51,8 @@ func NewPublisher(url string) (Publisher, error) {
 }
 
 func (pub *publisher) Publish(topic string, msg messaging.Message) error {
+	data, err := proto.Marshal(&msg)
+
 	ctx := context.Background()
 
 	sender, err := pub.session.NewSender(amqp.LinkTargetAddress(topic))
@@ -61,7 +62,7 @@ func (pub *publisher) Publish(topic string, msg messaging.Message) error {
 
 	ctx, cancel := context.WithTimeout(ctx, publishTimeout * time.Second)
 
-	message, err := pub.createMessage(topic, msg)
+	message, err := pub.createMessage(topic, data)
 
 	if err != nil {
 		fmt.Println( fmt.Sprintf( "Error creating message: %s", err ) )
@@ -83,7 +84,7 @@ func (pub *publisher) Close() {
 	pub.conn.Close()
 }
 
-func (pub *publisher) createMessage(topic string, msg messaging.Message) (*amqp.Message, error) {
+func (pub *publisher) createMessage(topic string, data []byte) (*amqp.Message, error) {
 	configs, _, _ := queueConfiguration.GetConfig()
 
 	durableValue, err := strconv.ParseBool(configs[queueConfiguration.EnvRabbitmqDurable])
@@ -107,20 +108,14 @@ func (pub *publisher) createMessage(topic string, msg messaging.Message) (*amqp.
 		ttlValue, _ = strconv.ParseUint(queueConfiguration.DefRabbitmqTTL, 10, 64)
 	}
 
-	correlationID, err := uuid.New().ID()
-
-	if err != nil {
-		return nil, errors.New("Unable to parse generate uuid")
-	}
-
-	message := amqp.NewMessage([]byte(msg.Payload))
+	message := amqp.NewMessage(data)
 	message.Header = &amqp.MessageHeader {
 		Durable: durableValue,
 		Priority: uint8(priorityValue),
 		TTL: time.Duration( ttlValue ) * time.Millisecond,
 	}
 	message.Properties = &amqp.MessageProperties {
-		CorrelationID: correlationID,
+		//CorrelationID: correlationID, TODO add when metadata changes are in
 		ContentType: configs[queueConfiguration.EnvRabbitmqContentType],
 	}
 

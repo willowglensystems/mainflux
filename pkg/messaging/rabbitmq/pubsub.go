@@ -8,12 +8,13 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
+	"sync"
 	"time"
 
 	log "github.com/mainflux/mainflux/logger"
+	"github.com/gogo/protobuf/proto"
 	"github.com/mainflux/mainflux/pkg/messaging"
 	"github.com/mainflux/mainflux/pkg/messaging/queue-configuration"
-	"github.com/mainflux/mainflux/pkg/uuid"
 	"github.com/Azure/go-amqp"
 )
 
@@ -25,7 +26,15 @@ const (
 
 const SubjectAllChannels = "channels.*"
 
+var (
+	errAlreadySubscribed = errors.New("already subscribed to topic")
+	errNotSubscribed     = errors.New("not subscribed")
+	errEmptyTopic        = errors.New("empty topic")
+	messages             = make(chan *amqp.Message)
+)
+
 var _ messaging.PubSub = (*pubsub)(nil)
+
 
 type PubSub interface {
 	messaging.PubSub
@@ -34,8 +43,10 @@ type PubSub interface {
 type pubsub struct {
 	conn          *amqp.Client
 	session       *amqp.Session
+	mu            sync.Mutex
 	logger        log.Logger
 	queue         string
+	subscriptions map[string]bool
 }
 
 func NewPubSub(url, queue string, logger log.Logger) (PubSub, error) {
@@ -54,11 +65,13 @@ func NewPubSub(url, queue string, logger log.Logger) (PubSub, error) {
 		session:       session,
 		queue:         queue,
 		logger:        logger,
+		subscriptions: make(map[string]bool),
 	}
 	return ret, nil
 }
 
 func (pubsub *pubsub) Publish(topic string, msg messaging.Message) error {
+	data, err := proto.Marshal(&msg)
 	ctx := context.Background()
 
 	sender, err := pubsub.session.NewSender(amqp.LinkTargetAddress(topic))
@@ -68,7 +81,7 @@ func (pubsub *pubsub) Publish(topic string, msg messaging.Message) error {
 
 	ctx, cancel := context.WithTimeout(ctx, pubTimeout * time.Second)
 
-	message, err := pubsub.createMessage(topic, msg)
+	message, err := pubsub.createMessage(topic, data)
 
 	if err != nil {
 		pubsub.logger.Error( fmt.Sprintf( "Error creating message: %s", err ) )
@@ -87,6 +100,18 @@ func (pubsub *pubsub) Publish(topic string, msg messaging.Message) error {
 }
 
 func (pubsub *pubsub) Subscribe(topic string, handler messaging.MessageHandler) error {
+	if topic == "" {
+                return errEmptyTopic
+        }
+        pubsub.mu.Lock()
+        defer pubsub.mu.Unlock()
+
+	if pubsub.subscriptions[topic] {
+                return errAlreadySubscribed
+        }
+
+	pubsub.subscriptions[topic] = true
+
 	receiver, err := pubsub.session.NewReceiver(
 		amqp.LinkSourceAddress(topic),
 		amqp.LinkCredit(maxMessages),
@@ -95,23 +120,24 @@ func (pubsub *pubsub) Subscribe(topic string, handler messaging.MessageHandler) 
 		pubsub.logger.Error(fmt.Sprintf("Creating receiver link: %s", err))
 	}
 
-	messages := make(chan *amqp.Message)
-	go handleMessages(messages, handler)
-	go receiveMessages(messages, receiver)
+	go pubsub.handleMessages(messages, handler)
+	go pubsub.receiveMessages(topic, messages, receiver)
 
 	return nil
 }
 
-func handleMessages(messages chan *amqp.Message, handler messaging.MessageHandler) {
+func (pubsub *pubsub) handleMessages(messages chan *amqp.Message, handler messaging.MessageHandler) {
 	for message := range messages {
-		var msg = messaging.Message {
-			Payload: message.GetData(),
-		}
+		var msg messaging.Message
+                if err := proto.Unmarshal(message.GetData(), &msg); err != nil {
+                        pubsub.logger.Warn(fmt.Sprintf("Failed to unmarshal received message: %s", err))
+                        return
+                }
 		handler( msg )
 	}
 }
 
-func receiveMessages(messages chan *amqp.Message, receiver *amqp.Receiver) {
+func (pubsub *pubsub) receiveMessages(topic string, messages chan *amqp.Message, receiver *amqp.Receiver) {
 	ctx := context.Background()
 
 	defer func() {
@@ -121,7 +147,7 @@ func receiveMessages(messages chan *amqp.Message, receiver *amqp.Receiver) {
 	}()
 
 
-	for {
+	for pubsub.subscriptions[topic] {
 		msg, err := receiver.Receive(ctx)
 		if err != nil {
 			fmt.Println(fmt.Sprintf("Reading message from AMQP: %s", err))
@@ -136,20 +162,34 @@ func receiveMessages(messages chan *amqp.Message, receiver *amqp.Receiver) {
 }
 
 func (pubsub *pubsub) Unsubscribe(topic string) error {
-	ctx := context.Background()
-	ctx, cancel := context.WithTimeout(ctx, receiveTimeout * time.Second)
-	if err := pubsub.session.Close(ctx); err != nil {
-		return fmt.Errorf("Consumer cancel failed: %s", err)
-	}
-	cancel()
+	if topic == "" {
+                return errEmptyTopic
+        }
+        pubsub.mu.Lock()
+        defer pubsub.mu.Unlock()
+
+        subscribed, ok := pubsub.subscriptions[topic]
+        if !ok || !subscribed {
+                return errNotSubscribed
+        }
+
+	pubsub.subscriptions[topic] = false
+
 	return nil
 }
 
 func (pubsub *pubsub) Close() {
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, receiveTimeout * time.Second)
+	if err := pubsub.session.Close(ctx); err != nil {
+		fmt.Sprintf("Consumer cancel failed: %s", err)
+	}
+	cancel()
+
 	pubsub.conn.Close()
 }
 
-func (pubsub *pubsub) createMessage(topic string, msg messaging.Message) (*amqp.Message, error) {
+func (pubsub *pubsub) createMessage(topic string, data []byte) (*amqp.Message, error) {
 	configs, queues, _ := queueConfiguration.GetConfig()
 
 	durableValue, err := strconv.ParseBool(configs[queueConfiguration.EnvRabbitmqDurable])
@@ -173,13 +213,7 @@ func (pubsub *pubsub) createMessage(topic string, msg messaging.Message) (*amqp.
 		ttlValue, _ = strconv.ParseUint(queueConfiguration.DefRabbitmqTTL, 10, 64)
 	}
 
-	correlationID, err := uuid.New().ID()
-
-	if err != nil {
-		return nil, errors.New("Unable to parse generate uuid")
-	}
-
-	message := amqp.NewMessage([]byte(msg.Payload))
+	message := amqp.NewMessage(data)
 	message.Header = &amqp.MessageHeader {
 		Durable: durableValue,
 		Priority: uint8(priorityValue),
@@ -187,7 +221,7 @@ func (pubsub *pubsub) createMessage(topic string, msg messaging.Message) (*amqp.
 	}
 	message.Properties = &amqp.MessageProperties {
 		ReplyTo: queues[topic],
-		CorrelationID: correlationID,
+		//CorrelationID: correlationID, TODO add when metadata changes are in
 		ContentType: configs[queueConfiguration.EnvRabbitmqContentType],
 	}
 
