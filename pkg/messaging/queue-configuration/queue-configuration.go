@@ -41,6 +41,9 @@ const (
 	EnvNatsTLSCertificate     = "MF_NATS_TLS_CERTIFICATE"
 	EnvNatsTLSKey             = "MF_NATS_TLS_KEY"
 	EnvNatsTLSCA              = "MF_NATS_TLS_CA"
+
+	NatsMessagingSystem       = "nats"
+	RabbitmqMessagingSystem   = "rabbitmq"
 )
 
 // GetSystem returns the type of queue system. 
@@ -58,13 +61,13 @@ func GetConfig() (map[string]string, map[string]string, error) {
 	configs := make(map[string]string)
 	systemType := mainflux.Env(EnvQueueSystem, DefQueueSystem)
 
-	if systemType == "nats" {
+	if systemType == NatsMessagingSystem {
 		configs[EnvNatsURL] = mainflux.Env(EnvNatsURL, DefNatsURL)
 		configs[EnvNatsTLSCertificate] = mainflux.Env(EnvNatsTLSCertificate, DefNatsTLSCertificate)
 		configs[EnvNatsTLSKey] = mainflux.Env(EnvNatsTLSKey, DefNatsTLSKey)
 		configs[EnvNatsTLSCA] = mainflux.Env(EnvNatsTLSCA, DefNatsTLSCA)
 		return configs, nil, nil
-	} else if systemType == "rabbitmq" {
+	} else if systemType == RabbitmqMessagingSystem {
 		configs[EnvRabbitmqURL] = mainflux.Env(EnvRabbitmqURL, DefRabbitmqURL)
 		configs[EnvRabbitmqTLSCertificate] = mainflux.Env(EnvRabbitmqTLSCertificate, DefRabbitmqTLSCertificate)
 		configs[EnvRabbitmqTLSKey] = mainflux.Env(EnvRabbitmqTLSKey, DefRabbitmqTLSKey)
