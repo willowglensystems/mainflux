@@ -8,31 +8,42 @@ import (
 )
 
 const (
-	DefQueueSystem         = "nats"
-	DefRabbitmqURL         = "amqp://guest:guest@rabbitmq/"
-	DefRabbitmqTLSConfig   = ""
-	DefRabbitmqDurable     = "false"
-	DefRabbitmqTTL         = "3600000" // Milliseconds
-	DefRabbitmqPriority    = "1"
-	DefRabbitmqContentType = "application/json"
-	DefRabbitmqSubSystem   = "smc"
-	DefRabbitmqSeverity    = "6"
-	DefRabbitmqQueues      = ""
-	DefNatsURL             = "nats://nats:4222"
-	DefNatsTLSConfig       = ""
+	DefQueueSystem            = "nats"
+	DefRabbitmqURL            = "amqp://guest:guest@rabbitmq/"
+	DefRabbitmqTLSCertificate = ""
+	DefRabbitmqTLSKey         = ""
+	DefRabbitmqTLSCA          = ""
+	DefRabbitmqDurable        = "false"
+	DefRabbitmqTTL            = "3600000" // Milliseconds
+	DefRabbitmqPriority       = "1"
+	DefRabbitmqContentType    = "application/json"
+	DefRabbitmqSubSystem      = "smc"
+	DefRabbitmqSeverity       = "6"
+	DefRabbitmqQueues         = ""
+	DefNatsURL                = "nats://nats:4222"
+	DefNatsTLSCertificate     = ""
+	DefNatsTLSKey             = ""
+	DefNatsTLSCA              = ""
 
-	EnvQueueSystem         = "MF_QUEUE_SYSTEM"
-	EnvRabbitmqURL         = "MF_RABBITMQ_URL"
-	EnvRabbitmqTLSConfig   = "MF_RABBITMQ_TLS_CONFIG"
-	EnvRabbitmqDurable     = "MF_RABBITMQ_DURABLE"
-	EnvRabbitmqTTL         = "MF_RABBITMQ_TTL"
-	EnvRabbitmqPriority    = "MF_RABBITMQ_PRIORITY"
-	EnvRabbitmqContentType = "MF_RABBITMQ_CONTENT_TYPE"
-	EnvRabbitmqSubSystem   = "MF_RABBITMQ_SUB_SYSTEM"
-	EnvRabbitmqSeverity    = "MF_RABBITMQ_SEVERITY"
-	EnvRabbitmqQueues      = "MF_RABBITMQ_QUEUES"
-	EnvNatsURL             = "MF_NATS_URL"
-	EnvNatsTLSConfig       = "MF_NATS_TLS_CONFIG"
+	EnvQueueSystem            = "MF_QUEUE_SYSTEM"
+	EnvRabbitmqURL            = "MF_RABBITMQ_URL"
+	EnvRabbitmqTLSCertificate = "MF_RABBITMQ_TLS_CERTIFICATE"
+	EnvRabbitmqTLSKey         = "MF_RABBITMQ_TLS_KEY"
+	EnvRabbitmqTLSCA          = "MF_RABBITMQ_TLS_CA"
+	EnvRabbitmqDurable        = "MF_RABBITMQ_DURABLE"
+	EnvRabbitmqTTL            = "MF_RABBITMQ_TTL"
+	EnvRabbitmqPriority       = "MF_RABBITMQ_PRIORITY"
+	EnvRabbitmqContentType    = "MF_RABBITMQ_CONTENT_TYPE"
+	EnvRabbitmqSubSystem      = "MF_RABBITMQ_SUB_SYSTEM"
+	EnvRabbitmqSeverity       = "MF_RABBITMQ_SEVERITY"
+	EnvRabbitmqQueues         = "MF_RABBITMQ_QUEUES"
+	EnvNatsURL                = "MF_NATS_URL"
+	EnvNatsTLSCertificate     = "MF_NATS_TLS_CERTIFICATE"
+	EnvNatsTLSKey             = "MF_NATS_TLS_KEY"
+	EnvNatsTLSCA              = "MF_NATS_TLS_CA"
+
+	NatsMessagingSystem       = "nats"
+	RabbitmqMessagingSystem   = "rabbitmq"
 )
 
 // GetSystem returns the type of queue system. 
@@ -50,13 +61,17 @@ func GetConfig() (map[string]string, map[string]string, error) {
 	configs := make(map[string]string)
 	systemType := mainflux.Env(EnvQueueSystem, DefQueueSystem)
 
-	if systemType == "nats" {
+	if systemType == NatsMessagingSystem {
 		configs[EnvNatsURL] = mainflux.Env(EnvNatsURL, DefNatsURL)
-		configs[EnvNatsTLSConfig] = mainflux.Env(EnvNatsTLSConfig, DefNatsTLSConfig)
+		configs[EnvNatsTLSCertificate] = mainflux.Env(EnvNatsTLSCertificate, DefNatsTLSCertificate)
+		configs[EnvNatsTLSKey] = mainflux.Env(EnvNatsTLSKey, DefNatsTLSKey)
+		configs[EnvNatsTLSCA] = mainflux.Env(EnvNatsTLSCA, DefNatsTLSCA)
 		return configs, nil, nil
-	} else if systemType == "rabbitmq" {
+	} else if systemType == RabbitmqMessagingSystem {
 		configs[EnvRabbitmqURL] = mainflux.Env(EnvRabbitmqURL, DefRabbitmqURL)
-		configs[EnvRabbitmqTLSConfig] = mainflux.Env(EnvRabbitmqTLSConfig, DefRabbitmqTLSConfig)
+		configs[EnvRabbitmqTLSCertificate] = mainflux.Env(EnvRabbitmqTLSCertificate, DefRabbitmqTLSCertificate)
+		configs[EnvRabbitmqTLSKey] = mainflux.Env(EnvRabbitmqTLSKey, DefRabbitmqTLSKey)
+		configs[EnvRabbitmqTLSCA] = mainflux.Env(EnvRabbitmqTLSCA, DefRabbitmqTLSCA)
 		configs[EnvRabbitmqDurable] = mainflux.Env(EnvRabbitmqDurable, DefRabbitmqDurable)
 		configs[EnvRabbitmqTTL] = mainflux.Env(EnvRabbitmqTTL, DefRabbitmqTTL)
 		configs[EnvRabbitmqPriority] = mainflux.Env(EnvRabbitmqPriority, DefRabbitmqPriority)
