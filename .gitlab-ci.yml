@@ -8,7 +8,7 @@ stages:
 build_mainflux_images:
   stage: build
   image:
-    name: gcr.io/kaniko-project/executor:debug
+    name: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
   script:
     - mkdir -p /kaniko/.docker
@@ -23,7 +23,7 @@ build_mainflux_images:
 build_vernemq:
   stage: build
   image:
-    name: gcr.io/kaniko-project/executor:debug
+    name: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
   script:
     - mkdir -p /kaniko/.docker
