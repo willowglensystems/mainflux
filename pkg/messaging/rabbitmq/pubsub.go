@@ -7,14 +7,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"strconv"
 	"sync"
 	"time"
 
 	log "github.com/mainflux/mainflux/logger"
 	"github.com/gogo/protobuf/proto"
 	"github.com/mainflux/mainflux/pkg/messaging"
-	"github.com/mainflux/mainflux/pkg/messaging/queue-configuration"
 	"github.com/Azure/go-amqp"
 )
 
@@ -81,7 +79,7 @@ func (pubsub *pubsub) Publish(topic string, msg messaging.Message) error {
 
 	ctx, cancel := context.WithTimeout(ctx, pubTimeout * time.Second)
 
-	message, err := pubsub.createMessage(topic, data)
+	message, err := createMessage(topic, data)
 
 	if err != nil {
 		pubsub.logger.Error( fmt.Sprintf( "Error creating message: %s", err ) )
@@ -187,43 +185,4 @@ func (pubsub *pubsub) Close() {
 	cancel()
 
 	pubsub.conn.Close()
-}
-
-func (pubsub *pubsub) createMessage(topic string, data []byte) (*amqp.Message, error) {
-	configs, queues, _ := queueConfiguration.GetConfig()
-
-	durableValue, err := strconv.ParseBool(configs[queueConfiguration.EnvRabbitmqDurable])
-
-	if err != nil {
-		fmt.Println("Unable to parse Durable configuration, defaulting to false")
-		durableValue, _ = strconv.ParseBool(queueConfiguration.DefRabbitmqDurable)
-	}
-
-	priorityValue, err := strconv.ParseUint(configs[queueConfiguration.EnvRabbitmqPriority], 10, 64)
-
-	if err != nil {
-		fmt.Println("Unable to parse Priority configuration, defaulting to 1")
-		priorityValue, _ = strconv.ParseUint(queueConfiguration.DefRabbitmqPriority, 10, 64)
-	}
-
-	ttlValue, err := strconv.ParseUint(configs[queueConfiguration.EnvRabbitmqTTL], 10, 64)
-
-	if err != nil {
-		fmt.Println("Unable to parse TTL configuration, defaulting to 3600000 milliseconds")
-		ttlValue, _ = strconv.ParseUint(queueConfiguration.DefRabbitmqTTL, 10, 64)
-	}
-
-	message := amqp.NewMessage(data)
-	message.Header = &amqp.MessageHeader {
-		Durable: durableValue,
-		Priority: uint8(priorityValue),
-		TTL: time.Duration( ttlValue ) * time.Millisecond,
-	}
-	message.Properties = &amqp.MessageProperties {
-		ReplyTo: queues[topic],
-		//CorrelationID: correlationID, TODO add when metadata changes are in
-		ContentType: configs[queueConfiguration.EnvRabbitmqContentType],
-	}
-
-	return message, nil
 }

@@ -62,7 +62,7 @@ func (pub *publisher) Publish(topic string, msg messaging.Message) error {
 
 	ctx, cancel := context.WithTimeout(ctx, publishTimeout * time.Second)
 
-	message, err := pub.createMessage(topic, data)
+	message, err := createMessage(topic, data)
 
 	if err != nil {
 		fmt.Println( fmt.Sprintf( "Error creating message: %s", err ) )
@@ -84,7 +84,7 @@ func (pub *publisher) Close() {
 	pub.conn.Close()
 }
 
-func (pub *publisher) createMessage(topic string, data []byte) (*amqp.Message, error) {
+func createMessage(topic string, data []byte) (*amqp.Message, error) {
 	configs, _, _ := queueConfiguration.GetConfig()
 
 	durableValue, err := strconv.ParseBool(configs[queueConfiguration.EnvRabbitmqDurable])
