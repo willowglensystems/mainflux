@@ -6,7 +6,6 @@ package rabbitmq
 import (
 	"context"
 	"fmt"
-	"strconv"
 	"time"
 
 	"github.com/gogo/protobuf/proto"
@@ -22,8 +21,9 @@ const (
 var _ messaging.Publisher = (*publisher)(nil)
 
 type publisher struct {
-	conn *amqp.Client
+	conn    *amqp.Client
 	session *amqp.Session
+	configs *queueConfiguration.Config
 }
 
 type Publisher interface {
@@ -42,36 +42,37 @@ func NewPublisher(url string) (Publisher, error) {
 		return nil, fmt.Errorf("Channel: %s", err)
 	}
 
+	configs, _, _ := queueConfiguration.GetConfig()
+
 	ret := &publisher{
 		conn: conn,
 		session: session,
+		configs: configs,
 	}
 
 	return ret, nil
 }
 
 func (pub *publisher) Publish(topic string, msg messaging.Message) error {
-	data, err := proto.Marshal(&msg)
-
 	ctx := context.Background()
 
 	sender, err := pub.session.NewSender(amqp.LinkTargetAddress(topic))
 	if err != nil {
-		fmt.Println("Creating sender link:", err)
+		return err
 	}
 
 	ctx, cancel := context.WithTimeout(ctx, publishTimeout * time.Second)
 
-	message, err := createMessage(topic, data)
+	message, err := createMessage(topic, &msg, pub.configs)
 
 	if err != nil {
-		fmt.Println( fmt.Sprintf( "Error creating message: %s", err ) )
+		return err
 	}
 
 	// Send message
 	err = sender.Send(ctx, message)
 	if err != nil {
-		fmt.Println("Sending message:", err)
+		return err
 	}
 
 	cancel()
@@ -84,39 +85,25 @@ func (pub *publisher) Close() {
 	pub.conn.Close()
 }
 
-func createMessage(topic string, data []byte) (*amqp.Message, error) {
-	configs, _, _ := queueConfiguration.GetConfig()
-
-	durableValue, err := strconv.ParseBool(configs[queueConfiguration.EnvRabbitmqDurable])
+func createMessage(topic string, msg *messaging.Message, configs *queueConfiguration.Config) (*amqp.Message, error) {
+	data, err := proto.Marshal(msg)
 
 	if err != nil {
-		fmt.Println("Unable to parse Durable configuration, defaulting to false")
-		durableValue, _ = strconv.ParseBool(queueConfiguration.DefRabbitmqDurable)
-	}
-
-	priorityValue, err := strconv.ParseUint(configs[queueConfiguration.EnvRabbitmqPriority], 10, 64)
-
-	if err != nil {
-		fmt.Println("Unable to parse Priority configuration, defaulting to 1")
-		priorityValue, _ = strconv.ParseUint(queueConfiguration.DefRabbitmqPriority, 10, 64)
-	}
-
-	ttlValue, err := strconv.ParseUint(configs[queueConfiguration.EnvRabbitmqTTL], 10, 64)
-
-	if err != nil {
-		fmt.Println("Unable to parse TTL configuration, defaulting to 3600000 milliseconds")
-		ttlValue, _ = strconv.ParseUint(queueConfiguration.DefRabbitmqTTL, 10, 64)
+		return nil, err
 	}
 
 	message := amqp.NewMessage(data)
 	message.Header = &amqp.MessageHeader {
-		Durable: durableValue,
-		Priority: uint8(priorityValue),
-		TTL: time.Duration( ttlValue ) * time.Millisecond,
+		Durable: configs.RabbitmqDurable,
+		Priority: uint8(configs.RabbitmqPriority),
+		TTL: time.Duration(configs.RabbitmqTTL) * time.Millisecond,
 	}
 	message.Properties = &amqp.MessageProperties {
-		//CorrelationID: correlationID, TODO add when metadata changes are in
-		ContentType: configs[queueConfiguration.EnvRabbitmqContentType],
+		CorrelationID: string(msg.Metadata["CorrelationID"]),
+		ContentType: configs.RabbitmqContentType,
+		CreationTime: time.Unix(msg.Created, 0),
+		ReplyTo: string(msg.Metadata["ReplyTo"]),
+		Subject: string(msg.Metadata["Type"]),
 	}
 
 	return message, nil

@@ -13,6 +13,7 @@ import (
 	log "github.com/mainflux/mainflux/logger"
 	"github.com/gogo/protobuf/proto"
 	"github.com/mainflux/mainflux/pkg/messaging"
+	"github.com/mainflux/mainflux/pkg/messaging/queue-configuration"
 	"github.com/Azure/go-amqp"
 )
 
@@ -41,6 +42,7 @@ type PubSub interface {
 type pubsub struct {
 	conn          *amqp.Client
 	session       *amqp.Session
+	configs       *queueConfiguration.Config
 	mu            sync.Mutex
 	logger        log.Logger
 	queue         string
@@ -58,9 +60,12 @@ func NewPubSub(url, queue string, logger log.Logger) (PubSub, error) {
 		return nil, fmt.Errorf("Channel: %s", err)
 	}
 
+	configs, _, _ := queueConfiguration.GetConfig()
+
 	ret := &pubsub{
 		conn:          conn,
 		session:       session,
+		configs:       configs,
 		queue:         queue,
 		logger:        logger,
 		subscriptions: make(map[string]bool),
@@ -69,7 +74,6 @@ func NewPubSub(url, queue string, logger log.Logger) (PubSub, error) {
 }
 
 func (pubsub *pubsub) Publish(topic string, msg messaging.Message) error {
-	data, err := proto.Marshal(&msg)
 	ctx := context.Background()
 
 	sender, err := pubsub.session.NewSender(amqp.LinkTargetAddress(topic))
@@ -79,7 +83,7 @@ func (pubsub *pubsub) Publish(topic string, msg messaging.Message) error {
 
 	ctx, cancel := context.WithTimeout(ctx, pubTimeout * time.Second)
 
-	message, err := createMessage(topic, data)
+	message, err := createMessage(topic, &msg, pubsub.configs)
 
 	if err != nil {
 		pubsub.logger.Error( fmt.Sprintf( "Error creating message: %s", err ) )
@@ -99,14 +103,15 @@ func (pubsub *pubsub) Publish(topic string, msg messaging.Message) error {
 
 func (pubsub *pubsub) Subscribe(topic string, handler messaging.MessageHandler) error {
 	if topic == "" {
-                return errEmptyTopic
-        }
-        pubsub.mu.Lock()
-        defer pubsub.mu.Unlock()
+		return errEmptyTopic
+	}
+
+	pubsub.mu.Lock()
+	defer pubsub.mu.Unlock()
 
 	if pubsub.subscriptions[topic] {
-                return errAlreadySubscribed
-        }
+		return errAlreadySubscribed
+	}
 
 	pubsub.subscriptions[topic] = true
 
@@ -127,10 +132,10 @@ func (pubsub *pubsub) Subscribe(topic string, handler messaging.MessageHandler) 
 func (pubsub *pubsub) handleMessages(messages chan *amqp.Message, handler messaging.MessageHandler) {
 	for message := range messages {
 		var msg messaging.Message
-                if err := proto.Unmarshal(message.GetData(), &msg); err != nil {
-                        pubsub.logger.Warn(fmt.Sprintf("Failed to unmarshal received message: %s", err))
-                        return
-                }
+		if err := proto.Unmarshal(message.GetData(), &msg); err != nil {
+			pubsub.logger.Warn(fmt.Sprintf("Failed to unmarshal received message: %s", err))
+			return
+		}
 		handler( msg )
 	}
 }
@@ -161,15 +166,15 @@ func (pubsub *pubsub) receiveMessages(topic string, messages chan *amqp.Message,
 
 func (pubsub *pubsub) Unsubscribe(topic string) error {
 	if topic == "" {
-                return errEmptyTopic
-        }
-        pubsub.mu.Lock()
-        defer pubsub.mu.Unlock()
+		return errEmptyTopic
+	}
+	pubsub.mu.Lock()
+	defer pubsub.mu.Unlock()
 
-        subscribed, ok := pubsub.subscriptions[topic]
-        if !ok || !subscribed {
-                return errNotSubscribed
-        }
+	subscribed, ok := pubsub.subscriptions[topic]
+	if !ok || !subscribed {
+		return errNotSubscribed
+	}
 
 	pubsub.subscriptions[topic] = false
 
