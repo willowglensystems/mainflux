@@ -17,8 +17,8 @@ build_mainflux_images:
       for SVC in $SERVICES; do
         /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/docker/Dockerfile --destination $CI_REGISTRY_IMAGE/$SVC:$CI_COMMIT_TAG --build-arg SVC=$SVC
       done
-  # rules:
-  #   - if: $CI_COMMIT_TAG
+  rules:
+    - if: $CI_COMMIT_TAG
 
 build_vernemq:
   stage: build
@@ -29,8 +29,8 @@ build_vernemq:
     - mkdir -p /kaniko/.docker
     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
     - /kaniko/executor --context $CI_PROJECT_DIR/docker/vernemq --dockerfile $CI_PROJECT_DIR/docker/vernemq/Dockerfile --destination $CI_REGISTRY_IMAGE/vernemq:$CI_COMMIT_TAG
-  # rules:
-  #   - if: $CI_COMMIT_TAG
+  rules:
+    - if: $CI_COMMIT_TAG
 
 build_manifests:
   stage: build
@@ -63,8 +63,8 @@ build_manifests:
   artifacts:
     paths:
       - manifests.yml
-  # rules:
-  #   - if: $CI_COMMIT_TAG
+  rules:
+    - if: $CI_COMMIT_TAG
       
 package:
   stage: package
@@ -72,5 +72,5 @@ package:
   script:
     - 'sed "s/image:.*\/\(.*\):.*/image: registry.willowglen.ca\/sq\/third-party\/mainflux\/\1:$CI_COMMIT_TAG/" manifests.yml > manifests2.yml'
     - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file manifests2.yml "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/manifests/$CI_COMMIT_TAG/manifests.yml"'
-  # rules:
-  #   - if: $CI_COMMIT_TAG
+  rules:
+    - if: $CI_COMMIT_TAG
