@@ -77,7 +77,6 @@ func (pubsub *pubsub) Publish(topic string, msg messaging.Message) error {
 
 	sender, err := pubsub.session.NewSender(amqp.LinkTargetAddress(topic))
 	if err != nil {
-		pubsub.logger.Error( fmt.Sprintf( "Creating sender link: %s ", err) )
 		return err
 	}
 
@@ -86,14 +85,12 @@ func (pubsub *pubsub) Publish(topic string, msg messaging.Message) error {
 	message, err := createMessage(topic, &msg, pubsub.configs)
 
 	if err != nil {
-		pubsub.logger.Error( fmt.Sprintf( "Error creating message: %s", err ) )
 		return err
 	}
 
 	// Send message
 	err = sender.Send(ctx, message)
 	if err != nil {
-		pubsub.logger.Error( fmt.Sprintf( "Sending message: %s", err ) )
 		return err
 	}
 
@@ -161,11 +158,12 @@ func (pubsub *pubsub) receiveMessages(topic string, messages chan *amqp.Message,
 		if err != nil {
 			fmt.Println(fmt.Sprintf("Error receiving message from AMQP: %s", err))
 		}
+		else {
+			// Accept message
+			msg.Accept(context.Background())
 
-		// Accept message
-		msg.Accept(context.Background())
-
-		messages <- msg
+			messages <- msg
+		}
 	}
 }
 
