@@ -29,7 +29,6 @@ var (
 	errAlreadySubscribed = errors.New("already subscribed to topic")
 	errNotSubscribed     = errors.New("not subscribed")
 	errEmptyTopic        = errors.New("empty topic")
-	messages             = make(chan *amqp.Message)
 )
 
 var _ messaging.PubSub = (*pubsub)(nil)
@@ -79,6 +78,7 @@ func (pubsub *pubsub) Publish(topic string, msg messaging.Message) error {
 	sender, err := pubsub.session.NewSender(amqp.LinkTargetAddress(topic))
 	if err != nil {
 		pubsub.logger.Error( fmt.Sprintf( "Creating sender link: %s ", err) )
+		return err
 	}
 
 	ctx, cancel := context.WithTimeout(ctx, pubTimeout * time.Second)
@@ -87,12 +87,14 @@ func (pubsub *pubsub) Publish(topic string, msg messaging.Message) error {
 
 	if err != nil {
 		pubsub.logger.Error( fmt.Sprintf( "Error creating message: %s", err ) )
+		return err
 	}
 
 	// Send message
 	err = sender.Send(ctx, message)
 	if err != nil {
 		pubsub.logger.Error( fmt.Sprintf( "Sending message: %s", err ) )
+		return err
 	}
 
 	cancel()
@@ -101,6 +103,8 @@ func (pubsub *pubsub) Publish(topic string, msg messaging.Message) error {
 	return nil
 }
 
+// Subscribe to a topic (RabbitMQ queue) with a message handler.
+// Note: the message handler is called from a goroutine so concurrency must be taken into account
 func (pubsub *pubsub) Subscribe(topic string, handler messaging.MessageHandler) error {
 	if topic == "" {
 		return errEmptyTopic
@@ -122,6 +126,8 @@ func (pubsub *pubsub) Subscribe(topic string, handler messaging.MessageHandler) 
 	if err != nil {
 		pubsub.logger.Error(fmt.Sprintf("Creating receiver link: %s", err))
 	}
+
+	messages := make(chan *amqp.Message)
 
 	go pubsub.handleMessages(messages, handler)
 	go pubsub.receiveMessages(topic, messages, receiver)
@@ -153,8 +159,7 @@ func (pubsub *pubsub) receiveMessages(topic string, messages chan *amqp.Message,
 	for pubsub.subscriptions[topic] {
 		msg, err := receiver.Receive(ctx)
 		if err != nil {
-			fmt.Println(fmt.Sprintf("Reading message from AMQP: %s", err))
-			return
+			fmt.Println(fmt.Sprintf("Error receiving message from AMQP: %s", err))
 		}
 
 		// Accept message

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/mainflux/mainflux"
 )
@@ -54,11 +55,11 @@ type Config struct {
 	RabbitmqTLSKey         string
 	RabbitmqTLSCA          string
 	RabbitmqDurable        bool
-	RabbitmqTTL            uint64
-	RabbitmqPriority       uint64
+	RabbitmqTTL            time.Duration
+	RabbitmqPriority       uint8
 	RabbitmqContentType    string
 	RabbitmqSubSystem      string
-	RabbitmqSeverity       uint64
+	RabbitmqSeverity       uint8
 	NatsURL                string
 	NatsTLSCertificate     string
 	NatsTLSKey             string
@@ -73,7 +74,7 @@ func GetSystem() string {
 }
 
 // GetConfig take the queue system type and returns two maps and an error. 
-// The first parameter is a map of the system configuration parameters.
+// The first parameter is a struct of the system configuration parameters.
 // The second parameter is a map that contains the queue parameters. If the queue system does not have any queue, it returns nil.
 // The third parameter is the error in the case that the provided systemType is not valid.
 func GetConfig() (*Config, map[string]string, error) {
@@ -100,10 +101,10 @@ func GetConfig() (*Config, map[string]string, error) {
 	
 		if err != nil {
 			fmt.Println("Unable to parse Priority configuration, defaulting to 1")
-			priorityValue, _ = strconv.ParseUint(DefRabbitmqPriority, 10, 64)
+			priorityValue, _ = strconv.ParseUint(DefRabbitmqPriority, 10, 8)
 		}
 	
-		ttlValue, err := strconv.ParseUint(mainflux.Env(EnvRabbitmqTTL, DefRabbitmqTTL), 10, 64)
+		ttlValue, err := strconv.ParseUint(mainflux.Env(EnvRabbitmqTTL, DefRabbitmqTTL), 10, 8)
 	
 		if err != nil {
 			fmt.Println("Unable to parse TTL configuration, defaulting to 3600000 milliseconds")
@@ -114,7 +115,7 @@ func GetConfig() (*Config, map[string]string, error) {
 	
 		if err != nil {
 			fmt.Println("Unable to parse Severity configuration, defaulting to 6")
-			severityValue, _ = strconv.ParseUint(DefRabbitmqSeverity, 10, 64)
+			severityValue, _ = strconv.ParseUint(DefRabbitmqSeverity, 10, 8)
 		}
 
 		queue := make(map[string]string)
@@ -133,11 +134,11 @@ func GetConfig() (*Config, map[string]string, error) {
 			RabbitmqTLSKey: mainflux.Env(EnvRabbitmqTLSKey, DefRabbitmqTLSKey),
 			RabbitmqTLSCA: mainflux.Env(EnvRabbitmqTLSCA, DefRabbitmqTLSCA),
 			RabbitmqDurable: durableValue,
-			RabbitmqTTL: ttlValue,
-			RabbitmqPriority: priorityValue,
+			RabbitmqTTL: time.Duration(ttlValue) * time.Millisecond,
+			RabbitmqPriority: uint8(priorityValue),
 			RabbitmqContentType: mainflux.Env(EnvRabbitmqContentType, DefRabbitmqContentType),
 			RabbitmqSubSystem: mainflux.Env(EnvRabbitmqSubSystem, DefRabbitmqSubSystem),
-			RabbitmqSeverity: severityValue,
+			RabbitmqSeverity: uint8(severityValue),
 		}
 
 		return config, queue, nil

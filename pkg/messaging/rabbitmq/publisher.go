@@ -95,8 +95,8 @@ func createMessage(topic string, msg *messaging.Message, configs *queueConfigura
 	message := amqp.NewMessage(data)
 	message.Header = &amqp.MessageHeader {
 		Durable: configs.RabbitmqDurable,
-		Priority: uint8(configs.RabbitmqPriority),
-		TTL: time.Duration(configs.RabbitmqTTL) * time.Millisecond,
+		Priority: configs.RabbitmqPriority,
+		TTL: configs.RabbitmqTTL,
 	}
 	message.Properties = &amqp.MessageProperties {
 		CorrelationID: string(msg.Metadata["CorrelationID"]),
