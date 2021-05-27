@@ -5,8 +5,11 @@ package rabbitmq
 
 import (
 	"context"
+	"crypto/tls"
+	"crypto/x509"
 	"errors"
 	"fmt"
+	"io/ioutil"
 	"sync"
 	"time"
 
@@ -33,6 +36,7 @@ var (
 
 var _ messaging.PubSub = (*pubsub)(nil)
 
+type PubSubOption func(*pubsub)
 
 type PubSub interface {
 	messaging.PubSub
@@ -46,10 +50,55 @@ type pubsub struct {
 	logger        log.Logger
 	queue         string
 	subscriptions map[string]bool
+	tlsConfig     *tls.Config
 }
 
-func NewPubSub(url, queue string, logger log.Logger) (PubSub, error) {
-	conn, err := amqp.Dial(url)
+// Constructor option to create a pubsub with TLS access
+func WithPubSubTLS(caFile, certFile, keyFile string) PubSubOption {
+	return func(pubsub *pubsub) {
+		roots := x509.NewCertPool()
+
+		data, err := ioutil.ReadFile(caFile)
+
+		if err != nil {
+			fmt.Errorf("Error reading in root CA: %s", err)
+			return
+		}
+
+		roots.AppendCertsFromPEM(data)
+
+		cert, err := tls.LoadX509KeyPair(certFile, keyFile)
+		if err != nil {
+			fmt.Errorf("Error loading certificate: %s", err)
+			return
+		}
+
+		pubsub.tlsConfig = &tls.Config{
+			Certificates: []tls.Certificate{cert},
+			RootCAs: roots,
+			InsecureSkipVerify: true,
+		}
+	}
+}
+
+func NewPubSub(url, queue string, logger log.Logger, opts ...PubSubOption) (PubSub, error) {
+	newPubSub := &pubsub{
+		tlsConfig: nil,
+	}
+	for _, opt := range opts {
+		opt(newPubSub)
+	}
+
+	var conn *amqp.Client
+	var err error
+
+	if newPubSub.tlsConfig != nil {
+		cfg := amqp.ConnTLSConfig(newPubSub.tlsConfig)
+		conn, err = amqp.Dial(url, cfg)
+	} else {
+		conn, err = amqp.Dial(url)
+	}
+
 	if err != nil {
 		return nil, err
 	}
@@ -61,15 +110,14 @@ func NewPubSub(url, queue string, logger log.Logger) (PubSub, error) {
 
 	configs, _, _ := queueConfiguration.GetConfig()
 
-	ret := &pubsub{
-		conn:          conn,
-		session:       session,
-		configs:       configs,
-		queue:         queue,
-		logger:        logger,
-		subscriptions: make(map[string]bool),
-	}
-	return ret, nil
+	newPubSub.conn = conn
+	newPubSub.session = session
+	newPubSub.configs = configs
+	newPubSub.queue = queue
+	newPubSub.logger = logger
+	newPubSub.subscriptions = make(map[string]bool)
+
+	return newPubSub, nil
 }
 
 func (pubsub *pubsub) Publish(topic string, msg messaging.Message) error {

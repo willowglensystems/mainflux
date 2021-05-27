@@ -21,9 +21,35 @@ func NewPublisher() (messaging.Publisher, error) {
 	configs, _, _ := queueConfiguration.GetConfig()
 
 	if systemType == queueConfiguration.RabbitmqMessagingSystem {
-		return rabbitmq.NewPublisher(configs.RabbitmqURL)
+		if configs.RabbitmqTLSCA != "" &&
+		   configs.RabbitmqTLSCertificate != "" &&
+		   configs.RabbitmqTLSKey != "" {
+			return rabbitmq.NewPublisher(
+				configs.RabbitmqURL, 
+				rabbitmq.WithPublisherTLS(
+					configs.RabbitmqTLSCA,
+					configs.RabbitmqTLSCertificate,
+					configs.RabbitmqTLSKey,
+				),
+			)
+		} else {
+			return rabbitmq.NewPublisher(configs.RabbitmqURL)
+		}
 	} else if systemType == queueConfiguration.NatsMessagingSystem {
-		return nats.NewPublisher(configs.NatsURL)
+		if configs.NatsTLSCA != "" &&
+		   configs.NatsTLSCertificate != "" &&
+		   configs.NatsTLSKey != "" {
+			return nats.NewPublisher(
+				configs.NatsURL, 
+				nats.WithPublisherTLS(
+					configs.NatsTLSCA,
+					configs.NatsTLSCertificate,
+					configs.NatsTLSKey,
+				),
+			)
+		} else {
+			return nats.NewPublisher(configs.NatsURL)
+		}
 	} else {
 		fmt.Println("Invalid messaging system type for creating a publisher:", systemType)
 		return nil, errors.New("Invalid queue type")
@@ -36,9 +62,39 @@ func NewPubSub(queue string, logger log.Logger) (messaging.PubSub, error) {
 	configs, _, _ := queueConfiguration.GetConfig()
 
 	if systemType == queueConfiguration.RabbitmqMessagingSystem {
-		return rabbitmq.NewPubSub(configs.RabbitmqURL, queue, logger)
+		if configs.RabbitmqTLSCA != "" &&
+		   configs.RabbitmqTLSCertificate != "" &&
+		   configs.RabbitmqTLSKey != "" {
+			return rabbitmq.NewPubSub(
+				configs.RabbitmqURL, 
+				queue,
+				logger,
+				rabbitmq.WithPubSubTLS(
+					configs.RabbitmqTLSCA,
+					configs.RabbitmqTLSCertificate,
+					configs.RabbitmqTLSKey,
+				),
+			)
+		} else {
+			return rabbitmq.NewPubSub(configs.RabbitmqURL, queue, logger)
+		}
 	} else if systemType == queueConfiguration.NatsMessagingSystem {
-		return nats.NewPubSub(configs.NatsURL, queue, logger)
+		if configs.NatsTLSCA != "" &&
+		   configs.NatsTLSCertificate != "" &&
+		   configs.NatsTLSKey != "" {
+			return nats.NewPubSub(
+				configs.NatsURL, 
+				queue, 
+				logger,
+				nats.WithPubSubTLS(
+					configs.NatsTLSCA,
+					configs.NatsTLSCertificate,
+					configs.NatsTLSKey,
+				),
+			)
+		} else {
+			return nats.NewPubSub(configs.NatsURL, queue, logger)
+		}
 	} else {
 		fmt.Println("Invalid messaging system type for creating a pubsub:", systemType)
 		return nil, errors.New("Invalid queue type")
