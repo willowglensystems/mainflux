@@ -48,3 +48,7 @@ func (pub publisher) Publish(topic string, msg messaging.Message) error {
 	}
 	return nil
 }
+
+func (pub publisher) Close() {
+
+}

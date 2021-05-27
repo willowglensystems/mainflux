@@ -19,7 +19,7 @@ import (
 	"github.com/mainflux/mainflux/consumers/writers/api"
 	"github.com/mainflux/mainflux/consumers/writers/mongodb"
 	"github.com/mainflux/mainflux/logger"
-	"github.com/mainflux/mainflux/pkg/messaging/nats"
+	"github.com/mainflux/mainflux/pkg/messaging/factory"
 	"github.com/mainflux/mainflux/pkg/transformers"
 	"github.com/mainflux/mainflux/pkg/transformers/json"
 	"github.com/mainflux/mainflux/pkg/transformers/senml"
@@ -72,7 +72,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	pubSub, err := nats.NewPubSub(cfg.natsURL, "", logger)
+	pubSub, err := factory.NewPubSub("", logger)
 	if err != nil {
 		logger.Error(fmt.Sprintf("Failed to connect to NATS: %s", err))
 		os.Exit(1)

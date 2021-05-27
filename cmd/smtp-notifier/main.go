@@ -27,7 +27,7 @@ import (
 	"github.com/mainflux/mainflux/consumers/notifiers/tracing"
 	"github.com/mainflux/mainflux/internal/email"
 	"github.com/mainflux/mainflux/logger"
-	"github.com/mainflux/mainflux/pkg/messaging/nats"
+	"github.com/mainflux/mainflux/pkg/messaging/factory"
 	"github.com/mainflux/mainflux/pkg/ulid"
 	opentracing "github.com/opentracing/opentracing-go"
 	stdprometheus "github.com/prometheus/client_golang/prometheus"
@@ -127,7 +127,7 @@ func main() {
 	db := connectToDB(cfg.dbConfig, logger)
 	defer db.Close()
 
-	pubSub, err := nats.NewPubSub(cfg.natsURL, "", logger)
+	pubSub, err := factory.NewPubSub("", logger)
 	if err != nil {
 		logger.Error(fmt.Sprintf("Failed to connect to NATS: %s", err))
 		os.Exit(1)

@@ -7,6 +7,8 @@ package messaging
 type Publisher interface {
 	// Publishes message to the stream.
 	Publish(topic string, msg Message) error
+	// Closes the connection to the stream
+	Close()
 }
 
 // MessageHandler represents Message handler for Subscriber.

@@ -101,7 +101,6 @@ github.com/golang/protobuf/ptypes/timestamp
 github.com/golang/snappy
 # github.com/google/uuid v1.2.0
 ## explicit
-github.com/google/uuid
 # github.com/gopcua/opcua v0.1.6
 ## explicit
 github.com/gopcua/opcua

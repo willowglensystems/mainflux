@@ -22,7 +22,7 @@ import (
 	"github.com/mainflux/mainflux/pkg/errors"
 	"github.com/mainflux/mainflux/pkg/messaging"
 	mqttpub "github.com/mainflux/mainflux/pkg/messaging/mqtt"
-	"github.com/mainflux/mainflux/pkg/messaging/nats"
+	"github.com/mainflux/mainflux/pkg/messaging/factory"
 	thingsapi "github.com/mainflux/mainflux/things/api/auth/grpc"
 	mp "github.com/mainflux/mproxy/pkg/mqtt"
 	"github.com/mainflux/mproxy/pkg/session"
@@ -145,7 +145,7 @@ func main() {
 	ec := connectToRedis(cfg.esURL, cfg.esPass, cfg.esDB, logger)
 	defer ec.Close()
 
-	nps, err := nats.NewPubSub(cfg.natsURL, "mqtt", logger)
+	nps, err := factory.NewPubSub("mqtt", logger)
 	if err != nil {
 		logger.Error(fmt.Sprintf("Failed to connect to NATS: %s", err))
 		os.Exit(1)
@@ -158,13 +158,13 @@ func main() {
 		os.Exit(1)
 	}
 
-	fwd := mqtt.NewForwarder(nats.SubjectAllChannels, logger)
+	fwd := mqtt.NewForwarder(factory.GetAllChannels(), logger)
 	if err := fwd.Forward(nps, mpub); err != nil {
 		logger.Error(fmt.Sprintf("Failed to forward NATS messages: %s", err))
 		os.Exit(1)
 	}
 
-	np, err := nats.NewPublisher(cfg.natsURL)
+	np, err := factory.NewPublisher()
 	if err != nil {
 		logger.Error(fmt.Sprintf("Failed to connect to NATS: %s", err))
 		os.Exit(1)
