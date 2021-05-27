@@ -137,9 +137,9 @@ func (pubsub *pubsub) handleMessages(messages chan *amqp.Message, handler messag
 		var msg messaging.Message
 		if err := proto.Unmarshal(message.GetData(), &msg); err != nil {
 			pubsub.logger.Warn(fmt.Sprintf("Failed to unmarshal received message: %s", err))
-			return
+		} else {
+			handler( msg )
 		}
-		handler( msg )
 	}
 }
 
@@ -157,8 +157,7 @@ func (pubsub *pubsub) receiveMessages(topic string, messages chan *amqp.Message,
 		msg, err := receiver.Receive(ctx)
 		if err != nil {
 			fmt.Println(fmt.Sprintf("Error receiving message from AMQP: %s", err))
-		}
-		else {
+		} else {
 			// Accept message
 			msg.Accept(context.Background())
 

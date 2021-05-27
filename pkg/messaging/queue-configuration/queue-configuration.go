@@ -73,7 +73,8 @@ func GetSystem() string {
 	return systemType
 }
 
-// GetConfig take the queue system type and returns two maps and an error. 
+// GetConfig retrieves and parses the system configuration from environment variables and returns them in a struct and a map.
+// If an error occurs, then the struct and map are nils and an error is returned.
 // The first parameter is a struct of the system configuration parameters.
 // The second parameter is a map that contains the queue parameters. If the queue system does not have any queue, it returns nil.
 // The third parameter is the error in the case that the provided systemType is not valid.
