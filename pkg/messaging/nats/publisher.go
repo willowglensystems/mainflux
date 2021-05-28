@@ -5,9 +5,7 @@ package nats
 
 import (
 	"crypto/tls"
-	"crypto/x509"
 	"fmt"
-	"io/ioutil"
 
 	"github.com/gogo/protobuf/proto"
 	"github.com/mainflux/mainflux/pkg/messaging"
@@ -30,48 +28,13 @@ type Publisher interface {
 	Close()
 }
 
-// Constructor option to create a publisher with TLS access
-func WithPublisherTLS(caFile, certFile, keyFile string) PublisherOption {
-	return func(pub *publisher) {
-		roots := x509.NewCertPool()
-
-		data, err := ioutil.ReadFile(caFile)
-
-		if err != nil {
-			fmt.Errorf("Error reading in root CA: %s", err)
-			return
-		}
-
-		roots.AppendCertsFromPEM(data)
-
-		cert, err := tls.LoadX509KeyPair(certFile, keyFile)
-		if err != nil {
-			fmt.Errorf("Error loading certificate: %s", err)
-			return
-		}
-
-		pub.tlsConfig = &tls.Config{
-			Certificates: []tls.Certificate{cert},
-			RootCAs: roots,
-			InsecureSkipVerify: true,
-		}
-	}
-}
-
 // NewPublisher returns NATS message Publisher.
-func NewPublisher(url string, opts ...PublisherOption) (Publisher, error) {
-	newPub := &publisher{
-		tlsConfig: nil,
-	}
-	for _, opt := range opts {
-		opt(newPub)
-	}
-
+func NewPublisher(url string, tlsConfig *tls.Config) (Publisher, error) {
 	var conn *broker.Conn
 	var err error
 
-	if newPub.tlsConfig != nil {
-		cfg := broker.Secure(newPub.tlsConfig)
+	if tlsConfig != nil {
+		cfg := broker.Secure(tlsConfig)
 		conn, err = broker.Connect(url, cfg)
 	} else {
 		conn, err = broker.Connect(url)
@@ -81,9 +44,11 @@ func NewPublisher(url string, opts ...PublisherOption) (Publisher, error) {
 		return nil, err
 	}
 
-	newPub.conn = conn
+	ret := &publisher{
+		conn: conn,
+	}
 
-	return newPub, nil
+	return ret, nil
 }
 
 func (pub *publisher) Publish(topic string, msg messaging.Message) error {

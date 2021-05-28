@@ -6,10 +6,8 @@ package rabbitmq
 import (
 	"context"
 	"crypto/tls"
-	"crypto/x509"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"sync"
 	"time"
 
@@ -53,47 +51,12 @@ type pubsub struct {
 	tlsConfig     *tls.Config
 }
 
-// Constructor option to create a pubsub with TLS access
-func WithPubSubTLS(caFile, certFile, keyFile string) PubSubOption {
-	return func(pubsub *pubsub) {
-		roots := x509.NewCertPool()
-
-		data, err := ioutil.ReadFile(caFile)
-
-		if err != nil {
-			fmt.Errorf("Error reading in root CA: %s", err)
-			return
-		}
-
-		roots.AppendCertsFromPEM(data)
-
-		cert, err := tls.LoadX509KeyPair(certFile, keyFile)
-		if err != nil {
-			fmt.Errorf("Error loading certificate: %s", err)
-			return
-		}
-
-		pubsub.tlsConfig = &tls.Config{
-			Certificates: []tls.Certificate{cert},
-			RootCAs: roots,
-			InsecureSkipVerify: true,
-		}
-	}
-}
-
-func NewPubSub(url, queue string, logger log.Logger, opts ...PubSubOption) (PubSub, error) {
-	newPubSub := &pubsub{
-		tlsConfig: nil,
-	}
-	for _, opt := range opts {
-		opt(newPubSub)
-	}
-
+func NewPubSub(url, queue string, logger log.Logger, tlsConfig *tls.Config) (PubSub, error) {
 	var conn *amqp.Client
 	var err error
 
-	if newPubSub.tlsConfig != nil {
-		cfg := amqp.ConnTLSConfig(newPubSub.tlsConfig)
+	if tlsConfig != nil {
+		cfg := amqp.ConnTLSConfig(tlsConfig)
 		conn, err = amqp.Dial(url, cfg)
 	} else {
 		conn, err = amqp.Dial(url)
@@ -110,14 +73,16 @@ func NewPubSub(url, queue string, logger log.Logger, opts ...PubSubOption) (PubS
 
 	configs, _, _ := queueConfiguration.GetConfig()
 
-	newPubSub.conn = conn
-	newPubSub.session = session
-	newPubSub.configs = configs
-	newPubSub.queue = queue
-	newPubSub.logger = logger
-	newPubSub.subscriptions = make(map[string]bool)
+	ret := &pubsub{
+		conn:          conn,
+		session:       session,
+		configs:       configs,
+		queue:         queue,
+		logger:        logger,
+		subscriptions: make(map[string]bool),
+	}
 
-	return newPubSub, nil
+	return ret, nil
 }
 
 func (pubsub *pubsub) Publish(topic string, msg messaging.Message) error {

@@ -42,7 +42,7 @@ func TestMain(m *testing.M) {
 		log.Fatalf(err.Error())
 	}
 	if err := pool.Retry(func() error {
-		pubsub, err = rabbitmq.NewPubSub(address, "queue", logger)
+		pubsub, err = rabbitmq.NewPubSub(address, "queue", logger, nil)
 		return err
 	}); err != nil {
 		log.Fatalf("Failed to create pubsub: %s", err)

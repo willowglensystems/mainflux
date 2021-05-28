@@ -6,9 +6,7 @@ package rabbitmq
 import (
 	"context"
 	"crypto/tls"
-	"crypto/x509"
 	"fmt"
-	"io/ioutil"
 	"time"
 
 	"github.com/gogo/protobuf/proto"
@@ -36,47 +34,12 @@ type Publisher interface {
 	messaging.Publisher
 }
 
-// Constructor option to create a publisher with TLS access
-func WithPublisherTLS(caFile, certFile, keyFile string) PublisherOption {
-	return func(pub *publisher) {
-		roots := x509.NewCertPool()
-
-		data, err := ioutil.ReadFile(caFile)
-
-		if err != nil {
-			fmt.Errorf("Error reading in root CA: %s", err)
-			return
-		}
-
-		roots.AppendCertsFromPEM(data)
-
-		cert, err := tls.LoadX509KeyPair(certFile, keyFile)
-		if err != nil {
-			fmt.Errorf("Error loading certificate: %s", err)
-			return
-		}
-
-		pub.tlsConfig = &tls.Config{
-			Certificates: []tls.Certificate{cert},
-			RootCAs: roots,
-			InsecureSkipVerify: true,
-		}
-	}
-}
-
-func NewPublisher(url string, opts ...PublisherOption) (Publisher, error) {
-	newPub := &publisher{
-		tlsConfig: nil,
-	}
-	for _, opt := range opts {
-		opt(newPub)
-	}
-
+func NewPublisher(url string, tlsConfig *tls.Config) (Publisher, error) {
 	var conn *amqp.Client
 	var err error
 
-	if newPub.tlsConfig != nil {
-		cfg := amqp.ConnTLSConfig(newPub.tlsConfig)
+	if tlsConfig != nil {
+		cfg := amqp.ConnTLSConfig(tlsConfig)
 		conn, err = amqp.Dial(url, cfg)
 	} else {
 		conn, err = amqp.Dial(url)
@@ -93,11 +56,13 @@ func NewPublisher(url string, opts ...PublisherOption) (Publisher, error) {
 
 	configs, _, _ := queueConfiguration.GetConfig()
 
-	newPub.conn = conn
-	newPub.session = session
-	newPub.configs = configs
+	ret := &publisher{
+		conn: conn,
+		session: session,
+		configs: configs,
+	}
 
-	return newPub, nil
+	return ret, nil
 }
 
 func (pub *publisher) Publish(topic string, msg messaging.Message) error {

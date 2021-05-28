@@ -5,10 +5,8 @@ package nats
 
 import (
 	"crypto/tls"
-	"crypto/x509"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"sync"
 
 	"github.com/gogo/protobuf/proto"
@@ -49,34 +47,6 @@ type pubsub struct {
 	tlsConfig     *tls.Config
 }
 
-// Constructor option to create a pubsub with TLS access
-func WithPubSubTLS(caFile, certFile, keyFile string) PubSubOption {
-	return func(pubsub *pubsub) {
-		roots := x509.NewCertPool()
-
-		data, err := ioutil.ReadFile(caFile)
-
-		if err != nil {
-			fmt.Errorf("Error reading in root CA: %s", err)
-			return
-		}
-
-		roots.AppendCertsFromPEM(data)
-
-		cert, err := tls.LoadX509KeyPair(certFile, keyFile)
-		if err != nil {
-			fmt.Errorf("Error loading certificate: %s", err)
-			return
-		}
-
-		pubsub.tlsConfig = &tls.Config{
-			Certificates: []tls.Certificate{cert},
-			RootCAs: roots,
-			InsecureSkipVerify: true,
-		}
-	}
-}
-
 // NewPubSub returns NATS message publisher/subscriber.
 // Parameter queue specifies the queue for the Subscribe method.
 // If queue is specified (is not an empty string), Subscribe method
@@ -84,35 +54,29 @@ func WithPubSubTLS(caFile, certFile, keyFile string) PubSubOption {
 // from ordinary subscribe. For more information, please take a look
 // here: https://docs.nats.io/developing-with-nats/receiving/queues.
 // If the queue is empty, Subscribe will be used.
-func NewPubSub(url, queue string, logger log.Logger, opts ...PubSubOption) (PubSub, error) {
-	newPubSub := &pubsub{
-		tlsConfig: nil,
-	}
-	for _, opt := range opts {
-		opt(newPubSub)
-	}
-
+func NewPubSub(url, queue string, logger log.Logger, tlsConfig *tls.Config) (PubSub, error) {
 	var conn *broker.Conn
 	var err error
 
-	if newPubSub.tlsConfig != nil {
-		cfg := broker.Secure(newPubSub.tlsConfig)
+	if tlsConfig != nil {
+		cfg := broker.Secure(tlsConfig)
 		conn, err = broker.Connect(url, cfg)
 	} else {
 		conn, err = broker.Connect(url)
 	}
 
-	conn, err = broker.Connect(url)
 	if err != nil {
 		return nil, err
 	}
 
-	newPubSub.conn = conn
-	newPubSub.queue = queue
-	newPubSub.logger = logger
-	newPubSub.subscriptions = make(map[string]*broker.Subscription)
+	ret := &pubsub{
+		conn:          conn,
+		queue:         queue,
+		logger:        logger,
+		subscriptions: make(map[string]*broker.Subscription),
+	}
 
-	return newPubSub, nil
+	return ret, nil
 }
 
 func (ps *pubsub) Publish(topic string, msg messaging.Message) error {
