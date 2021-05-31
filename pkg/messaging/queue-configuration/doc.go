@@ -4,6 +4,7 @@
 // Package queueConfiguration holds the configuration parser for 
 // messaging queue settings. The settings are set through environment
 // variables and are defined as follows:
+// MF_ENABLE_TLS - A boolean for enabling TLS for the queue.
 // MF_QUEUE_SYSTEM - The messaging queue system to use. (nats or rabbitmq)
 // MF_RABBITMQ_URL - The URL used to connect to rabbitmq.
 // MF_RABBITMQ_TLS_CERTFICATE - The file path to the TLS client certificate.

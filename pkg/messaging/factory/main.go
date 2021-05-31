@@ -14,105 +14,99 @@ import (
 	"github.com/mainflux/mainflux/pkg/messaging/rabbitmq"
 )
 
-// Generates a NATS or RabbitMQ publisher based on the messaging queue configuration
+// Generates a NATS or RabbitMQ publisher based on the messaging queue configuration.
+// If TLS is configured then a TLS connection is made.
 func NewPublisher() (messaging.Publisher, error) {
 	systemType := queueConfiguration.GetSystem()
 	configs, _, _ := queueConfiguration.GetConfig()
 
-	if systemType == queueConfiguration.RabbitmqMessagingSystem {
-		return rabbitmq.NewPublisher(configs.RabbitmqURL, nil)
-	} else if systemType == queueConfiguration.NatsMessagingSystem {
-		return nats.NewPublisher(configs.NatsURL, nil)
+	if configs.EnableTLS {
+		if !isTLSConfigured(systemType, configs) {
+			fmt.Println("Invalid TLS configuration for creating a TLS publisher:", systemType)
+			return nil, errors.New("Invalid TLS configuration")
+		}
+	
+		if systemType == queueConfiguration.RabbitmqMessagingSystem {
+			return rabbitmq.NewPublisher(
+				configs.RabbitmqURL, 
+				generateTLSConfig(
+					configs.RabbitmqTLSCA,
+					configs.RabbitmqTLSCertificate,
+					configs.RabbitmqTLSKey,
+				),
+			)
+		} else if systemType == queueConfiguration.NatsMessagingSystem {
+			return nats.NewPublisher(
+				configs.NatsURL, 
+				generateTLSConfig(
+					configs.NatsTLSCA,
+					configs.NatsTLSCertificate,
+					configs.NatsTLSKey,
+				),
+			)
+		} else {
+			fmt.Println("Invalid messaging system type for creating a publisher:", systemType)
+			return nil, errors.New("Invalid queue type")
+		}
 	} else {
-		fmt.Println("Invalid messaging system type for creating a publisher:", systemType)
-		return nil, errors.New("Invalid queue type")
+		if systemType == queueConfiguration.RabbitmqMessagingSystem {
+			return rabbitmq.NewPublisher(configs.RabbitmqURL, nil)
+		} else if systemType == queueConfiguration.NatsMessagingSystem {
+			return nats.NewPublisher(configs.NatsURL, nil)
+		} else {
+			fmt.Println("Invalid messaging system type for creating a publisher:", systemType)
+			return nil, errors.New("Invalid queue type")
+		}
 	}
 }
 
-// Generates a NATS or RabbitMQ publisher with TLS based on the messaging queue configuration
-func NewPublisherTLS() (messaging.Publisher, error) {
-	systemType := queueConfiguration.GetSystem()
-	configs, _, _ := queueConfiguration.GetConfig()
-
-	if !isTLSConfigured(systemType, configs) {
-		fmt.Println("Invalid TLS configuration for creating a TLS publisher:", systemType)
-		return nil, errors.New("Invalid TLS configuration")
-	}
-
-	if systemType == queueConfiguration.RabbitmqMessagingSystem {
-		return rabbitmq.NewPublisher(
-			configs.RabbitmqURL, 
-			generateTLSConfig(
-				configs.RabbitmqTLSCA,
-				configs.RabbitmqTLSCertificate,
-				configs.RabbitmqTLSKey,
-			),
-		)
-	} else if systemType == queueConfiguration.NatsMessagingSystem {
-		return nats.NewPublisher(
-			configs.NatsURL, 
-			generateTLSConfig(
-				configs.NatsTLSCA,
-				configs.NatsTLSCertificate,
-				configs.NatsTLSKey,
-			),
-		)
-	} else {
-		fmt.Println("Invalid messaging system type for creating a publisher:", systemType)
-		return nil, errors.New("Invalid queue type")
-	}
-}
-
-// Generates a NATS or RabbitMQ publisher/subscriber based on the messaging queue configuration
+// Generates a NATS or RabbitMQ publisher/subscriber based on the messaging queue configuration.
+// If TLS is configured then a TLS connection is made.
 func NewPubSub(queue string, logger log.Logger) (messaging.PubSub, error) {
 	systemType := queueConfiguration.GetSystem()
 	configs, _, _ := queueConfiguration.GetConfig()
 
-	if systemType == queueConfiguration.RabbitmqMessagingSystem {
-		return rabbitmq.NewPubSub(configs.RabbitmqURL, queue, logger, nil)
-	} else if systemType == queueConfiguration.NatsMessagingSystem {
-		return nats.NewPubSub(configs.NatsURL, queue, logger, nil)
+	if configs.EnableTLS {
+		if !isTLSConfigured(systemType, configs) {
+			fmt.Println("Invalid TLS configuration for creating a TLS publisher:", systemType)
+			return nil, errors.New("Invalid TLS configuration")
+		}
+	
+		if systemType == queueConfiguration.RabbitmqMessagingSystem {
+			return rabbitmq.NewPubSub(
+				configs.RabbitmqURL, 
+				queue,
+				logger,
+				generateTLSConfig(
+					configs.RabbitmqTLSCA,
+					configs.RabbitmqTLSCertificate,
+					configs.RabbitmqTLSKey,
+				),
+			)
+		} else if systemType == queueConfiguration.NatsMessagingSystem {
+			return nats.NewPubSub(
+				configs.NatsURL, 
+				queue, 
+				logger,
+				generateTLSConfig(
+					configs.NatsTLSCA,
+					configs.NatsTLSCertificate,
+					configs.NatsTLSKey,
+				),
+			)
+		} else {
+			fmt.Println("Invalid messaging system type for creating a pubsub:", systemType)
+			return nil, errors.New("Invalid queue type")
+		}
 	} else {
-		fmt.Println("Invalid messaging system type for creating a pubsub:", systemType)
-		return nil, errors.New("Invalid queue type")
-	}
-}
-
-// Generates a NATS or RabbitMQ publisher/subscriber with TLS based on the messaging queue configuration
-func NewPubSubTLS(queue string, logger log.Logger) (messaging.PubSub, error) {
-	systemType := queueConfiguration.GetSystem()
-	configs, _, _ := queueConfiguration.GetConfig()
-
-	if !isTLSConfigured(systemType, configs) {
-		fmt.Println("Invalid TLS configuration for creating a TLS publisher:", systemType)
-		return nil, errors.New("Invalid TLS configuration")
-	}
-
-	if systemType == queueConfiguration.RabbitmqMessagingSystem {
-		return rabbitmq.NewPubSub(
-			configs.RabbitmqURL, 
-			queue,
-			logger,
-			generateTLSConfig(
-				configs.RabbitmqTLSCA,
-				configs.RabbitmqTLSCertificate,
-				configs.RabbitmqTLSKey,
-			),
-		)
-	} else if systemType == queueConfiguration.NatsMessagingSystem {
-		return nats.NewPubSub(
-			configs.NatsURL, 
-			queue, 
-			logger,
-			generateTLSConfig(
-				configs.NatsTLSCA,
-				configs.NatsTLSCertificate,
-				configs.NatsTLSKey,
-			),
-		)
-	} else {
-		fmt.Println("Invalid messaging system type for creating a pubsub:", systemType)
-		return nil, errors.New("Invalid queue type")
+		if systemType == queueConfiguration.RabbitmqMessagingSystem {
+			return rabbitmq.NewPubSub(configs.RabbitmqURL, queue, logger, nil)
+		} else if systemType == queueConfiguration.NatsMessagingSystem {
+			return nats.NewPubSub(configs.NatsURL, queue, logger, nil)
+		} else {
+			fmt.Println("Invalid messaging system type for creating a pubsub:", systemType)
+			return nil, errors.New("Invalid queue type")
+		}
 	}
 }
 
