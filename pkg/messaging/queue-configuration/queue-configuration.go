@@ -11,6 +11,7 @@ import (
 )
 
 const (
+	DefEnableTLS              = "false"
 	DefQueueSystem            = "nats"
 	DefRabbitmqURL            = "amqp://guest:guest@rabbitmq/"
 	DefRabbitmqTLSCertificate = ""
@@ -28,6 +29,7 @@ const (
 	DefNatsTLSKey             = ""
 	DefNatsTLSCA              = ""
 
+	EnvEnableTLS              = "MF_ENABLE_TLS"
 	EnvQueueSystem            = "MF_QUEUE_SYSTEM"
 	EnvRabbitmqURL            = "MF_RABBITMQ_URL"
 	EnvRabbitmqTLSCertificate = "MF_RABBITMQ_TLS_CERTIFICATE"
@@ -50,6 +52,7 @@ const (
 )
 
 type Config struct {
+	EnableTLS              bool
 	RabbitmqURL            string
 	RabbitmqTLSCertificate string
 	RabbitmqTLSKey         string
@@ -81,8 +84,16 @@ func GetSystem() string {
 func GetConfig() (*Config, map[string]string, error) {
 	systemType := mainflux.Env(EnvQueueSystem, DefQueueSystem)
 
+	enableTLSValue, err := strconv.ParseBool(mainflux.Env(EnvEnableTLS, DefEnableTLS))
+
+	if err != nil {
+		fmt.Println("Unable to parse EnableTLS configuration, defaulting to false")
+		enableTLSValue, _ = strconv.ParseBool(DefEnableTLS)
+	}
+
 	if systemType == NatsMessagingSystem {
 		config := &Config {
+			EnableTLS: enableTLSValue,
 			NatsURL: mainflux.Env(EnvNatsURL, DefNatsURL),
 			NatsTLSCertificate: mainflux.Env(EnvNatsTLSCertificate, DefNatsTLSCertificate),
 			NatsTLSKey: mainflux.Env(EnvNatsTLSKey, DefNatsTLSKey),
@@ -130,6 +141,7 @@ func GetConfig() (*Config, map[string]string, error) {
 		}
 
 		config := &Config{
+			EnableTLS: enableTLSValue,
 			RabbitmqURL: mainflux.Env(EnvRabbitmqURL, DefRabbitmqURL),
 			RabbitmqTLSCertificate: mainflux.Env(EnvRabbitmqTLSCertificate, DefRabbitmqTLSCertificate),
 			RabbitmqTLSKey: mainflux.Env(EnvRabbitmqTLSKey, DefRabbitmqTLSKey),

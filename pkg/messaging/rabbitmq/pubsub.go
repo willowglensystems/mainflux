@@ -5,6 +5,7 @@ package rabbitmq
 
 import (
 	"context"
+	"crypto/tls"
 	"errors"
 	"fmt"
 	"sync"
@@ -33,6 +34,7 @@ var (
 
 var _ messaging.PubSub = (*pubsub)(nil)
 
+type PubSubOption func(*pubsub)
 
 type PubSub interface {
 	messaging.PubSub
@@ -46,10 +48,20 @@ type pubsub struct {
 	logger        log.Logger
 	queue         string
 	subscriptions map[string]bool
+	tlsConfig     *tls.Config
 }
 
-func NewPubSub(url, queue string, logger log.Logger) (PubSub, error) {
-	conn, err := amqp.Dial(url)
+func NewPubSub(url, queue string, logger log.Logger, tlsConfig *tls.Config) (PubSub, error) {
+	var conn *amqp.Client
+	var err error
+
+	if tlsConfig != nil {
+		cfg := amqp.ConnTLSConfig(tlsConfig)
+		conn, err = amqp.Dial(url, cfg)
+	} else {
+		conn, err = amqp.Dial(url)
+	}
+
 	if err != nil {
 		return nil, err
 	}
@@ -69,6 +81,7 @@ func NewPubSub(url, queue string, logger log.Logger) (PubSub, error) {
 		logger:        logger,
 		subscriptions: make(map[string]bool),
 	}
+
 	return ret, nil
 }
 

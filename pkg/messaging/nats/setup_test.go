@@ -36,7 +36,7 @@ func TestMain(m *testing.M) {
 
 	address := fmt.Sprintf("%s:%s", "localhost", container.GetPort("4222/tcp"))
 	if err := pool.Retry(func() error {
-		publisher, err = nats.NewPublisher(address)
+		publisher, err = nats.NewPublisher(address, nil)
 		return err
 	}); err != nil {
 		log.Fatalf("Could not connect to docker: %s", err)
@@ -47,7 +47,7 @@ func TestMain(m *testing.M) {
 		log.Fatalf(err.Error())
 	}
 	if err := pool.Retry(func() error {
-		pubsub, err = nats.NewPubSub(address, "", logger)
+		pubsub, err = nats.NewPubSub(address, "", logger, nil)
 		return err
 	}); err != nil {
 		log.Fatalf("Could not connect to docker: %s", err)

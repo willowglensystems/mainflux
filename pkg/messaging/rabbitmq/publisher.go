@@ -5,6 +5,7 @@ package rabbitmq
 
 import (
 	"context"
+	"crypto/tls"
 	"fmt"
 	"time"
 
@@ -20,19 +21,30 @@ const (
 
 var _ messaging.Publisher = (*publisher)(nil)
 
+type PublisherOption func(*publisher)
+
 type publisher struct {
-	conn    *amqp.Client
-	session *amqp.Session
-	configs *queueConfiguration.Config
+	conn      *amqp.Client
+	session   *amqp.Session
+	configs   *queueConfiguration.Config
+	tlsConfig *tls.Config
 }
 
 type Publisher interface {
 	messaging.Publisher
 }
 
+func NewPublisher(url string, tlsConfig *tls.Config) (Publisher, error) {
+	var conn *amqp.Client
+	var err error
 
-func NewPublisher(url string) (Publisher, error) {
-	conn, err := amqp.Dial(url)
+	if tlsConfig != nil {
+		cfg := amqp.ConnTLSConfig(tlsConfig)
+		conn, err = amqp.Dial(url, cfg)
+	} else {
+		conn, err = amqp.Dial(url)
+	}
+	
 	if err != nil {
 		return nil, err
 	}
