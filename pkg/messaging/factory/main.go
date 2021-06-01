@@ -21,29 +21,17 @@ func NewPublisher() (messaging.Publisher, error) {
 	configs, _, _ := queueConfiguration.GetConfig()
 
 	if configs.EnableTLS {
-		if !isTLSConfigured(systemType, configs) {
+		tlsConfig := generateTLSConfig(systemType, configs)
+
+		if tlsConfig == nil {
 			fmt.Println("Invalid TLS configuration for creating a TLS publisher:", systemType)
 			return nil, errors.New("Invalid TLS configuration")
 		}
-	
+
 		if systemType == queueConfiguration.RabbitmqMessagingSystem {
-			return rabbitmq.NewPublisher(
-				configs.RabbitmqURL, 
-				generateTLSConfig(
-					configs.RabbitmqTLSCA,
-					configs.RabbitmqTLSCertificate,
-					configs.RabbitmqTLSKey,
-				),
-			)
+			return rabbitmq.NewPublisher(configs.RabbitmqURL, tlsConfig)
 		} else if systemType == queueConfiguration.NatsMessagingSystem {
-			return nats.NewPublisher(
-				configs.NatsURL, 
-				generateTLSConfig(
-					configs.NatsTLSCA,
-					configs.NatsTLSCertificate,
-					configs.NatsTLSKey,
-				),
-			)
+			return nats.NewPublisher(configs.NatsURL, tlsConfig)
 		} else {
 			fmt.Println("Invalid messaging system type for creating a publisher:", systemType)
 			return nil, errors.New("Invalid queue type")
@@ -67,33 +55,17 @@ func NewPubSub(queue string, logger log.Logger) (messaging.PubSub, error) {
 	configs, _, _ := queueConfiguration.GetConfig()
 
 	if configs.EnableTLS {
-		if !isTLSConfigured(systemType, configs) {
+		tlsConfig := generateTLSConfig(systemType, configs)
+
+		if tlsConfig == nil {
 			fmt.Println("Invalid TLS configuration for creating a TLS publisher:", systemType)
 			return nil, errors.New("Invalid TLS configuration")
 		}
-	
+
 		if systemType == queueConfiguration.RabbitmqMessagingSystem {
-			return rabbitmq.NewPubSub(
-				configs.RabbitmqURL, 
-				queue,
-				logger,
-				generateTLSConfig(
-					configs.RabbitmqTLSCA,
-					configs.RabbitmqTLSCertificate,
-					configs.RabbitmqTLSKey,
-				),
-			)
+			return rabbitmq.NewPubSub(configs.RabbitmqURL, queue, logger, tlsConfig )
 		} else if systemType == queueConfiguration.NatsMessagingSystem {
-			return nats.NewPubSub(
-				configs.NatsURL, 
-				queue, 
-				logger,
-				generateTLSConfig(
-					configs.NatsTLSCA,
-					configs.NatsTLSCertificate,
-					configs.NatsTLSKey,
-				),
-			)
+			return nats.NewPubSub(configs.NatsURL, queue, logger, tlsConfig)
 		} else {
 			fmt.Println("Invalid messaging system type for creating a pubsub:", systemType)
 			return nil, errors.New("Invalid queue type")
@@ -124,38 +96,54 @@ func GetAllChannels() (string) {
 	}
 }
 
-func isTLSConfigured(systemType string, configs *queueConfiguration.Config) bool {
+// Takes in the file paths of a TLS Certificate Authority and a TLS Client Certificate and Key to generate a tls.Config object.
+func generateTLSConfig(systemType string, configs *queueConfiguration.Config) (*tls.Config) {
+	var caFile, certFile, keyFile string
+
 	if systemType == queueConfiguration.RabbitmqMessagingSystem {
-		return configs.RabbitmqTLSCA != "" && configs.RabbitmqTLSCertificate != "" && configs.RabbitmqTLSKey != "";
+		caFile, certFile, keyFile = configs.RabbitmqTLSCA, configs.RabbitmqTLSCertificate, configs.RabbitmqTLSKey
 	} else if systemType == queueConfiguration.NatsMessagingSystem {
-		return configs.NatsTLSCA != "" && configs.NatsTLSCertificate != "" && configs.NatsTLSKey != "";
+		caFile, certFile, keyFile = configs.NatsTLSCA, configs.NatsTLSCertificate, configs.NatsTLSKey
 	} else {
 		fmt.Println("Invalid messaging system type for checking TLS configuration:", systemType)
-		return false
-	}
-}
-
-// Takes in the file paths of a TLS Certificate Authority and a TLS Client Certificate and Key to generate a tls.Config object.
-func generateTLSConfig(caFile, certFile, keyFile string) (*tls.Config) {
-	roots := x509.NewCertPool()
-	data, err := ioutil.ReadFile(caFile)
-
-	if err != nil {
-		fmt.Errorf("Error reading in root CA: %s", err)
 		return nil
 	}
 
-	roots.AppendCertsFromPEM(data)
-	cert, err := tls.LoadX509KeyPair(certFile, keyFile)
+	if caFile != "" && certFile != "" && keyFile != "" {
+		roots := x509.NewCertPool()
+		data, err := ioutil.ReadFile(caFile)
 
-	if err != nil {
-		fmt.Errorf("Error loading certificate: %s", err)
+		if err != nil {
+			fmt.Errorf("Error reading in root CA: %s", err)
+			return nil
+		}
+
+		roots.AppendCertsFromPEM(data)
+		cert, err := tls.LoadX509KeyPair(certFile, keyFile)
+
+		if err != nil {
+			fmt.Errorf("Error loading certificate: %s", err)
+			return nil
+		}
+
+		return &tls.Config {
+			Certificates: []tls.Certificate{cert},
+			RootCAs: roots,
+			InsecureSkipVerify: false,
+		}
+	} else {
+		if caFile == "" {
+			fmt.Errorf("No Certificate Authority specified")
+		}
+
+		if certFile == "" {
+			fmt.Errorf("No client certificate specified")
+		}
+
+		if keyFile == "" {
+			fmt.Errorf("No client key file specified")
+		}
+
 		return nil
-	}
-
-	return &tls.Config {
-		Certificates: []tls.Certificate{cert},
-		RootCAs: roots,
-		InsecureSkipVerify: false,
 	}
 }
