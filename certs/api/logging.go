@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/mainflux/mainflux/certs"
-	log "github.com/mainflux/mainflux/logger"
+	"git.willowglen.ca/sq/third-party/mainflux/certs"
+	log "git.willowglen.ca/sq/third-party/mainflux/logger"
 )
 
 var _ certs.Service = (*loggingMiddleware)(nil)

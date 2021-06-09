@@ -8,10 +8,10 @@ import (
 	"syscall"
 	"testing"
 
-	mfLogger "github.com/mainflux/mainflux/logger"
+	mfLogger "git.willowglen.ca/sq/third-party/mainflux/logger"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging/factory"
+	queueConfiguration "git.willowglen.ca/sq/third-party/mainflux/pkg/messaging/queue-configuration"
 	dockertest "github.com/ory/dockertest/v3"
-	"github.com/mainflux/mainflux/pkg/messaging/factory"
-	"github.com/mainflux/mainflux/pkg/messaging/queue-configuration"
 )
 
 func TestUnsecuredNats(t *testing.T) {
@@ -64,11 +64,11 @@ func TestSecuredNats(t *testing.T) {
 	natsContainer, err := pool.RunWithOptions(
 		&dockertest.RunOptions{
 			Repository: "nats",
-			Tag: "1.3.0",
-			Mounts: []string {
+			Tag:        "1.3.0",
+			Mounts: []string{
 				workingDirectory + "/test_files:/config",
 			},
-			Cmd: []string {"-c", "/config/nats.conf"},
+			Cmd: []string{"-c", "/config/nats.conf"},
 		},
 	)
 
@@ -152,7 +152,7 @@ func TestSecuredRabbitmq(t *testing.T) {
 		"./Dockerfile",
 		&dockertest.RunOptions{
 			Name: "rabbitmq-amqp1-0",
-			Mounts: []string {
+			Mounts: []string{
 				workingDirectory + "/test_files:/etc/ssl",
 			},
 			Env: []string{

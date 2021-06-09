@@ -10,9 +10,9 @@ import (
 	"fmt"
 	"time"
 
-	log "github.com/mainflux/mainflux/logger"
-	"github.com/mainflux/mainflux/pkg/messaging"
-	"github.com/mainflux/mainflux/twins"
+	log "git.willowglen.ca/sq/third-party/mainflux/logger"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging"
+	"git.willowglen.ca/sq/third-party/mainflux/twins"
 )
 
 var _ twins.Service = (*loggingMiddleware)(nil)

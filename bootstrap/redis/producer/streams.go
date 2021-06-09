@@ -6,8 +6,8 @@ package producer
 import (
 	"time"
 
+	"git.willowglen.ca/sq/third-party/mainflux/bootstrap"
 	"github.com/go-redis/redis"
-	"github.com/mainflux/mainflux/bootstrap"
 )
 
 const (

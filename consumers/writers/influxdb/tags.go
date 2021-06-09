@@ -1,8 +1,8 @@
 package influxdb
 
 import (
-	"github.com/mainflux/mainflux/pkg/transformers/json"
-	"github.com/mainflux/mainflux/pkg/transformers/senml"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/transformers/json"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/transformers/senml"
 )
 
 type tags map[string]string

@@ -12,11 +12,11 @@ import (
 	"strconv"
 	"strings"
 
+	"git.willowglen.ca/sq/third-party/mainflux"
+	"git.willowglen.ca/sq/third-party/mainflux/bootstrap"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
 	kithttp "github.com/go-kit/kit/transport/http"
 	"github.com/go-zoo/bone"
-	"github.com/mainflux/mainflux"
-	"github.com/mainflux/mainflux/bootstrap"
-	"github.com/mainflux/mainflux/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 

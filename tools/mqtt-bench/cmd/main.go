@@ -6,7 +6,7 @@ package main
 import (
 	"log"
 
-	bench "github.com/mainflux/mainflux/tools/mqtt-bench"
+	bench "git.willowglen.ca/sq/third-party/mainflux/tools/mqtt-bench"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )

@@ -9,14 +9,14 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/gogo/protobuf/proto"
-	"github.com/mainflux/mainflux/pkg/messaging"
-	"github.com/mainflux/mainflux/pkg/messaging/queue-configuration"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging"
+	queueConfiguration "git.willowglen.ca/sq/third-party/mainflux/pkg/messaging/queue-configuration"
 	"github.com/Azure/go-amqp"
+	"github.com/gogo/protobuf/proto"
 )
 
 const (
-	publishTimeout         = 5
+	publishTimeout = 5
 )
 
 var _ messaging.Publisher = (*publisher)(nil)
@@ -44,7 +44,7 @@ func NewPublisher(url string, tlsConfig *tls.Config) (Publisher, error) {
 	} else {
 		conn, err = amqp.Dial(url)
 	}
-	
+
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ func NewPublisher(url string, tlsConfig *tls.Config) (Publisher, error) {
 	configs, _, _ := queueConfiguration.GetConfig()
 
 	ret := &publisher{
-		conn: conn,
+		conn:    conn,
 		session: session,
 		configs: configs,
 	}
@@ -73,7 +73,7 @@ func (pub *publisher) Publish(topic string, msg messaging.Message) error {
 		return err
 	}
 
-	ctx, cancel := context.WithTimeout(ctx, publishTimeout * time.Second)
+	ctx, cancel := context.WithTimeout(ctx, publishTimeout*time.Second)
 
 	message, err := createMessage(topic, &msg, pub.configs)
 
@@ -105,17 +105,17 @@ func createMessage(topic string, msg *messaging.Message, configs *queueConfigura
 	}
 
 	message := amqp.NewMessage(data)
-	message.Header = &amqp.MessageHeader {
-		Durable: configs.RabbitmqDurable,
+	message.Header = &amqp.MessageHeader{
+		Durable:  configs.RabbitmqDurable,
 		Priority: configs.RabbitmqPriority,
-		TTL: configs.RabbitmqTTL,
+		TTL:      configs.RabbitmqTTL,
 	}
-	message.Properties = &amqp.MessageProperties {
+	message.Properties = &amqp.MessageProperties{
 		CorrelationID: string(msg.Metadata["CorrelationID"]),
-		ContentType: configs.RabbitmqContentType,
-		CreationTime: time.Unix(msg.Created, 0),
-		ReplyTo: string(msg.Metadata["ReplyTo"]),
-		Subject: string(msg.Metadata["Type"]),
+		ContentType:   configs.RabbitmqContentType,
+		CreationTime:  time.Unix(msg.Created, 0),
+		ReplyTo:       string(msg.Metadata["ReplyTo"]),
+		Subject:       string(msg.Metadata["Type"]),
 	}
 
 	return message, nil

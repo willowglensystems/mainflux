@@ -11,12 +11,12 @@ import (
 	"testing"
 	"time"
 
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/uuid"
+	"git.willowglen.ca/sq/third-party/mainflux/things"
+	"git.willowglen.ca/sq/third-party/mainflux/things/mocks"
+	"git.willowglen.ca/sq/third-party/mainflux/things/redis"
 	r "github.com/go-redis/redis"
-	"github.com/mainflux/mainflux/pkg/errors"
-	"github.com/mainflux/mainflux/pkg/uuid"
-	"github.com/mainflux/mainflux/things"
-	"github.com/mainflux/mainflux/things/mocks"
-	"github.com/mainflux/mainflux/things/redis"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

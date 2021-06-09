@@ -6,8 +6,8 @@ package api
 import (
 	"net/http"
 
-	"github.com/mainflux/mainflux"
-	"github.com/mainflux/mainflux/readers"
+	"git.willowglen.ca/sq/third-party/mainflux"
+	"git.willowglen.ca/sq/third-party/mainflux/readers"
 )
 
 var _ mainflux.Response = (*pageRes)(nil)

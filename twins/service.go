@@ -10,11 +10,11 @@ import (
 	"math"
 	"time"
 
-	"github.com/mainflux/mainflux/logger"
-	"github.com/mainflux/mainflux/pkg/errors"
-	"github.com/mainflux/mainflux/pkg/messaging"
+	"git.willowglen.ca/sq/third-party/mainflux/logger"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging"
 
-	"github.com/mainflux/mainflux"
+	"git.willowglen.ca/sq/third-party/mainflux"
 	"github.com/mainflux/senml"
 )
 

@@ -9,7 +9,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/mainflux/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
 )
 
 type version struct {

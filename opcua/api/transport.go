@@ -8,12 +8,12 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"git.willowglen.ca/sq/third-party/mainflux"
+	"git.willowglen.ca/sq/third-party/mainflux/internal/httputil"
+	"git.willowglen.ca/sq/third-party/mainflux/opcua"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
 	kithttp "github.com/go-kit/kit/transport/http"
 	"github.com/go-zoo/bone"
-	"github.com/mainflux/mainflux"
-	"github.com/mainflux/mainflux/internal/httputil"
-	"github.com/mainflux/mainflux/opcua"
-	"github.com/mainflux/mainflux/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 

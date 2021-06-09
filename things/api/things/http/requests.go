@@ -4,8 +4,8 @@
 package http
 
 import (
-	"github.com/mainflux/mainflux/auth"
-	"github.com/mainflux/mainflux/things"
+	"git.willowglen.ca/sq/third-party/mainflux/auth"
+	"git.willowglen.ca/sq/third-party/mainflux/things"
 )
 
 const (

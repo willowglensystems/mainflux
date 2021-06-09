@@ -4,7 +4,7 @@
 package mocks
 
 import (
-	"github.com/mainflux/mainflux/users"
+	"git.willowglen.ca/sq/third-party/mainflux/users"
 )
 
 var _ users.Hasher = (*hasherMock)(nil)

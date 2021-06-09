@@ -10,8 +10,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/mainflux/mainflux/pkg/uuid"
-	"github.com/mainflux/mainflux/twins"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/uuid"
+	"git.willowglen.ca/sq/third-party/mainflux/twins"
 )
 
 var _ twins.TwinRepository = (*twinRepositoryMock)(nil)

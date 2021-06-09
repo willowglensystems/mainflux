@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/mainflux/mainflux/pkg/messaging"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -34,15 +34,15 @@ func TestPubsub(t *testing.T) {
 		payload  []byte
 	}{
 		{
-			desc:    "publish message with string payload",
-			payload: data,
+			desc:     "publish message with string payload",
+			payload:  data,
 			subtopic: subtopic,
 		},
 	}
 
 	for _, tc := range cases {
 		expectedMsg := messaging.Message{
-			Payload:  tc.payload,
+			Payload: tc.payload,
 		}
 		require.Nil(t, err, fmt.Sprintf("got unexpected error: %s", err))
 

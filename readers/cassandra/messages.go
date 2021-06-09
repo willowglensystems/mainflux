@@ -7,11 +7,11 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
+	jsont "git.willowglen.ca/sq/third-party/mainflux/pkg/transformers/json"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/transformers/senml"
+	"git.willowglen.ca/sq/third-party/mainflux/readers"
 	"github.com/gocql/gocql"
-	"github.com/mainflux/mainflux/pkg/errors"
-	jsont "github.com/mainflux/mainflux/pkg/transformers/json"
-	"github.com/mainflux/mainflux/pkg/transformers/senml"
-	"github.com/mainflux/mainflux/readers"
 )
 
 var errReadMessages = errors.New("failed to read messages from cassandra database")

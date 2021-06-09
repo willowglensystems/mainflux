@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/mainflux/mainflux/pkg/errors"
-	"github.com/mainflux/mainflux/pkg/messaging"
-	"github.com/mainflux/mainflux/pkg/transformers/senml"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/transformers/senml"
 	mfsenml "github.com/mainflux/senml"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

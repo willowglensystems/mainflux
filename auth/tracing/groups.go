@@ -7,7 +7,7 @@ package tracing
 import (
 	"context"
 
-	"github.com/mainflux/mainflux/auth"
+	"git.willowglen.ca/sq/third-party/mainflux/auth"
 	opentracing "github.com/opentracing/opentracing-go"
 )
 

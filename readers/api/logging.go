@@ -9,8 +9,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/mainflux/mainflux/logger"
-	"github.com/mainflux/mainflux/readers"
+	"git.willowglen.ca/sq/third-party/mainflux/logger"
+	"git.willowglen.ca/sq/third-party/mainflux/readers"
 )
 
 var _ readers.MessageRepository = (*loggingMiddleware)(nil)

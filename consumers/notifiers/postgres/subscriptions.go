@@ -9,9 +9,9 @@ import (
 	"fmt"
 	"strings"
 
+	notifiers "git.willowglen.ca/sq/third-party/mainflux/consumers/notifiers"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
 	"github.com/lib/pq"
-	notifiers "github.com/mainflux/mainflux/consumers/notifiers"
-	"github.com/mainflux/mainflux/pkg/errors"
 )
 
 var _ notifiers.SubscriptionsRepository = (*subscriptionsRepo)(nil)

@@ -3,7 +3,7 @@ ARG SVC
 ARG GOARCH
 ARG GOARM
 
-WORKDIR /go/src/github.com/mainflux/mainflux
+WORKDIR /go/src/git.willowglen.ca/sq/third-party/mainflux
 COPY . .
 RUN apk update \
     && apk add make\

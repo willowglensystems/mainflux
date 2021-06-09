@@ -11,14 +11,14 @@ import (
 	"syscall"
 	"testing"
 
-	"github.com/mainflux/mainflux/logger"
-	"github.com/mainflux/mainflux/pkg/messaging"
-	"github.com/mainflux/mainflux/pkg/messaging/rabbitmq"
+	"git.willowglen.ca/sq/third-party/mainflux/logger"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging/rabbitmq"
 	dockertest "github.com/ory/dockertest/v3"
 )
 
 var (
-	pubsub    messaging.PubSub
+	pubsub messaging.PubSub
 )
 
 func TestMain(m *testing.M) {

@@ -11,9 +11,9 @@ import (
 
 	"github.com/opentracing/opentracing-go/mocktracer"
 
-	"github.com/mainflux/mainflux"
-	"github.com/mainflux/mainflux/things"
-	grpcapi "github.com/mainflux/mainflux/things/api/auth/grpc"
+	"git.willowglen.ca/sq/third-party/mainflux"
+	"git.willowglen.ca/sq/third-party/mainflux/things"
+	grpcapi "git.willowglen.ca/sq/third-party/mainflux/things/api/auth/grpc"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc"

@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/mainflux/mainflux"
-	"github.com/mainflux/mainflux/bootstrap"
+	"git.willowglen.ca/sq/third-party/mainflux"
+	"git.willowglen.ca/sq/third-party/mainflux/bootstrap"
 )
 
 var (

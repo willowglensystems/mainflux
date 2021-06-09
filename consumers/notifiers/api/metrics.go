@@ -7,8 +7,8 @@ import (
 	"context"
 	"time"
 
+	notifiers "git.willowglen.ca/sq/third-party/mainflux/consumers/notifiers"
 	"github.com/go-kit/kit/metrics"
-	notifiers "github.com/mainflux/mainflux/consumers/notifiers"
 )
 
 var _ notifiers.Service = (*metricsMiddleware)(nil)

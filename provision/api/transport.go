@@ -6,11 +6,11 @@ import (
 	"io"
 	"net/http"
 
+	"git.willowglen.ca/sq/third-party/mainflux"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux/provision"
 	kithttp "github.com/go-kit/kit/transport/http"
 	"github.com/go-zoo/bone"
-	"github.com/mainflux/mainflux"
-	"github.com/mainflux/mainflux/pkg/errors"
-	"github.com/mainflux/mainflux/provision"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 

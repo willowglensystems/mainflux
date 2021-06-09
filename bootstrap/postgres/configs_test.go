@@ -8,10 +8,10 @@ import (
 	"strconv"
 	"testing"
 
+	"git.willowglen.ca/sq/third-party/mainflux/bootstrap"
+	"git.willowglen.ca/sq/third-party/mainflux/bootstrap/postgres"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
 	"github.com/gofrs/uuid"
-	"github.com/mainflux/mainflux/bootstrap"
-	"github.com/mainflux/mainflux/bootstrap/postgres"
-	"github.com/mainflux/mainflux/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"time"
 
-	log "github.com/mainflux/mainflux/logger"
-	"github.com/mainflux/mainflux/users"
+	log "git.willowglen.ca/sq/third-party/mainflux/logger"
+	"git.willowglen.ca/sq/third-party/mainflux/users"
 )
 
 var _ users.Service = (*loggingMiddleware)(nil)

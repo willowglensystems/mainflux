@@ -4,8 +4,8 @@
 package api
 
 import (
-	notifiers "github.com/mainflux/mainflux/consumers/notifiers"
-	"github.com/mainflux/mainflux/pkg/errors"
+	notifiers "git.willowglen.ca/sq/third-party/mainflux/consumers/notifiers"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
 )
 
 var (

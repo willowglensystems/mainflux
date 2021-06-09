@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/mainflux/mainflux/things/redis"
+	"git.willowglen.ca/sq/third-party/mainflux/things/redis"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

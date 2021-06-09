@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/mainflux/mainflux/bootstrap"
+	"git.willowglen.ca/sq/third-party/mainflux/bootstrap"
 	"github.com/stretchr/testify/assert"
 )
 

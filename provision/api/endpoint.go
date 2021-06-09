@@ -3,8 +3,8 @@ package api
 import (
 	"context"
 
+	"git.willowglen.ca/sq/third-party/mainflux/provision"
 	"github.com/go-kit/kit/endpoint"
-	"github.com/mainflux/mainflux/provision"
 )
 
 func doProvision(svc provision.Service) endpoint.Endpoint {

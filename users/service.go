@@ -7,9 +7,9 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/mainflux/mainflux"
-	"github.com/mainflux/mainflux/auth"
-	"github.com/mainflux/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux"
+	"git.willowglen.ca/sq/third-party/mainflux/auth"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
 )
 
 var (

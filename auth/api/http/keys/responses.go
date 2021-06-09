@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/mainflux/mainflux"
+	"git.willowglen.ca/sq/third-party/mainflux"
 )
 
 var (

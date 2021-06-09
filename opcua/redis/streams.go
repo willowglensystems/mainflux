@@ -8,9 +8,9 @@ import (
 	"errors"
 	"fmt"
 
+	"git.willowglen.ca/sq/third-party/mainflux/logger"
+	"git.willowglen.ca/sq/third-party/mainflux/opcua"
 	"github.com/go-redis/redis"
-	"github.com/mainflux/mainflux/logger"
-	"github.com/mainflux/mainflux/opcua"
 )
 
 const (

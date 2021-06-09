@@ -6,9 +6,9 @@ package jwt
 import (
 	"time"
 
+	"git.willowglen.ca/sq/third-party/mainflux/auth"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
 	"github.com/dgrijalva/jwt-go"
-	"github.com/mainflux/mainflux/auth"
-	"github.com/mainflux/mainflux/pkg/errors"
 )
 
 const issuerName = "mainflux.auth"

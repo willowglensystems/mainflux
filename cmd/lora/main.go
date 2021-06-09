@@ -14,17 +14,17 @@ import (
 	"syscall"
 	"time"
 
+	"git.willowglen.ca/sq/third-party/mainflux"
+	"git.willowglen.ca/sq/third-party/mainflux/logger"
+	"git.willowglen.ca/sq/third-party/mainflux/lora"
+	"git.willowglen.ca/sq/third-party/mainflux/lora/api"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging/factory"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging/mqtt"
 	r "github.com/go-redis/redis"
-	"github.com/mainflux/mainflux"
-	"github.com/mainflux/mainflux/logger"
-	"github.com/mainflux/mainflux/lora"
-	"github.com/mainflux/mainflux/lora/api"
-	"github.com/mainflux/mainflux/pkg/messaging"
-	"github.com/mainflux/mainflux/pkg/messaging/mqtt"
-	"github.com/mainflux/mainflux/pkg/messaging/factory"
 
+	"git.willowglen.ca/sq/third-party/mainflux/lora/redis"
 	kitprometheus "github.com/go-kit/kit/metrics/prometheus"
-	"github.com/mainflux/mainflux/lora/redis"
 	stdprometheus "github.com/prometheus/client_golang/prometheus"
 )
 

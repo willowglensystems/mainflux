@@ -23,14 +23,14 @@ default values.
 | MF_CASSANDRA_WRITER_TRANSFORMER  | Message transformer type                                  | senml                  |
 
 ## Deployment
-The service itself is distributed as Docker container. Check the [`cassandra-writer`](https://github.com/mainflux/mainflux/blob/master/docker/addons/cassandra-writer/docker-compose.yml#L30-L49) service section in 
+The service itself is distributed as Docker container. Check the [`cassandra-writer`](https://git.willowglen.ca/sq/third-party/mainflux/blob/master/docker/addons/cassandra-writer/docker-compose.yml#L30-L49) service section in 
 docker-compose to see how service is deployed.
 
 To start the service, execute the following shell script:
 
 ```bash
 # download the latest version of the service
-git clone https://github.com/mainflux/mainflux
+git clone https://git.willowglen.ca/sq/third-party/mainflux
 
 cd mainflux
 

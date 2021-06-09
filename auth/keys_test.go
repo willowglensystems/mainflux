@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/mainflux/mainflux/auth"
+	"git.willowglen.ca/sq/third-party/mainflux/auth"
 	"github.com/stretchr/testify/assert"
 )
 

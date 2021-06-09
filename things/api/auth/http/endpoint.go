@@ -6,8 +6,8 @@ package http
 import (
 	"context"
 
+	"git.willowglen.ca/sq/third-party/mainflux/things"
 	"github.com/go-kit/kit/endpoint"
-	"github.com/mainflux/mainflux/things"
 )
 
 func identifyEndpoint(svc things.Service) endpoint.Endpoint {

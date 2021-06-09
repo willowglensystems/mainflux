@@ -9,11 +9,11 @@ import (
 	"fmt"
 	"strings"
 
+	"git.willowglen.ca/sq/third-party/mainflux/bootstrap"
+	"git.willowglen.ca/sq/third-party/mainflux/logger"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
-	"github.com/mainflux/mainflux/bootstrap"
-	"github.com/mainflux/mainflux/logger"
-	"github.com/mainflux/mainflux/pkg/errors"
 )
 
 const (

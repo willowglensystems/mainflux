@@ -7,9 +7,9 @@ import (
 	"context"
 	"time"
 
-	"github.com/mainflux/mainflux"
-	"github.com/mainflux/mainflux/pkg/errors"
-	"github.com/mainflux/mainflux/pkg/ulid"
+	"git.willowglen.ca/sq/third-party/mainflux"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/ulid"
 )
 
 const (

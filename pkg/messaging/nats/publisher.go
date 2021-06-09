@@ -7,8 +7,8 @@ import (
 	"crypto/tls"
 	"fmt"
 
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging"
 	"github.com/gogo/protobuf/proto"
-	"github.com/mainflux/mainflux/pkg/messaging"
 	broker "github.com/nats-io/nats.go"
 )
 

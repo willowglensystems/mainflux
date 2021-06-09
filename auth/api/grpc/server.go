@@ -6,12 +6,12 @@ package grpc
 import (
 	"context"
 
+	mainflux "git.willowglen.ca/sq/third-party/mainflux"
+	"git.willowglen.ca/sq/third-party/mainflux/auth"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
 	kitot "github.com/go-kit/kit/tracing/opentracing"
 	kitgrpc "github.com/go-kit/kit/transport/grpc"
 	"github.com/golang/protobuf/ptypes/empty"
-	mainflux "github.com/mainflux/mainflux"
-	"github.com/mainflux/mainflux/auth"
-	"github.com/mainflux/mainflux/pkg/errors"
 	opentracing "github.com/opentracing/opentracing-go"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

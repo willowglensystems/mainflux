@@ -10,10 +10,10 @@ import (
 	"fmt"
 	"strings"
 
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux/things"
 	"github.com/gofrs/uuid"
 	"github.com/lib/pq" // required for DB access
-	"github.com/mainflux/mainflux/pkg/errors"
-	"github.com/mainflux/mainflux/things"
 )
 
 const (

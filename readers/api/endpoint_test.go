@@ -12,12 +12,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/mainflux/mainflux"
-	"github.com/mainflux/mainflux/pkg/transformers/senml"
-	"github.com/mainflux/mainflux/pkg/uuid"
-	"github.com/mainflux/mainflux/readers"
-	"github.com/mainflux/mainflux/readers/api"
-	"github.com/mainflux/mainflux/readers/mocks"
+	"git.willowglen.ca/sq/third-party/mainflux"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/transformers/senml"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/uuid"
+	"git.willowglen.ca/sq/third-party/mainflux/readers"
+	"git.willowglen.ca/sq/third-party/mainflux/readers/api"
+	"git.willowglen.ca/sq/third-party/mainflux/readers/mocks"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

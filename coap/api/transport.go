@@ -13,13 +13,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/mainflux/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
 
+	"git.willowglen.ca/sq/third-party/mainflux"
+	"git.willowglen.ca/sq/third-party/mainflux/coap"
+	log "git.willowglen.ca/sq/third-party/mainflux/logger"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging"
 	"github.com/go-zoo/bone"
-	"github.com/mainflux/mainflux"
-	"github.com/mainflux/mainflux/coap"
-	log "github.com/mainflux/mainflux/logger"
-	"github.com/mainflux/mainflux/pkg/messaging"
 	"github.com/plgd-dev/go-coap/v2/message"
 	"github.com/plgd-dev/go-coap/v2/message/codes"
 	"github.com/plgd-dev/go-coap/v2/mux"

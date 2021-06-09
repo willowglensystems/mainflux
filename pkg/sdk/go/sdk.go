@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/mainflux/mainflux/auth"
+	"git.willowglen.ca/sq/third-party/mainflux/auth"
 )
 
 const (

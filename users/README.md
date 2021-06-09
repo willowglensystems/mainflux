@@ -46,14 +46,14 @@ default values.
 
 ## Deployment
 
-The service itself is distributed as Docker container. Check the [`users`](https://github.com/mainflux/mainflux/blob/master/docker/docker-compose.yml#L109-L143) service section in 
+The service itself is distributed as Docker container. Check the [`users`](https://git.willowglen.ca/sq/third-party/mainflux/blob/master/docker/docker-compose.yml#L109-L143) service section in 
 docker-compose to see how service is deployed.
 
 To start the service outside of the container, execute the following shell script:
 
 ```bash
 # download the latest version of the service
-git clone https://github.com/mainflux/mainflux
+git clone https://git.willowglen.ca/sq/third-party/mainflux
 
 cd mainflux
 

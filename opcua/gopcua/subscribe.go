@@ -9,12 +9,12 @@ import (
 	"strconv"
 	"time"
 
+	"git.willowglen.ca/sq/third-party/mainflux/logger"
+	"git.willowglen.ca/sq/third-party/mainflux/opcua"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging"
 	opcuaGopcua "github.com/gopcua/opcua"
 	uaGopcua "github.com/gopcua/opcua/ua"
-	"github.com/mainflux/mainflux/logger"
-	"github.com/mainflux/mainflux/opcua"
-	"github.com/mainflux/mainflux/pkg/errors"
-	"github.com/mainflux/mainflux/pkg/messaging"
 )
 
 const protocol = "opcua"

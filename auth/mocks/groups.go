@@ -10,7 +10,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/mainflux/mainflux/auth"
+	"git.willowglen.ca/sq/third-party/mainflux/auth"
 )
 
 var _ auth.GroupRepository = (*groupRepositoryMock)(nil)

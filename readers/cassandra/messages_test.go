@@ -8,12 +8,12 @@ import (
 	"testing"
 	"time"
 
-	cwriter "github.com/mainflux/mainflux/consumers/writers/cassandra"
-	"github.com/mainflux/mainflux/pkg/transformers/json"
-	"github.com/mainflux/mainflux/pkg/transformers/senml"
-	"github.com/mainflux/mainflux/pkg/uuid"
-	"github.com/mainflux/mainflux/readers"
-	creader "github.com/mainflux/mainflux/readers/cassandra"
+	cwriter "git.willowglen.ca/sq/third-party/mainflux/consumers/writers/cassandra"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/transformers/json"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/transformers/senml"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/uuid"
+	"git.willowglen.ca/sq/third-party/mainflux/readers"
+	creader "git.willowglen.ca/sq/third-party/mainflux/readers/cassandra"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

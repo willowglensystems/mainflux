@@ -15,10 +15,10 @@ import (
 
 	"github.com/opentracing/opentracing-go/mocktracer"
 
-	"github.com/mainflux/mainflux/pkg/uuid"
-	"github.com/mainflux/mainflux/things"
-	httpapi "github.com/mainflux/mainflux/things/api/auth/http"
-	"github.com/mainflux/mainflux/things/mocks"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/uuid"
+	"git.willowglen.ca/sq/third-party/mainflux/things"
+	httpapi "git.willowglen.ca/sq/third-party/mainflux/things/api/auth/http"
+	"git.willowglen.ca/sq/third-party/mainflux/things/mocks"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

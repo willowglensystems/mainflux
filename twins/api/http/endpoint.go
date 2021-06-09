@@ -6,8 +6,8 @@ package http
 import (
 	"context"
 
+	"git.willowglen.ca/sq/third-party/mainflux/twins"
 	"github.com/go-kit/kit/endpoint"
-	"github.com/mainflux/mainflux/twins"
 )
 
 func addTwinEndpoint(svc twins.Service) endpoint.Endpoint {

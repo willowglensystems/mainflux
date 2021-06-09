@@ -8,7 +8,7 @@ import (
 	"sort"
 	"sync"
 
-	notifiers "github.com/mainflux/mainflux/consumers/notifiers"
+	notifiers "git.willowglen.ca/sq/third-party/mainflux/consumers/notifiers"
 )
 
 var _ notifiers.SubscriptionsRepository = (*subRepoMock)(nil)

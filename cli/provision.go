@@ -12,8 +12,8 @@ import (
 	"os"
 	"path/filepath"
 
+	mfxsdk "git.willowglen.ca/sq/third-party/mainflux/pkg/sdk/go"
 	"github.com/docker/docker/pkg/namesgenerator"
-	mfxsdk "github.com/mainflux/mainflux/pkg/sdk/go"
 	"github.com/spf13/cobra"
 )
 

@@ -7,8 +7,8 @@ import (
 	"context"
 	"time"
 
+	"git.willowglen.ca/sq/third-party/mainflux/auth"
 	"github.com/go-kit/kit/endpoint"
-	"github.com/mainflux/mainflux/auth"
 )
 
 func issueEndpoint(svc auth.Service) endpoint.Endpoint {

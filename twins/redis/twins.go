@@ -7,9 +7,9 @@ import (
 	"context"
 	"fmt"
 
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux/twins"
 	"github.com/go-redis/redis"
-	"github.com/mainflux/mainflux/pkg/errors"
-	"github.com/mainflux/mainflux/twins"
 )
 
 const (

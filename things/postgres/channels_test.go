@@ -10,9 +10,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/mainflux/mainflux/pkg/errors"
-	"github.com/mainflux/mainflux/things"
-	"github.com/mainflux/mainflux/things/postgres"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux/things"
+	"git.willowglen.ca/sq/third-party/mainflux/things/postgres"
 	"github.com/stretchr/testify/assert"
 )
 

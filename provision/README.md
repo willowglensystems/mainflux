@@ -7,7 +7,7 @@ For gateways to communicate with [Mainflux][mainflux] configuration is required 
 
 To create bootstrap configuration you can use [Bootstrap][bootstrap] or `Provision` service. [Mainflux UI][mfxui] uses [Bootstrap][bootstrap] service for creating gateway configurations.  `Provision` service should provide an easy way of provisioning your gateways i.e creating bootstrap configuration and as many things and channels that your setup requires.  
 
-Also you may use provision service to create certificates for each thing. Each service running on gateway may require more than one thing and channel for communication. Let's say that you are using services [Agent][agent] and [Export](https://github.com/mainflux/export) on a gateway you will need two channels for `Agent` (`data` and `control`) and one for `Export` and one thing. Additionally if you enabled mtls each service will need its own thing and certificate for access to [Mainflux][mainflux]. Your setup could require any number of things and channels this kind of setup we can call `provision layout`.
+Also you may use provision service to create certificates for each thing. Each service running on gateway may require more than one thing and channel for communication. Let's say that you are using services [Agent][agent] and [Export](https://git.willowglen.ca/sq/third-party/export) on a gateway you will need two channels for `Agent` (`data` and `control`) and one for `Export` and one thing. Additionally if you enabled mtls each service will need its own thing and certificate for access to [Mainflux][mainflux]. Your setup could require any number of things and channels this kind of setup we can call `provision layout`.
 
 Provision service provides a way of specifying this `provision layout` and creating a setup according to that layout by serving requests on `/mapping` endpoint. Provision layout is configured in [config.toml](configs/config.toml).
 
@@ -171,8 +171,8 @@ curl -s  -X POST  http://localhost:8190/certs -H "Authorization: <users_token>" 
 }
 ```
 
-[mainflux]: https://github.com/mainflux/mainflux
-[bootstrap]: https://github.com/mainflux/mainflux/tree/master/bootstrap
-[export]: https://github.com/mainflux/export
-[agent]: https://github.com/mainflux/agent
-[mfxui]: https://github.com/mainflux/mainflux/ui
+[mainflux]: https://git.willowglen.ca/sq/third-party/mainflux
+[bootstrap]: https://git.willowglen.ca/sq/third-party/mainflux/tree/master/bootstrap
+[export]: https://git.willowglen.ca/sq/third-party/export
+[agent]: https://git.willowglen.ca/sq/third-party/agent
+[mfxui]: https://git.willowglen.ca/sq/third-party/mainflux/ui

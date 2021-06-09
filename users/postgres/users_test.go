@@ -8,10 +8,10 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/mainflux/mainflux/pkg/errors"
-	"github.com/mainflux/mainflux/pkg/uuid"
-	"github.com/mainflux/mainflux/users"
-	"github.com/mainflux/mainflux/users/postgres"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/uuid"
+	"git.willowglen.ca/sq/third-party/mainflux/users"
+	"git.willowglen.ca/sq/third-party/mainflux/users/postgres"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

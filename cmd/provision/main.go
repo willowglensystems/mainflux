@@ -11,12 +11,12 @@ import (
 	"strconv"
 	"syscall"
 
-	"github.com/mainflux/mainflux"
-	"github.com/mainflux/mainflux/logger"
-	"github.com/mainflux/mainflux/pkg/errors"
-	mfSDK "github.com/mainflux/mainflux/pkg/sdk/go"
-	"github.com/mainflux/mainflux/provision"
-	"github.com/mainflux/mainflux/provision/api"
+	"git.willowglen.ca/sq/third-party/mainflux"
+	"git.willowglen.ca/sq/third-party/mainflux/logger"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
+	mfSDK "git.willowglen.ca/sq/third-party/mainflux/pkg/sdk/go"
+	"git.willowglen.ca/sq/third-party/mainflux/provision"
+	"git.willowglen.ca/sq/third-party/mainflux/provision/api"
 )
 
 const (

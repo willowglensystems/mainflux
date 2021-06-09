@@ -14,9 +14,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/mainflux/mainflux/twins"
-	httpapi "github.com/mainflux/mainflux/twins/api/http"
-	"github.com/mainflux/mainflux/twins/mocks"
+	"git.willowglen.ca/sq/third-party/mainflux/twins"
+	httpapi "git.willowglen.ca/sq/third-party/mainflux/twins/api/http"
+	"git.willowglen.ca/sq/third-party/mainflux/twins/mocks"
 	"github.com/opentracing/opentracing-go/mocktracer"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

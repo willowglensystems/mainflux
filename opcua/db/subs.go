@@ -8,7 +8,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/mainflux/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
 )
 
 const columns = 2

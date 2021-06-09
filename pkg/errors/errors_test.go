@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/mainflux/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
 
 	"github.com/stretchr/testify/assert"
 )

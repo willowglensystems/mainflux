@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"time"
 
-	notifiers "github.com/mainflux/mainflux/consumers/notifiers"
-	log "github.com/mainflux/mainflux/logger"
+	notifiers "git.willowglen.ca/sq/third-party/mainflux/consumers/notifiers"
+	log "git.willowglen.ca/sq/third-party/mainflux/logger"
 )
 
 var _ notifiers.Service = (*loggingMiddleware)(nil)

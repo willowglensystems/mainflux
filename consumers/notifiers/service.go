@@ -7,10 +7,10 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/mainflux/mainflux"
-	"github.com/mainflux/mainflux/consumers"
-	"github.com/mainflux/mainflux/pkg/errors"
-	"github.com/mainflux/mainflux/pkg/messaging"
+	"git.willowglen.ca/sq/third-party/mainflux"
+	"git.willowglen.ca/sq/third-party/mainflux/consumers"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging"
 )
 
 var (

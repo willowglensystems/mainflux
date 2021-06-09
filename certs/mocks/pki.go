@@ -16,8 +16,8 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/mainflux/mainflux/certs/pki"
-	"github.com/mainflux/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux/certs/pki"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
 )
 
 var (

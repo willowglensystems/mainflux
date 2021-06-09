@@ -4,9 +4,9 @@
 package senml
 
 import (
-	"github.com/mainflux/mainflux/pkg/errors"
-	"github.com/mainflux/mainflux/pkg/messaging"
-	"github.com/mainflux/mainflux/pkg/transformers"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging"
+	"git.willowglen.ca/sq/third-party/mainflux/pkg/transformers"
 	"github.com/mainflux/senml"
 )
 
