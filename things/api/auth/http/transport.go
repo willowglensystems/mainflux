@@ -10,9 +10,9 @@ import (
 	"net/http"
 	"strings"
 
-	"git.willowglen.ca/sq/third-party/mainflux"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
-	"git.willowglen.ca/sq/third-party/mainflux/things"
+	"git.willowglen.ca/sq/third-party/mainflux.git"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux.git/things"
 	kitot "github.com/go-kit/kit/tracing/opentracing"
 	kithttp "github.com/go-kit/kit/transport/http"
 	"github.com/go-zoo/bone"

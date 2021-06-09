@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
 )
 
 func TestToSQMessageEmpty(t *testing.T) {

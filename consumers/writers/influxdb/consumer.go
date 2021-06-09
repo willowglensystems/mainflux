@@ -7,10 +7,10 @@ import (
 	"math"
 	"time"
 
-	"git.willowglen.ca/sq/third-party/mainflux/consumers"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/transformers/json"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/transformers/senml"
+	"git.willowglen.ca/sq/third-party/mainflux.git/consumers"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/json"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/senml"
 
 	influxdata "github.com/influxdata/influxdb/client/v2"
 )

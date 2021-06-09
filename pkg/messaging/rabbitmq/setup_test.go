@@ -11,9 +11,9 @@ import (
 	"syscall"
 	"testing"
 
-	"git.willowglen.ca/sq/third-party/mainflux/logger"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging/rabbitmq"
+	"git.willowglen.ca/sq/third-party/mainflux.git/logger"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging/rabbitmq"
 	dockertest "github.com/ory/dockertest/v3"
 )
 

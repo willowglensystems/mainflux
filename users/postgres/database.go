@@ -4,8 +4,8 @@ import (
 	"context"
 	"database/sql"
 
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
-	"git.willowglen.ca/sq/third-party/mainflux/users"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux.git/users"
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
 	"github.com/opentracing/opentracing-go"

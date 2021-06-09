@@ -7,8 +7,8 @@ import (
 	"errors"
 	"fmt"
 
-	"git.willowglen.ca/sq/third-party/mainflux/logger"
-	"git.willowglen.ca/sq/third-party/mainflux/opcua/db"
+	"git.willowglen.ca/sq/third-party/mainflux.git/logger"
+	"git.willowglen.ca/sq/third-party/mainflux.git/opcua/db"
 )
 
 const protocol = "opcua"

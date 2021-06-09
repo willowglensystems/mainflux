@@ -6,8 +6,8 @@ package mocks
 import (
 	"context"
 
-	"git.willowglen.ca/sq/third-party/mainflux"
-	"git.willowglen.ca/sq/third-party/mainflux/users"
+	"git.willowglen.ca/sq/third-party/mainflux.git"
+	"git.willowglen.ca/sq/third-party/mainflux.git/users"
 	"github.com/golang/protobuf/ptypes/empty"
 	"google.golang.org/grpc"
 )

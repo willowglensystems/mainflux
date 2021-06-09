@@ -9,10 +9,10 @@ import (
 	"fmt"
 	"time"
 
-	"git.willowglen.ca/sq/third-party/mainflux/certs"
-	"git.willowglen.ca/sq/third-party/mainflux/logger"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
-	"git.willowglen.ca/sq/third-party/mainflux/things"
+	"git.willowglen.ca/sq/third-party/mainflux.git/certs"
+	"git.willowglen.ca/sq/third-party/mainflux.git/logger"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux.git/things"
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
 )

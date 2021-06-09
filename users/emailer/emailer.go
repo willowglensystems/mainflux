@@ -5,8 +5,8 @@ package emailer
 import (
 	"fmt"
 
-	"git.willowglen.ca/sq/third-party/mainflux/internal/email"
-	"git.willowglen.ca/sq/third-party/mainflux/users"
+	"git.willowglen.ca/sq/third-party/mainflux.git/internal/email"
+	"git.willowglen.ca/sq/third-party/mainflux.git/users"
 )
 
 var _ users.Emailer = (*emailer)(nil)

@@ -8,10 +8,10 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"git.willowglen.ca/sq/third-party/mainflux/consumers"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
-	mfjson "git.willowglen.ca/sq/third-party/mainflux/pkg/transformers/json"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/transformers/senml"
+	"git.willowglen.ca/sq/third-party/mainflux.git/consumers"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
+	mfjson "git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/json"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/senml"
 	"github.com/gofrs/uuid"
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq" // required for DB access

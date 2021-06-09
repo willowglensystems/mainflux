@@ -11,7 +11,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	sdk "git.willowglen.ca/sq/third-party/mainflux/pkg/sdk/go"
+	sdk "git.willowglen.ca/sq/third-party/mainflux.git/pkg/sdk/go"
 )
 
 var (

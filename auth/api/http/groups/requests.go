@@ -1,8 +1,8 @@
 package groups
 
 import (
-	"git.willowglen.ca/sq/third-party/mainflux/auth"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux.git/auth"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
 )
 
 type createGroupReq struct {

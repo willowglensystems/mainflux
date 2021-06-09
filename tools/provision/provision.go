@@ -20,7 +20,7 @@ import (
 	"os"
 	"time"
 
-	sdk "git.willowglen.ca/sq/third-party/mainflux/pkg/sdk/go"
+	sdk "git.willowglen.ca/sq/third-party/mainflux.git/pkg/sdk/go"
 	"github.com/docker/docker/pkg/namesgenerator"
 )
 

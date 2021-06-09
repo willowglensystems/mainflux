@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"sort"
 
-	"git.willowglen.ca/sq/third-party/mainflux/things"
+	"git.willowglen.ca/sq/third-party/mainflux.git/things"
 )
 
 // Since mocks will store data in map, and they need to resemble the real

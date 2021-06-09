@@ -10,7 +10,7 @@ import (
 	"net/http"
 	"strings"
 
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
 )
 
 func (sdk mfSDK) SendMessage(chanName, msg, token string) error {

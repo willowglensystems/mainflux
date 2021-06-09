@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
 	"github.com/pelletier/go-toml"
 )
 

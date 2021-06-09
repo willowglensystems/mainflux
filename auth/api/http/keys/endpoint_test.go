@@ -14,11 +14,11 @@ import (
 	"testing"
 	"time"
 
-	"git.willowglen.ca/sq/third-party/mainflux/auth"
-	httpapi "git.willowglen.ca/sq/third-party/mainflux/auth/api/http"
-	"git.willowglen.ca/sq/third-party/mainflux/auth/jwt"
-	"git.willowglen.ca/sq/third-party/mainflux/auth/mocks"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/uuid"
+	"git.willowglen.ca/sq/third-party/mainflux.git/auth"
+	httpapi "git.willowglen.ca/sq/third-party/mainflux.git/auth/api/http"
+	"git.willowglen.ca/sq/third-party/mainflux.git/auth/jwt"
+	"git.willowglen.ca/sq/third-party/mainflux.git/auth/mocks"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/uuid"
 	"github.com/opentracing/opentracing-go/mocktracer"
 	"github.com/stretchr/testify/assert"
 )

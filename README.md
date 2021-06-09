@@ -126,7 +126,7 @@ and [@malidukica][dusanm] for his effort on implementing the initial user interf
 
 Thank you for your interest in Mainflux and the desire to contribute!
 
-1. Take a look at our [open issues](https://git.willowglen.ca/sq/third-party/mainflux/issues). The [good-first-issue](https://git.willowglen.ca/sq/third-party/mainflux/labels/good-first-issue) label is specifically for issues that are great for getting started.
+1. Take a look at our [open issues](https://git.willowglen.ca/sq/third-party/mainflux.git/issues). The [good-first-issue](https://git.willowglen.ca/sq/third-party/mainflux.git/labels/good-first-issue) label is specifically for issues that are great for getting started.
 2. Checkout the [contribution guide](CONTRIBUTING.md) to learn more about our style and conventions.
 3. Make your changes compatible to our workflow.
 
@@ -157,8 +157,8 @@ please head to company's [careers page][careers] or shoot us an e-mail at <caree
 [forum]: https://groups.google.com/forum/#!forum/mainflux
 [gitter]: https://gitter.im/mainflux/mainflux?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 [gitter-badge]: https://badges.gitter.im/Join%20Chat.svg
-[grc-badge]: https://goreportcard.com/badge/git.willowglen.ca/sq/third-party/mainflux
-[grc-url]: https://goreportcard.com/report/git.willowglen.ca/sq/third-party/mainflux
+[grc-badge]: https://goreportcard.com/badge/git.willowglen.ca/sq/third-party/mainflux.git
+[grc-url]: https://goreportcard.com/report/git.willowglen.ca/sq/third-party/mainflux.git
 [cov-badge]: https://codecov.io/gh/mainflux/mainflux/branch/master/graph/badge.svg
 [cov-url]: https://codecov.io/gh/mainflux/mainflux
 [license]: https://img.shields.io/badge/license-Apache%20v2.0-blue.svg
@@ -168,7 +168,7 @@ please head to company's [careers page][careers] or shoot us an e-mail at <caree
 [agent]: https://git.willowglen.ca/sq/third-party/agent
 [export]: https://git.willowglen.ca/sq/third-party/export
 [kubernetes]: https://kubernetes.io/
-[rel]: https://git.willowglen.ca/sq/third-party/mainflux/releases
+[rel]: https://git.willowglen.ca/sq/third-party/mainflux.git/releases
 [careers]: https://www.mainflux.com/careers.html
 [lf]: https://www.linuxfoundation.org/
 [edgex]: https://www.edgexfoundry.org/

@@ -3,7 +3,7 @@ package groups
 import (
 	"context"
 
-	"git.willowglen.ca/sq/third-party/mainflux/auth"
+	"git.willowglen.ca/sq/third-party/mainflux.git/auth"
 	"github.com/go-kit/kit/endpoint"
 )
 

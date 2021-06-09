@@ -6,9 +6,9 @@ package gopcua
 import (
 	"context"
 
-	"git.willowglen.ca/sq/third-party/mainflux/logger"
-	"git.willowglen.ca/sq/third-party/mainflux/opcua"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux.git/logger"
+	"git.willowglen.ca/sq/third-party/mainflux.git/opcua"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
 	opcuaGopcua "github.com/gopcua/opcua"
 	"github.com/gopcua/opcua/id"
 	uaGopcua "github.com/gopcua/opcua/ua"

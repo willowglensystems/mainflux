@@ -6,7 +6,7 @@ package api
 import (
 	"context"
 
-	"git.willowglen.ca/sq/third-party/mainflux/opcua"
+	"git.willowglen.ca/sq/third-party/mainflux.git/opcua"
 	"github.com/go-kit/kit/endpoint"
 )
 

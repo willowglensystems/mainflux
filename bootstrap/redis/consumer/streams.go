@@ -7,8 +7,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"git.willowglen.ca/sq/third-party/mainflux/bootstrap"
-	"git.willowglen.ca/sq/third-party/mainflux/logger"
+	"git.willowglen.ca/sq/third-party/mainflux.git/bootstrap"
+	"git.willowglen.ca/sq/third-party/mainflux.git/logger"
 	"github.com/go-redis/redis"
 )
 

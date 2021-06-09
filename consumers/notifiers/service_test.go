@@ -8,11 +8,11 @@ import (
 	"fmt"
 	"testing"
 
-	notifiers "git.willowglen.ca/sq/third-party/mainflux/consumers/notifiers"
-	"git.willowglen.ca/sq/third-party/mainflux/consumers/notifiers/mocks"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/uuid"
+	notifiers "git.willowglen.ca/sq/third-party/mainflux.git/consumers/notifiers"
+	"git.willowglen.ca/sq/third-party/mainflux.git/consumers/notifiers/mocks"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/uuid"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

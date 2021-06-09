@@ -9,8 +9,8 @@ import (
 	"context"
 	"time"
 
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging"
-	"git.willowglen.ca/sq/third-party/mainflux/twins"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
+	"git.willowglen.ca/sq/third-party/mainflux.git/twins"
 	"github.com/go-kit/kit/metrics"
 )
 

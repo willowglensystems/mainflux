@@ -9,7 +9,7 @@ import (
 	"strings"
 	"sync"
 
-	"git.willowglen.ca/sq/third-party/mainflux/bootstrap"
+	"git.willowglen.ca/sq/third-party/mainflux.git/bootstrap"
 )
 
 const (

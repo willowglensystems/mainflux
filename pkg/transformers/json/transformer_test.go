@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/transformers/json"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/json"
 	"github.com/stretchr/testify/assert"
 )
 

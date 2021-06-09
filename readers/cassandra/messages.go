@@ -7,10 +7,10 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
-	jsont "git.willowglen.ca/sq/third-party/mainflux/pkg/transformers/json"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/transformers/senml"
-	"git.willowglen.ca/sq/third-party/mainflux/readers"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
+	jsont "git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/json"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/senml"
+	"git.willowglen.ca/sq/third-party/mainflux.git/readers"
 	"github.com/gocql/gocql"
 )
 

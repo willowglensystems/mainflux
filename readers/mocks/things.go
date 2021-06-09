@@ -8,7 +8,7 @@ import (
 
 	"github.com/golang/protobuf/ptypes/empty"
 
-	"git.willowglen.ca/sq/third-party/mainflux"
+	"git.willowglen.ca/sq/third-party/mainflux.git"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

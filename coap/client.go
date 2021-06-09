@@ -7,9 +7,9 @@ import (
 	"bytes"
 	"fmt"
 
-	"git.willowglen.ca/sq/third-party/mainflux/logger"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging"
+	"git.willowglen.ca/sq/third-party/mainflux.git/logger"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
 	"github.com/plgd-dev/go-coap/v2/message"
 	"github.com/plgd-dev/go-coap/v2/message/codes"
 	mux "github.com/plgd-dev/go-coap/v2/mux"

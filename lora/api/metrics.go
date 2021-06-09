@@ -6,7 +6,7 @@ package api
 import (
 	"time"
 
-	"git.willowglen.ca/sq/third-party/mainflux/lora"
+	"git.willowglen.ca/sq/third-party/mainflux.git/lora"
 	"github.com/go-kit/kit/metrics"
 )
 

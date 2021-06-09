@@ -14,9 +14,9 @@ import (
 	"github.com/gofrs/uuid"
 	"github.com/jmoiron/sqlx"
 
-	"git.willowglen.ca/sq/third-party/mainflux/auth"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
-	"git.willowglen.ca/sq/third-party/mainflux/users"
+	"git.willowglen.ca/sq/third-party/mainflux.git/auth"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux.git/users"
 	"github.com/lib/pq"
 )
 

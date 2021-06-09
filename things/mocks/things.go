@@ -10,7 +10,7 @@ import (
 	"strings"
 	"sync"
 
-	"git.willowglen.ca/sq/third-party/mainflux/things"
+	"git.willowglen.ca/sq/third-party/mainflux.git/things"
 )
 
 var _ things.ThingRepository = (*thingRepositoryMock)(nil)

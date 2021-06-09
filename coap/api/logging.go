@@ -10,9 +10,9 @@ import (
 	"fmt"
 	"time"
 
-	"git.willowglen.ca/sq/third-party/mainflux/coap"
-	log "git.willowglen.ca/sq/third-party/mainflux/logger"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging"
+	"git.willowglen.ca/sq/third-party/mainflux.git/coap"
+	log "git.willowglen.ca/sq/third-party/mainflux.git/logger"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
 )
 
 var _ coap.Service = (*loggingMiddleware)(nil)

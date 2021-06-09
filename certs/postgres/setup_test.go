@@ -8,8 +8,8 @@ import (
 	"os"
 	"testing"
 
-	"git.willowglen.ca/sq/third-party/mainflux/certs/postgres"
-	"git.willowglen.ca/sq/third-party/mainflux/logger"
+	"git.willowglen.ca/sq/third-party/mainflux.git/certs/postgres"
+	"git.willowglen.ca/sq/third-party/mainflux.git/logger"
 	"github.com/jmoiron/sqlx"
 	dockertest "github.com/ory/dockertest/v3"
 )

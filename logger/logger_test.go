@@ -9,7 +9,7 @@ import (
 	"io"
 	"testing"
 
-	log "git.willowglen.ca/sq/third-party/mainflux/logger"
+	log "git.willowglen.ca/sq/third-party/mainflux.git/logger"
 	"github.com/stretchr/testify/assert"
 )
 

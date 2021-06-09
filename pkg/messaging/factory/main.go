@@ -7,11 +7,11 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	log "git.willowglen.ca/sq/third-party/mainflux/logger"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging/nats"
-	queueConfiguration "git.willowglen.ca/sq/third-party/mainflux/pkg/messaging/queue-configuration"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging/rabbitmq"
+	log "git.willowglen.ca/sq/third-party/mainflux.git/logger"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging/nats"
+	queueConfiguration "git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging/queue-configuration"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging/rabbitmq"
 )
 
 // Generates a NATS or RabbitMQ publisher based on the messaging queue configuration.

@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
-	"git.willowglen.ca/sq/third-party/mainflux/twins"
-	"git.willowglen.ca/sq/third-party/mainflux/twins/mongodb"
+	"git.willowglen.ca/sq/third-party/mainflux.git/twins"
+	"git.willowglen.ca/sq/third-party/mainflux.git/twins/mongodb"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson"

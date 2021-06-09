@@ -4,8 +4,8 @@
 package mocks
 
 import (
-	notifiers "git.willowglen.ca/sq/third-party/mainflux/consumers/notifiers"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging"
+	notifiers "git.willowglen.ca/sq/third-party/mainflux.git/consumers/notifiers"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
 )
 
 var _ notifiers.Notifier = (*notifier)(nil)

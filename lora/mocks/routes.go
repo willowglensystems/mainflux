@@ -7,7 +7,7 @@ import (
 	"errors"
 	"sync"
 
-	"git.willowglen.ca/sq/third-party/mainflux/lora"
+	"git.willowglen.ca/sq/third-party/mainflux.git/lora"
 )
 
 type routeMapMock struct {

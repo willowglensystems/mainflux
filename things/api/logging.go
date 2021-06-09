@@ -10,8 +10,8 @@ import (
 	"fmt"
 	"time"
 
-	log "git.willowglen.ca/sq/third-party/mainflux/logger"
-	"git.willowglen.ca/sq/third-party/mainflux/things"
+	log "git.willowglen.ca/sq/third-party/mainflux.git/logger"
+	"git.willowglen.ca/sq/third-party/mainflux.git/things"
 )
 
 var _ things.Service = (*loggingMiddleware)(nil)

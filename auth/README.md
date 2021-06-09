@@ -76,7 +76,7 @@ default values.
 
 ## Deployment
 
-The service itself is distributed as Docker container. Check the [`auth`](https://git.willowglen.ca/sq/third-party/mainflux/blob/master/docker/docker-compose.yml#L71-L94) service section in 
+The service itself is distributed as Docker container. Check the [`auth`](https://git.willowglen.ca/sq/third-party/mainflux.git/blob/master/docker/docker-compose.yml#L71-L94) service section in 
 docker-compose to see how service is deployed.
 
 
@@ -84,9 +84,9 @@ To start the service outside of the container, execute the following shell scrip
 
 ```bash
 # download the latest version of the service
-go get git.willowglen.ca/sq/third-party/mainflux
+go get git.willowglen.ca/sq/third-party/mainflux.git
 
-cd $GOPATH/src/git.willowglen.ca/sq/third-party/mainflux
+cd $GOPATH/src/git.willowglen.ca/sq/third-party/mainflux.git
 
 # compile the service
 make auth

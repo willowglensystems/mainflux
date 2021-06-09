@@ -8,7 +8,7 @@ package api
 import (
 	"time"
 
-	"git.willowglen.ca/sq/third-party/mainflux/readers"
+	"git.willowglen.ca/sq/third-party/mainflux.git/readers"
 	"github.com/go-kit/kit/metrics"
 )
 

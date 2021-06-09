@@ -11,7 +11,7 @@ import (
 	"os"
 	"testing"
 
-	"git.willowglen.ca/sq/third-party/mainflux/consumers/writers/postgres"
+	"git.willowglen.ca/sq/third-party/mainflux.git/consumers/writers/postgres"
 	"github.com/jmoiron/sqlx"
 	dockertest "github.com/ory/dockertest/v3"
 )

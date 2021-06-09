@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"sync"
 
-	"git.willowglen.ca/sq/third-party/mainflux"
+	"git.willowglen.ca/sq/third-party/mainflux.git"
 )
 
 // Prefix represents the prefix used to generate UUID mocks

@@ -6,7 +6,7 @@ package auth
 import (
 	"context"
 
-	"git.willowglen.ca/sq/third-party/mainflux"
+	"git.willowglen.ca/sq/third-party/mainflux.git"
 	"github.com/go-redis/redis"
 )
 

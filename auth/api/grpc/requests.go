@@ -4,7 +4,7 @@
 package grpc
 
 import (
-	"git.willowglen.ca/sq/third-party/mainflux/auth"
+	"git.willowglen.ca/sq/third-party/mainflux.git/auth"
 )
 
 type identityReq struct {

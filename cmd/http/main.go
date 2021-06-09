@@ -17,12 +17,12 @@ import (
 
 	"google.golang.org/grpc/credentials"
 
-	"git.willowglen.ca/sq/third-party/mainflux"
-	adapter "git.willowglen.ca/sq/third-party/mainflux/http"
-	"git.willowglen.ca/sq/third-party/mainflux/http/api"
-	"git.willowglen.ca/sq/third-party/mainflux/logger"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging/factory"
-	thingsapi "git.willowglen.ca/sq/third-party/mainflux/things/api/auth/grpc"
+	"git.willowglen.ca/sq/third-party/mainflux.git"
+	adapter "git.willowglen.ca/sq/third-party/mainflux.git/http"
+	"git.willowglen.ca/sq/third-party/mainflux.git/http/api"
+	"git.willowglen.ca/sq/third-party/mainflux.git/logger"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging/factory"
+	thingsapi "git.willowglen.ca/sq/third-party/mainflux.git/things/api/auth/grpc"
 	kitprometheus "github.com/go-kit/kit/metrics/prometheus"
 	"github.com/opentracing/opentracing-go"
 	stdprometheus "github.com/prometheus/client_golang/prometheus"

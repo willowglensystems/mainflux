@@ -3,7 +3,7 @@ package api
 import (
 	"context"
 
-	"git.willowglen.ca/sq/third-party/mainflux/provision"
+	"git.willowglen.ca/sq/third-party/mainflux.git/provision"
 	"github.com/go-kit/kit/endpoint"
 )
 

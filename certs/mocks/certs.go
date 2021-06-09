@@ -7,7 +7,7 @@ import (
 	"context"
 	"sync"
 
-	"git.willowglen.ca/sq/third-party/mainflux/certs"
+	"git.willowglen.ca/sq/third-party/mainflux.git/certs"
 )
 
 var _ certs.Repository = (*certsRepoMock)(nil)

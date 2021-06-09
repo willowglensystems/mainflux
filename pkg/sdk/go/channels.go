@@ -11,7 +11,7 @@ import (
 	"net/http"
 	"strings"
 
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
 )
 
 const channelsEndpoint = "channels"

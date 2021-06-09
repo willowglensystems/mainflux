@@ -7,7 +7,7 @@ import (
 	"errors"
 	"time"
 
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 )
 

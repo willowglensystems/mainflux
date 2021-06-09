@@ -6,8 +6,8 @@ package jwt
 import (
 	"time"
 
-	"git.willowglen.ca/sq/third-party/mainflux/auth"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux.git/auth"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
 	"github.com/dgrijalva/jwt-go"
 )
 

@@ -8,12 +8,12 @@ import (
 	"testing"
 	"time"
 
-	pwriter "git.willowglen.ca/sq/third-party/mainflux/consumers/writers/postgres"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/transformers/json"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/transformers/senml"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/uuid"
-	"git.willowglen.ca/sq/third-party/mainflux/readers"
-	preader "git.willowglen.ca/sq/third-party/mainflux/readers/postgres"
+	pwriter "git.willowglen.ca/sq/third-party/mainflux.git/consumers/writers/postgres"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/json"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/senml"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/uuid"
+	"git.willowglen.ca/sq/third-party/mainflux.git/readers"
+	preader "git.willowglen.ca/sq/third-party/mainflux.git/readers/postgres"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

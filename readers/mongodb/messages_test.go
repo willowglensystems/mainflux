@@ -9,12 +9,12 @@ import (
 	"testing"
 	"time"
 
-	mwriter "git.willowglen.ca/sq/third-party/mainflux/consumers/writers/mongodb"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/transformers/json"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/transformers/senml"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/uuid"
-	"git.willowglen.ca/sq/third-party/mainflux/readers"
-	mreader "git.willowglen.ca/sq/third-party/mainflux/readers/mongodb"
+	mwriter "git.willowglen.ca/sq/third-party/mainflux.git/consumers/writers/mongodb"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/json"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/senml"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/uuid"
+	"git.willowglen.ca/sq/third-party/mainflux.git/readers"
+	mreader "git.willowglen.ca/sq/third-party/mainflux.git/readers/mongodb"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 

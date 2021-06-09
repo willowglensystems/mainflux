@@ -8,8 +8,8 @@ import (
 	"errors"
 	"fmt"
 
-	"git.willowglen.ca/sq/third-party/mainflux/logger"
-	"git.willowglen.ca/sq/third-party/mainflux/opcua"
+	"git.willowglen.ca/sq/third-party/mainflux.git/logger"
+	"git.willowglen.ca/sq/third-party/mainflux.git/opcua"
 	"github.com/go-redis/redis"
 )
 

@@ -24,13 +24,13 @@ default values.
 
 ## Deployment
 
-The service itself is distributed as Docker container. Check the [`influxdb-writer`](https://git.willowglen.ca/sq/third-party/mainflux/blob/master/docker/addons/influxdb-writer/docker-compose.yml#L35-L58) service section in docker-compose to see how service is deployed.
+The service itself is distributed as Docker container. Check the [`influxdb-writer`](https://git.willowglen.ca/sq/third-party/mainflux.git/blob/master/docker/addons/influxdb-writer/docker-compose.yml#L35-L58) service section in docker-compose to see how service is deployed.
 
 To start the service, execute the following shell script:
 
 ```bash
 # download the latest version of the service
-git clone https://git.willowglen.ca/sq/third-party/mainflux
+git clone https://git.willowglen.ca/sq/third-party/mainflux.git
 
 cd mainflux
 

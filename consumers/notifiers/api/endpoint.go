@@ -6,7 +6,7 @@ package api
 import (
 	"context"
 
-	notifiers "git.willowglen.ca/sq/third-party/mainflux/consumers/notifiers"
+	notifiers "git.willowglen.ca/sq/third-party/mainflux.git/consumers/notifiers"
 	"github.com/go-kit/kit/endpoint"
 )
 

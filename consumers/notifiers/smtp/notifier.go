@@ -6,9 +6,9 @@ package smtp
 import (
 	"fmt"
 
-	notifiers "git.willowglen.ca/sq/third-party/mainflux/consumers/notifiers"
-	"git.willowglen.ca/sq/third-party/mainflux/internal/email"
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/messaging"
+	notifiers "git.willowglen.ca/sq/third-party/mainflux.git/consumers/notifiers"
+	"git.willowglen.ca/sq/third-party/mainflux.git/internal/email"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
 )
 
 const (

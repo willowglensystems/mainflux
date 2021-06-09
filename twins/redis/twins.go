@@ -7,8 +7,8 @@ import (
 	"context"
 	"fmt"
 
-	"git.willowglen.ca/sq/third-party/mainflux/pkg/errors"
-	"git.willowglen.ca/sq/third-party/mainflux/twins"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux.git/twins"
 	"github.com/go-redis/redis"
 )
 

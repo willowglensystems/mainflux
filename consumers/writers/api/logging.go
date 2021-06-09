@@ -9,8 +9,8 @@ import (
 	"fmt"
 	"time"
 
-	"git.willowglen.ca/sq/third-party/mainflux/consumers"
-	log "git.willowglen.ca/sq/third-party/mainflux/logger"
+	"git.willowglen.ca/sq/third-party/mainflux.git/consumers"
+	log "git.willowglen.ca/sq/third-party/mainflux.git/logger"
 )
 
 var _ consumers.Consumer = (*loggingMiddleware)(nil)
