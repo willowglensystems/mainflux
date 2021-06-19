@@ -68,7 +68,13 @@ func NewPublisher(url string, tlsConfig *tls.Config) (Publisher, error) {
 func (pub *publisher) Publish(topic string, msg messaging.Message) error {
 	ctx := context.Background()
 
-	sender, err := pub.session.NewSender(amqp.LinkTargetAddress(topic))
+	subject := topic
+
+	if msg.Subtopic != "" {
+		subject = fmt.Sprintf("/exchange/%s/%s", subject, msg.Subtopic)
+	}
+
+	sender, err := pub.session.NewSender(amqp.LinkTargetAddress(subject))
 	if err != nil {
 		return err
 	}
