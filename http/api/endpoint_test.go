@@ -13,10 +13,10 @@ import (
 
 	"github.com/opentracing/opentracing-go/mocktracer"
 
-	"github.com/mainflux/mainflux"
-	adapter "github.com/mainflux/mainflux/http"
-	"github.com/mainflux/mainflux/http/api"
-	"github.com/mainflux/mainflux/http/mocks"
+	"git.willowglen.ca/sq/third-party/mainflux.git"
+	adapter "git.willowglen.ca/sq/third-party/mainflux.git/http"
+	"git.willowglen.ca/sq/third-party/mainflux.git/http/api"
+	"git.willowglen.ca/sq/third-party/mainflux.git/http/mocks"
 	"github.com/stretchr/testify/assert"
 )
 

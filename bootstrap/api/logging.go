@@ -9,8 +9,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/mainflux/mainflux/bootstrap"
-	log "github.com/mainflux/mainflux/logger"
+	"git.willowglen.ca/sq/third-party/mainflux.git/bootstrap"
+	log "git.willowglen.ca/sq/third-party/mainflux.git/logger"
 )
 
 var _ bootstrap.Service = (*loggingMiddleware)(nil)

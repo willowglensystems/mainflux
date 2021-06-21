@@ -1,6 +1,6 @@
 package api
 
-import "github.com/mainflux/mainflux/pkg/errors"
+import "git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
 
 type provisionReq struct {
 	token       string

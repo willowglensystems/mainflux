@@ -7,9 +7,9 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"git.willowglen.ca/sq/third-party/mainflux.git/bootstrap"
+	"git.willowglen.ca/sq/third-party/mainflux.git/logger"
 	"github.com/go-redis/redis"
-	"github.com/mainflux/mainflux/bootstrap"
-	"github.com/mainflux/mainflux/logger"
 )
 
 const (

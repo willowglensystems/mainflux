@@ -11,12 +11,12 @@ import (
 	"fmt"
 	"sync"
 
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
 	"github.com/gogo/protobuf/proto"
-	"github.com/mainflux/mainflux/pkg/errors"
 	broker "github.com/nats-io/nats.go"
 
-	"github.com/mainflux/mainflux"
-	"github.com/mainflux/mainflux/pkg/messaging"
+	"git.willowglen.ca/sq/third-party/mainflux.git"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
 )
 
 const chansPrefix = "channels"

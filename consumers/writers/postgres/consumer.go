@@ -8,13 +8,13 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"git.willowglen.ca/sq/third-party/mainflux.git/consumers"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
+	mfjson "git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/json"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/senml"
 	"github.com/gofrs/uuid"
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq" // required for DB access
-	"github.com/mainflux/mainflux/consumers"
-	"github.com/mainflux/mainflux/pkg/errors"
-	mfjson "github.com/mainflux/mainflux/pkg/transformers/json"
-	"github.com/mainflux/mainflux/pkg/transformers/senml"
 )
 
 const (

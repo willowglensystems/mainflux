@@ -10,10 +10,10 @@ import (
 	"errors"
 	"time"
 
+	"git.willowglen.ca/sq/third-party/mainflux.git/things"
 	"github.com/golang/protobuf/ptypes/empty"
-	"github.com/mainflux/mainflux/things"
 
-	"github.com/mainflux/mainflux"
+	"git.willowglen.ca/sq/third-party/mainflux.git"
 	"google.golang.org/grpc"
 )
 

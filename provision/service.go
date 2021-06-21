@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/mainflux/mainflux/logger"
-	"github.com/mainflux/mainflux/pkg/errors"
-	SDK "github.com/mainflux/mainflux/pkg/sdk/go"
+	"git.willowglen.ca/sq/third-party/mainflux.git/logger"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
+	SDK "git.willowglen.ca/sq/third-party/mainflux.git/pkg/sdk/go"
 )
 
 const (

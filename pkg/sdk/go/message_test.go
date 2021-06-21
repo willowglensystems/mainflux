@@ -9,11 +9,11 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/mainflux/mainflux"
-	adapter "github.com/mainflux/mainflux/http"
-	"github.com/mainflux/mainflux/http/api"
-	"github.com/mainflux/mainflux/http/mocks"
-	sdk "github.com/mainflux/mainflux/pkg/sdk/go"
+	"git.willowglen.ca/sq/third-party/mainflux.git"
+	adapter "git.willowglen.ca/sq/third-party/mainflux.git/http"
+	"git.willowglen.ca/sq/third-party/mainflux.git/http/api"
+	"git.willowglen.ca/sq/third-party/mainflux.git/http/mocks"
+	sdk "git.willowglen.ca/sq/third-party/mainflux.git/pkg/sdk/go"
 	"github.com/opentracing/opentracing-go/mocktracer"
 	"github.com/stretchr/testify/assert"
 )

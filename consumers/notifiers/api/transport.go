@@ -10,13 +10,13 @@ import (
 	"net/http"
 	"strings"
 
+	"git.willowglen.ca/sq/third-party/mainflux.git"
+	notifiers "git.willowglen.ca/sq/third-party/mainflux.git/consumers/notifiers"
+	"git.willowglen.ca/sq/third-party/mainflux.git/internal/httputil"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
 	kitot "github.com/go-kit/kit/tracing/opentracing"
 	kithttp "github.com/go-kit/kit/transport/http"
 	"github.com/go-zoo/bone"
-	"github.com/mainflux/mainflux"
-	notifiers "github.com/mainflux/mainflux/consumers/notifiers"
-	"github.com/mainflux/mainflux/internal/httputil"
-	"github.com/mainflux/mainflux/pkg/errors"
 	opentracing "github.com/opentracing/opentracing-go"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )

@@ -6,8 +6,8 @@ package main
 import (
 	"log"
 
-	"github.com/mainflux/mainflux/cli"
-	sdk "github.com/mainflux/mainflux/pkg/sdk/go"
+	"git.willowglen.ca/sq/third-party/mainflux.git/cli"
+	sdk "git.willowglen.ca/sq/third-party/mainflux.git/pkg/sdk/go"
 	"github.com/spf13/cobra"
 )
 

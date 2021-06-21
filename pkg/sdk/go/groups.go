@@ -11,8 +11,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/mainflux/mainflux/auth"
-	"github.com/mainflux/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux.git/auth"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
 )
 
 const groupsEndpoint = "groups"

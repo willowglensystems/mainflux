@@ -11,8 +11,8 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/mainflux/mainflux"
-	"github.com/mainflux/mainflux/bootstrap"
+	"git.willowglen.ca/sq/third-party/mainflux.git"
+	"git.willowglen.ca/sq/third-party/mainflux.git/bootstrap"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

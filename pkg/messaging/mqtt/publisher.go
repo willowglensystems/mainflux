@@ -7,8 +7,8 @@ import (
 	"errors"
 	"time"
 
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
 	mqtt "github.com/eclipse/paho.mqtt.golang"
-	"github.com/mainflux/mainflux/pkg/messaging"
 )
 
 var _ messaging.Publisher = (*publisher)(nil)

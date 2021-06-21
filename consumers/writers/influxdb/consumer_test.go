@@ -9,12 +9,12 @@ import (
 	"testing"
 	"time"
 
+	writer "git.willowglen.ca/sq/third-party/mainflux.git/consumers/writers/influxdb"
+	log "git.willowglen.ca/sq/third-party/mainflux.git/logger"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/json"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/senml"
 	"github.com/gofrs/uuid"
 	influxdata "github.com/influxdata/influxdb/client/v2"
-	writer "github.com/mainflux/mainflux/consumers/writers/influxdb"
-	log "github.com/mainflux/mainflux/logger"
-	"github.com/mainflux/mainflux/pkg/transformers/json"
-	"github.com/mainflux/mainflux/pkg/transformers/senml"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

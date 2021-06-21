@@ -4,7 +4,7 @@
 package mocks
 
 import (
-	"github.com/mainflux/mainflux/pkg/messaging"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
 )
 
 type mockPublisher struct{}

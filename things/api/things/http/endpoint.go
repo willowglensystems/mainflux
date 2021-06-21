@@ -6,10 +6,10 @@ package http
 import (
 	"context"
 
+	"git.willowglen.ca/sq/third-party/mainflux.git/auth"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux.git/things"
 	"github.com/go-kit/kit/endpoint"
-	"github.com/mainflux/mainflux/auth"
-	"github.com/mainflux/mainflux/pkg/errors"
-	"github.com/mainflux/mainflux/things"
 )
 
 func createThingEndpoint(svc things.Service) endpoint.Endpoint {

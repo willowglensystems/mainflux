@@ -6,7 +6,7 @@ package main
 import (
 	"log"
 
-	"github.com/mainflux/mainflux/tools/provision"
+	"git.willowglen.ca/sq/third-party/mainflux.git/tools/provision"
 	"github.com/spf13/cobra"
 )
 

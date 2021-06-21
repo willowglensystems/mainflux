@@ -10,9 +10,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/mainflux/mainflux/http"
-	log "github.com/mainflux/mainflux/logger"
-	"github.com/mainflux/mainflux/pkg/messaging"
+	"git.willowglen.ca/sq/third-party/mainflux.git/http"
+	log "git.willowglen.ca/sq/third-party/mainflux.git/logger"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
 )
 
 var _ http.Service = (*loggingMiddleware)(nil)

@@ -9,8 +9,8 @@ import (
 	"context"
 	"time"
 
+	"git.willowglen.ca/sq/third-party/mainflux.git/things"
 	"github.com/go-kit/kit/metrics"
-	"github.com/mainflux/mainflux/things"
 )
 
 var _ things.Service = (*metricsMiddleware)(nil)
@@ -207,5 +207,5 @@ func (ms *metricsMiddleware) ListMembers(ctx context.Context, token, groupID str
 		ms.latency.With("method", "list_members").Observe(time.Since(begin).Seconds())
 	}(time.Now())
 
-	return ms.svc.ListMembers(ctx, token, groupID,  pm)
+	return ms.svc.ListMembers(ctx, token, groupID, pm)
 }

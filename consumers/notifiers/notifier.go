@@ -6,7 +6,7 @@ package notifiers
 import (
 	"errors"
 
-	"github.com/mainflux/mainflux/pkg/messaging"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
 )
 
 // ErrNotify wraps sending notification errors,

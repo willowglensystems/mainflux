@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"strconv"
 
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
 	"github.com/go-zoo/bone"
-	"github.com/mainflux/mainflux/pkg/errors"
 )
 
 // ReadUintQuery reads the value of uint64 http query parameters for a given key

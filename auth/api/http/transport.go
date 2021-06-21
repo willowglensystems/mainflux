@@ -5,11 +5,11 @@ package http
 import (
 	"net/http"
 
+	"git.willowglen.ca/sq/third-party/mainflux.git"
+	"git.willowglen.ca/sq/third-party/mainflux.git/auth"
+	"git.willowglen.ca/sq/third-party/mainflux.git/auth/api/http/groups"
+	"git.willowglen.ca/sq/third-party/mainflux.git/auth/api/http/keys"
 	"github.com/go-zoo/bone"
-	"github.com/mainflux/mainflux"
-	"github.com/mainflux/mainflux/auth"
-	"github.com/mainflux/mainflux/auth/api/http/groups"
-	"github.com/mainflux/mainflux/auth/api/http/keys"
 	"github.com/opentracing/opentracing-go"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )

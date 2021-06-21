@@ -11,10 +11,10 @@ import (
 	"fmt"
 	"strings"
 
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux.git/things"
 	"github.com/gofrs/uuid"
 	"github.com/lib/pq"
-	"github.com/mainflux/mainflux/pkg/errors"
-	"github.com/mainflux/mainflux/things"
 )
 
 var _ things.ChannelRepository = (*channelRepository)(nil)

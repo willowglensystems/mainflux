@@ -6,8 +6,8 @@ package api
 import (
 	"context"
 
+	"git.willowglen.ca/sq/third-party/mainflux.git/http"
 	"github.com/go-kit/kit/endpoint"
-	"github.com/mainflux/mainflux/http"
 )
 
 func sendMessageEndpoint(svc http.Service) endpoint.Endpoint {

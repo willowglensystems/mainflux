@@ -10,10 +10,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/mainflux/mainflux/logger"
-	"github.com/mainflux/mainflux/mqtt/redis"
-	"github.com/mainflux/mainflux/pkg/auth"
-	"github.com/mainflux/mainflux/pkg/messaging"
+	"git.willowglen.ca/sq/third-party/mainflux.git/logger"
+	"git.willowglen.ca/sq/third-party/mainflux.git/mqtt/redis"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/auth"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
 	"github.com/mainflux/mproxy/pkg/session"
 )
 

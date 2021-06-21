@@ -9,11 +9,11 @@ import (
 	"os"
 	"testing"
 
-	"github.com/mainflux/mainflux"
-	"github.com/mainflux/mainflux/pkg/uuid"
-	"github.com/mainflux/mainflux/things"
-	grpcapi "github.com/mainflux/mainflux/things/api/auth/grpc"
-	"github.com/mainflux/mainflux/things/mocks"
+	"git.willowglen.ca/sq/third-party/mainflux.git"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/uuid"
+	"git.willowglen.ca/sq/third-party/mainflux.git/things"
+	grpcapi "git.willowglen.ca/sq/third-party/mainflux.git/things/api/auth/grpc"
+	"git.willowglen.ca/sq/third-party/mainflux.git/things/mocks"
 	"github.com/opentracing/opentracing-go/mocktracer"
 	"google.golang.org/grpc"
 )

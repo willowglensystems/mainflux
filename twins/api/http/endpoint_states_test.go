@@ -10,12 +10,12 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/mainflux/mainflux/twins"
+	"git.willowglen.ca/sq/third-party/mainflux.git/twins"
 	"github.com/mainflux/senml"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mainflux/mainflux/twins/mocks"
+	"git.willowglen.ca/sq/third-party/mainflux.git/twins/mocks"
 )
 
 const (

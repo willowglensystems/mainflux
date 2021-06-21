@@ -5,9 +5,9 @@
 package uuid
 
 import (
+	"git.willowglen.ca/sq/third-party/mainflux.git"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
 	"github.com/gofrs/uuid"
-	"github.com/mainflux/mainflux"
-	"github.com/mainflux/mainflux/pkg/errors"
 )
 
 // ErrGeneratingID indicates error in generating UUID

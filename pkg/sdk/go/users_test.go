@@ -11,12 +11,12 @@ import (
 	"regexp"
 	"testing"
 
-	"github.com/mainflux/mainflux"
-	sdk "github.com/mainflux/mainflux/pkg/sdk/go"
-	"github.com/mainflux/mainflux/pkg/uuid"
-	"github.com/mainflux/mainflux/users"
-	"github.com/mainflux/mainflux/users/api"
-	"github.com/mainflux/mainflux/users/mocks"
+	"git.willowglen.ca/sq/third-party/mainflux.git"
+	sdk "git.willowglen.ca/sq/third-party/mainflux.git/pkg/sdk/go"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/uuid"
+	"git.willowglen.ca/sq/third-party/mainflux.git/users"
+	"git.willowglen.ca/sq/third-party/mainflux.git/users/api"
+	"git.willowglen.ca/sq/third-party/mainflux.git/users/mocks"
 	"github.com/opentracing/opentracing-go/mocktracer"
 	"github.com/stretchr/testify/assert"
 )

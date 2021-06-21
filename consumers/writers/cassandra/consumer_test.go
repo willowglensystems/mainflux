@@ -8,10 +8,10 @@ import (
 	"testing"
 	"time"
 
+	"git.willowglen.ca/sq/third-party/mainflux.git/consumers/writers/cassandra"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/json"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/senml"
 	"github.com/gofrs/uuid"
-	"github.com/mainflux/mainflux/consumers/writers/cassandra"
-	"github.com/mainflux/mainflux/pkg/transformers/json"
-	"github.com/mainflux/mainflux/pkg/transformers/senml"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

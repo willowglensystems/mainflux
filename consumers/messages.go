@@ -7,12 +7,12 @@ import (
 	"fmt"
 	"io/ioutil"
 
+	"git.willowglen.ca/sq/third-party/mainflux.git/logger"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
+	pubsub "git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging/nats"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers"
 	"github.com/BurntSushi/toml"
-	"github.com/mainflux/mainflux/logger"
-	"github.com/mainflux/mainflux/pkg/errors"
-	"github.com/mainflux/mainflux/pkg/messaging"
-	pubsub "github.com/mainflux/mainflux/pkg/messaging/nats"
-	"github.com/mainflux/mainflux/pkg/transformers"
 )
 
 var (

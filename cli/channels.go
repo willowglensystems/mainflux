@@ -6,7 +6,7 @@ package cli
 import (
 	"encoding/json"
 
-	mfxsdk "github.com/mainflux/mainflux/pkg/sdk/go"
+	mfxsdk "git.willowglen.ca/sq/third-party/mainflux.git/pkg/sdk/go"
 	"github.com/spf13/cobra"
 )
 

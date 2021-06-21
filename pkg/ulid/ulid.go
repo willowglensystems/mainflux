@@ -7,8 +7,8 @@ package ulid
 import (
 	"time"
 
-	"github.com/mainflux/mainflux"
-	"github.com/mainflux/mainflux/pkg/errors"
+	"git.willowglen.ca/sq/third-party/mainflux.git"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
 	"github.com/oklog/ulid/v2"
 
 	mathrand "math/rand"

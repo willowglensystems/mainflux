@@ -16,14 +16,14 @@ import (
 
 	"github.com/opentracing/opentracing-go/mocktracer"
 
+	"git.willowglen.ca/sq/third-party/mainflux.git"
+	"git.willowglen.ca/sq/third-party/mainflux.git/bootstrap"
+	"git.willowglen.ca/sq/third-party/mainflux.git/bootstrap/mocks"
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
+	mfsdk "git.willowglen.ca/sq/third-party/mainflux.git/pkg/sdk/go"
+	"git.willowglen.ca/sq/third-party/mainflux.git/things"
+	httpapi "git.willowglen.ca/sq/third-party/mainflux.git/things/api/things/http"
 	"github.com/gofrs/uuid"
-	"github.com/mainflux/mainflux"
-	"github.com/mainflux/mainflux/bootstrap"
-	"github.com/mainflux/mainflux/bootstrap/mocks"
-	"github.com/mainflux/mainflux/pkg/errors"
-	mfsdk "github.com/mainflux/mainflux/pkg/sdk/go"
-	"github.com/mainflux/mainflux/things"
-	httpapi "github.com/mainflux/mainflux/things/api/things/http"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

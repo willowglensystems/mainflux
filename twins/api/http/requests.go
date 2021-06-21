@@ -4,7 +4,7 @@
 package http
 
 import (
-	"github.com/mainflux/mainflux/twins"
+	"git.willowglen.ca/sq/third-party/mainflux.git/twins"
 )
 
 const (

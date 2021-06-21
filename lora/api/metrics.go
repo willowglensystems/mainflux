@@ -6,8 +6,8 @@ package api
 import (
 	"time"
 
+	"git.willowglen.ca/sq/third-party/mainflux.git/lora"
 	"github.com/go-kit/kit/metrics"
-	"github.com/mainflux/mainflux/lora"
 )
 
 var _ lora.Service = (*metricsMiddleware)(nil)

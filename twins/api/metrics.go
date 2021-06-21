@@ -9,9 +9,9 @@ import (
 	"context"
 	"time"
 
+	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
+	"git.willowglen.ca/sq/third-party/mainflux.git/twins"
 	"github.com/go-kit/kit/metrics"
-	"github.com/mainflux/mainflux/pkg/messaging"
-	"github.com/mainflux/mainflux/twins"
 )
 
 var _ twins.Service = (*metricsMiddleware)(nil)

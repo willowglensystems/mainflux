@@ -7,8 +7,8 @@ import (
 	"context"
 	"time"
 
+	"git.willowglen.ca/sq/third-party/mainflux.git/users"
 	"github.com/go-kit/kit/metrics"
-	"github.com/mainflux/mainflux/users"
 )
 
 var _ users.Service = (*metricsMiddleware)(nil)
