@@ -7,7 +7,7 @@ import (
 	"os"
 	"path"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
+	"github.com/mainflux/mainflux/pkg/errors"
 	"github.com/pelletier/go-toml"
 )
 

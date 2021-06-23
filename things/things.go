@@ -6,7 +6,7 @@ package things
 import (
 	"context"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
+	"github.com/mainflux/mainflux/pkg/errors"
 )
 
 var (

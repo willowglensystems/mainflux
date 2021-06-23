@@ -3,7 +3,7 @@
 
 package grpc
 
-import "git.willowglen.ca/sq/third-party/mainflux.git/things"
+import "github.com/mainflux/mainflux/things"
 
 type AccessByKeyReq struct {
 	thingKey string

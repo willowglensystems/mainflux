@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"testing"
 
-	notifiers "git.willowglen.ca/sq/third-party/mainflux.git/consumers/notifiers"
-	"git.willowglen.ca/sq/third-party/mainflux.git/consumers/notifiers/postgres"
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
+	notifiers "github.com/mainflux/mainflux/consumers/notifiers"
+	"github.com/mainflux/mainflux/consumers/notifiers/postgres"
+	"github.com/mainflux/mainflux/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

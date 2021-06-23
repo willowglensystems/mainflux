@@ -23,7 +23,7 @@ default values.
 
 ## Deployment
 
-The service itself is distributed as Docker container. Check the [`coap-adapter`](https://git.willowglen.ca/sq/third-party/mainflux.git/blob/master/docker/docker-compose.yml#L273-L291) service section in 
+The service itself is distributed as Docker container. Check the [`coap-adapter`](https://github.com/mainflux/mainflux/blob/master/docker/docker-compose.yml#L273-L291) service section in 
 docker-compose to see how service is deployed.
 
 Running this service outside of container requires working instance of the NATS service.
@@ -31,7 +31,7 @@ To start the service outside of the container, execute the following shell scrip
 
 ```bash
 # download the latest version of the service
-git clone https://git.willowglen.ca/sq/third-party/mainflux.git
+git clone https://github.com/mainflux/mainflux
 
 cd mainflux
 

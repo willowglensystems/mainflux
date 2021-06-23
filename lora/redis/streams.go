@@ -5,8 +5,8 @@ import (
 	"errors"
 	"fmt"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/logger"
-	"git.willowglen.ca/sq/third-party/mainflux.git/lora"
+	"github.com/mainflux/mainflux/logger"
+	"github.com/mainflux/mainflux/lora"
 	"github.com/go-redis/redis"
 )
 

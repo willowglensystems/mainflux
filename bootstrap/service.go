@@ -10,9 +10,9 @@ import (
 	"encoding/hex"
 	"time"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git"
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
-	mfsdk "git.willowglen.ca/sq/third-party/mainflux.git/pkg/sdk/go"
+	"github.com/mainflux/mainflux"
+	"github.com/mainflux/mainflux/pkg/errors"
+	mfsdk "github.com/mainflux/mainflux/pkg/sdk/go"
 )
 
 var (

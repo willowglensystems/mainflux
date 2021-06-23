@@ -4,8 +4,8 @@
 package api
 
 import (
-	groups "git.willowglen.ca/sq/third-party/mainflux.git/auth"
-	"git.willowglen.ca/sq/third-party/mainflux.git/users"
+	groups "github.com/mainflux/mainflux/auth"
+	"github.com/mainflux/mainflux/users"
 )
 
 type userReq struct {

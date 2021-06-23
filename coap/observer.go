@@ -4,7 +4,7 @@
 package coap
 
 import (
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
+	"github.com/mainflux/mainflux/pkg/messaging"
 	"github.com/gogo/protobuf/proto"
 	broker "github.com/nats-io/nats.go"
 )

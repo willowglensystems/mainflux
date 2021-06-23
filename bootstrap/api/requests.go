@@ -3,7 +3,7 @@
 
 package api
 
-import "git.willowglen.ca/sq/third-party/mainflux.git/bootstrap"
+import "github.com/mainflux/mainflux/bootstrap"
 
 type apiReq interface {
 	validate() error

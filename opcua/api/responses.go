@@ -6,8 +6,8 @@ package api
 import (
 	"net/http"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git"
-	"git.willowglen.ca/sq/third-party/mainflux.git/opcua"
+	"github.com/mainflux/mainflux"
+	"github.com/mainflux/mainflux/opcua"
 )
 
 var _ mainflux.Response = (*browseRes)(nil)

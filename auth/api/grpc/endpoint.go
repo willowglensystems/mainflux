@@ -7,7 +7,7 @@ import (
 	"context"
 	"time"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/auth"
+	"github.com/mainflux/mainflux/auth"
 	"github.com/go-kit/kit/endpoint"
 )
 

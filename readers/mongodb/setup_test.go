@@ -9,7 +9,7 @@ import (
 	"os"
 	"testing"
 
-	log "git.willowglen.ca/sq/third-party/mainflux.git/logger"
+	log "github.com/mainflux/mainflux/logger"
 	dockertest "github.com/ory/dockertest/v3"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"

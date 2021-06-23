@@ -10,7 +10,7 @@ import (
 	"strings"
 	"sync"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/twins"
+	"github.com/mainflux/mainflux/twins"
 )
 
 var _ twins.StateRepository = (*stateRepositoryMock)(nil)

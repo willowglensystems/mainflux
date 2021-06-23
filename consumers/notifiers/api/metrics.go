@@ -7,7 +7,7 @@ import (
 	"context"
 	"time"
 
-	notifiers "git.willowglen.ca/sq/third-party/mainflux.git/consumers/notifiers"
+	notifiers "github.com/mainflux/mainflux/consumers/notifiers"
 	"github.com/go-kit/kit/metrics"
 )
 

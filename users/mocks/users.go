@@ -7,7 +7,7 @@ import (
 	"context"
 	"sync"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/users"
+	"github.com/mainflux/mainflux/users"
 )
 
 var _ users.UserRepository = (*userRepositoryMock)(nil)

@@ -3,7 +3,7 @@ package influxdb
 import (
 	"strconv"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/senml"
+	"github.com/mainflux/mainflux/pkg/transformers/senml"
 )
 
 type fields map[string]interface{}

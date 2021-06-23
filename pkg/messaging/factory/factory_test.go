@@ -8,9 +8,9 @@ import (
 	"syscall"
 	"testing"
 
-	mfLogger "git.willowglen.ca/sq/third-party/mainflux.git/logger"
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging/factory"
-	queueConfiguration "git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging/queue-configuration"
+	mfLogger "github.com/mainflux/mainflux/logger"
+	"github.com/mainflux/mainflux/pkg/messaging/factory"
+	queueConfiguration "github.com/mainflux/mainflux/pkg/messaging/queue-configuration"
 	dockertest "github.com/ory/dockertest/v3"
 )
 

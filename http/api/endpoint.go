@@ -6,7 +6,7 @@ package api
 import (
 	"context"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/http"
+	"github.com/mainflux/mainflux/http"
 	"github.com/go-kit/kit/endpoint"
 )
 

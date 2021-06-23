@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"testing"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/twins"
-	"git.willowglen.ca/sq/third-party/mainflux.git/twins/mocks"
-	"git.willowglen.ca/sq/third-party/mainflux.git/twins/redis"
+	"github.com/mainflux/mainflux/twins"
+	"github.com/mainflux/mainflux/twins/mocks"
+	"github.com/mainflux/mainflux/twins/redis"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

@@ -4,7 +4,7 @@
 package api
 
 import (
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
+	"github.com/mainflux/mainflux/pkg/messaging"
 )
 
 type publishReq struct {

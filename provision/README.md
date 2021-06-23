@@ -171,8 +171,8 @@ curl -s  -X POST  http://localhost:8190/certs -H "Authorization: <users_token>" 
 }
 ```
 
-[mainflux]: https://git.willowglen.ca/sq/third-party/mainflux.git
-[bootstrap]: https://git.willowglen.ca/sq/third-party/mainflux.git/tree/master/bootstrap
+[mainflux]: https://github.com/mainflux/mainflux
+[bootstrap]: https://github.com/mainflux/mainflux/tree/master/bootstrap
 [export]: https://git.willowglen.ca/sq/third-party/export
 [agent]: https://git.willowglen.ca/sq/third-party/agent
-[mfxui]: https://git.willowglen.ca/sq/third-party/mainflux.git/ui
+[mfxui]: https://github.com/mainflux/mainflux/ui

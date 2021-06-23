@@ -3,7 +3,7 @@
 
 package api
 
-import "git.willowglen.ca/sq/third-party/mainflux.git/opcua"
+import "github.com/mainflux/mainflux/opcua"
 
 type browseReq struct {
 	ServerURI  string

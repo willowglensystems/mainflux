@@ -14,11 +14,11 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/consumers/writers/mongodb"
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/json"
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/senml"
+	"github.com/mainflux/mainflux/consumers/writers/mongodb"
+	"github.com/mainflux/mainflux/pkg/transformers/json"
+	"github.com/mainflux/mainflux/pkg/transformers/senml"
 
-	log "git.willowglen.ca/sq/third-party/mainflux.git/logger"
+	log "github.com/mainflux/mainflux/logger"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"

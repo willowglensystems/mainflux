@@ -1,4 +1,4 @@
-module git.willowglen.ca/sq/third-party/mainflux.git
+module github.com/mainflux/mainflux
 
 go 1.14
 

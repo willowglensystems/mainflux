@@ -6,7 +6,7 @@ package keys
 import (
 	"time"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/auth"
+	"github.com/mainflux/mainflux/auth"
 )
 
 type issueKeyReq struct {

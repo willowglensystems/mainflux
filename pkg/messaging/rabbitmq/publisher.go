@@ -9,8 +9,8 @@ import (
 	"fmt"
 	"time"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
-	queueConfiguration "git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging/queue-configuration"
+	"github.com/mainflux/mainflux/pkg/messaging"
+	queueConfiguration "github.com/mainflux/mainflux/pkg/messaging/queue-configuration"
 	"github.com/Azure/go-amqp"
 	"github.com/gogo/protobuf/proto"
 )

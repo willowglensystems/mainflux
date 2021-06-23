@@ -38,14 +38,14 @@ default values.
 
 ## Deployment
 
-The service itself is distributed as Docker container. Check the [`mqtt-adapter`](https://git.willowglen.ca/sq/third-party/mainflux.git/blob/master/docker/docker-compose.yml#L219-L243) service section in 
+The service itself is distributed as Docker container. Check the [`mqtt-adapter`](https://github.com/mainflux/mainflux/blob/master/docker/docker-compose.yml#L219-L243) service section in 
 docker-compose to see how service is deployed.
 
 To start the service outside of the container, execute the following shell script:
 
 ```bash
 # download the latest version of the service
-git clone https://git.willowglen.ca/sq/third-party/mainflux.git
+git clone https://github.com/mainflux/mainflux
 
 cd mainflux
 

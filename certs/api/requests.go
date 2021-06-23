@@ -3,7 +3,7 @@
 
 package api
 
-import "git.willowglen.ca/sq/third-party/mainflux.git/certs"
+import "github.com/mainflux/mainflux/certs"
 
 const maxLimitSize = 100
 

@@ -12,7 +12,7 @@ import (
 	"os"
 	"path/filepath"
 
-	mfxsdk "git.willowglen.ca/sq/third-party/mainflux.git/pkg/sdk/go"
+	mfxsdk "github.com/mainflux/mainflux/pkg/sdk/go"
 	"github.com/docker/docker/pkg/namesgenerator"
 	"github.com/spf13/cobra"
 )

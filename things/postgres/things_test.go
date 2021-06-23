@@ -10,10 +10,10 @@ import (
 	"strings"
 	"testing"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/uuid"
-	"git.willowglen.ca/sq/third-party/mainflux.git/things"
-	"git.willowglen.ca/sq/third-party/mainflux.git/things/postgres"
+	"github.com/mainflux/mainflux/pkg/errors"
+	"github.com/mainflux/mainflux/pkg/uuid"
+	"github.com/mainflux/mainflux/things"
+	"github.com/mainflux/mainflux/things/postgres"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

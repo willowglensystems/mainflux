@@ -6,7 +6,7 @@ package redis
 import (
 	"fmt"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/lora"
+	"github.com/mainflux/mainflux/lora"
 	"github.com/go-redis/redis"
 )
 

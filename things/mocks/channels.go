@@ -10,7 +10,7 @@ import (
 	"strings"
 	"sync"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/things"
+	"github.com/mainflux/mainflux/things"
 )
 
 // Connection represents connection between channel and thing that is used for

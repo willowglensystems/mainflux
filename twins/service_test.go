@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"testing"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/twins"
-	"git.willowglen.ca/sq/third-party/mainflux.git/twins/mocks"
+	"github.com/mainflux/mainflux/twins"
+	"github.com/mainflux/mainflux/twins/mocks"
 	"github.com/mainflux/senml"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

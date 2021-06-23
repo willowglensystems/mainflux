@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	sdk "git.willowglen.ca/sq/third-party/mainflux.git/pkg/sdk/go"
+	sdk "github.com/mainflux/mainflux/pkg/sdk/go"
 	"github.com/stretchr/testify/assert"
 )
 

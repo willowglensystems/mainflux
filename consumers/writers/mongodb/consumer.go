@@ -8,10 +8,10 @@ import (
 
 	"go.mongodb.org/mongo-driver/mongo"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/consumers"
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/json"
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/senml"
+	"github.com/mainflux/mainflux/consumers"
+	"github.com/mainflux/mainflux/pkg/errors"
+	"github.com/mainflux/mainflux/pkg/transformers/json"
+	"github.com/mainflux/mainflux/pkg/transformers/senml"
 )
 
 const senmlCollection string = "messages"

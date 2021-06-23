@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"time"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git"
-	"git.willowglen.ca/sq/third-party/mainflux.git/twins"
+	"github.com/mainflux/mainflux"
+	"github.com/mainflux/mainflux/twins"
 )
 
 var (

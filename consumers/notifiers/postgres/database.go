@@ -7,8 +7,8 @@ import (
 	"context"
 	"database/sql"
 
-	notifiers "git.willowglen.ca/sq/third-party/mainflux.git/consumers/notifiers"
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
+	notifiers "github.com/mainflux/mainflux/consumers/notifiers"
+	"github.com/mainflux/mainflux/pkg/errors"
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
 	"github.com/opentracing/opentracing-go"

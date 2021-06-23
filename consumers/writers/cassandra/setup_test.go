@@ -8,8 +8,8 @@ import (
 	"os"
 	"testing"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/consumers/writers/cassandra"
-	log "git.willowglen.ca/sq/third-party/mainflux.git/logger"
+	"github.com/mainflux/mainflux/consumers/writers/cassandra"
+	log "github.com/mainflux/mainflux/logger"
 	"github.com/gocql/gocql"
 	dockertest "github.com/ory/dockertest/v3"
 )

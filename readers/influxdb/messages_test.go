@@ -5,12 +5,12 @@ import (
 	"testing"
 	"time"
 
-	iwriter "git.willowglen.ca/sq/third-party/mainflux.git/consumers/writers/influxdb"
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/json"
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/senml"
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/uuid"
-	"git.willowglen.ca/sq/third-party/mainflux.git/readers"
-	ireader "git.willowglen.ca/sq/third-party/mainflux.git/readers/influxdb"
+	iwriter "github.com/mainflux/mainflux/consumers/writers/influxdb"
+	"github.com/mainflux/mainflux/pkg/transformers/json"
+	"github.com/mainflux/mainflux/pkg/transformers/senml"
+	"github.com/mainflux/mainflux/pkg/uuid"
+	"github.com/mainflux/mainflux/readers"
+	ireader "github.com/mainflux/mainflux/readers/influxdb"
 	influxdata "github.com/influxdata/influxdb/client/v2"
 
 	"github.com/stretchr/testify/assert"

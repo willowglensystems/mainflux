@@ -6,10 +6,10 @@ package things
 import (
 	"context"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
+	"github.com/mainflux/mainflux/pkg/errors"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git"
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/ulid"
+	"github.com/mainflux/mainflux"
+	"github.com/mainflux/mainflux/pkg/ulid"
 )
 
 var (

@@ -6,7 +6,7 @@ package redis
 import (
 	"context"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/things"
+	"github.com/mainflux/mainflux/things"
 	"github.com/go-redis/redis"
 )
 

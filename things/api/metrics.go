@@ -9,7 +9,7 @@ import (
 	"context"
 	"time"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/things"
+	"github.com/mainflux/mainflux/things"
 	"github.com/go-kit/kit/metrics"
 )
 

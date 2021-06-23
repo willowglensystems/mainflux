@@ -3,7 +3,7 @@ package sqMessaging
 import (
 	"encoding/binary"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
+	"github.com/mainflux/mainflux/pkg/messaging"
 )
 
 func ToSQMessage(msg messaging.Message) SQMessage {
