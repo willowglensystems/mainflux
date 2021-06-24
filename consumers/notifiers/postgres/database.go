@@ -7,10 +7,10 @@ import (
 	"context"
 	"database/sql"
 
-	notifiers "github.com/mainflux/mainflux/consumers/notifiers"
-	"github.com/mainflux/mainflux/pkg/errors"
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
+	notifiers "github.com/mainflux/mainflux/consumers/notifiers"
+	"github.com/mainflux/mainflux/pkg/errors"
 	"github.com/opentracing/opentracing-go"
 )
 

@@ -6,8 +6,8 @@ package redis
 import (
 	"fmt"
 
-	"github.com/mainflux/mainflux/opcua"
 	"github.com/go-redis/redis"
+	"github.com/mainflux/mainflux/opcua"
 )
 
 var _ opcua.RouteMapRepository = (*routerMap)(nil)

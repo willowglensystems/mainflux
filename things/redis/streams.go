@@ -6,8 +6,8 @@ package redis
 import (
 	"context"
 
-	"github.com/mainflux/mainflux/things"
 	"github.com/go-redis/redis"
+	"github.com/mainflux/mainflux/things"
 )
 
 const (

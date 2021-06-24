@@ -10,8 +10,8 @@ import (
 	"errors"
 	"time"
 
-	"github.com/mainflux/mainflux/things"
 	"github.com/golang/protobuf/ptypes/empty"
+	"github.com/mainflux/mainflux/things"
 
 	"github.com/mainflux/mainflux"
 	"google.golang.org/grpc"

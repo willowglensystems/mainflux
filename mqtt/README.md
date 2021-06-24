@@ -1,7 +1,7 @@
 # MQTT adapter
 
 MQTT adapter provides an MQTT API for sending messages through the platform.
-MQTT adapter uses [mProxy](https://git.willowglen.ca/sq/third-party/mproxy) for proxying
+MQTT adapter uses [mProxy](https://github.com/mainflux/mproxy) for proxying
 traffic between client and MQTT broker.
 
 ## Configuration

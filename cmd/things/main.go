@@ -22,6 +22,8 @@ import (
 	opentracing "github.com/opentracing/opentracing-go"
 	"google.golang.org/grpc/credentials"
 
+	kitprometheus "github.com/go-kit/kit/metrics/prometheus"
+	"github.com/go-redis/redis"
 	"github.com/mainflux/mainflux"
 	authapi "github.com/mainflux/mainflux/auth/api/grpc"
 	"github.com/mainflux/mainflux/logger"
@@ -34,8 +36,6 @@ import (
 	"github.com/mainflux/mainflux/things/postgres"
 	rediscache "github.com/mainflux/mainflux/things/redis"
 	localusers "github.com/mainflux/mainflux/things/users"
-	kitprometheus "github.com/go-kit/kit/metrics/prometheus"
-	"github.com/go-redis/redis"
 	stdprometheus "github.com/prometheus/client_golang/prometheus"
 	jconfig "github.com/uber/jaeger-client-go/config"
 	"google.golang.org/grpc"

@@ -6,8 +6,8 @@ package api
 import (
 	"time"
 
-	"github.com/mainflux/mainflux/opcua"
 	"github.com/go-kit/kit/metrics"
+	"github.com/mainflux/mainflux/opcua"
 )
 
 var _ opcua.Service = (*metricsMiddleware)(nil)

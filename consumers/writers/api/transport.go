@@ -8,8 +8,8 @@ package api
 import (
 	"net/http"
 
-	"github.com/mainflux/mainflux"
 	"github.com/go-zoo/bone"
+	"github.com/mainflux/mainflux"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 

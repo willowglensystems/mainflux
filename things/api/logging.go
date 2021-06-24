@@ -289,5 +289,5 @@ func (lm *loggingMiddleware) ListMembers(ctx context.Context, token, groupID str
 		lm.logger.Info(fmt.Sprintf("%s without errors.", message))
 	}(time.Now())
 
-	return lm.svc.ListMembers(ctx, token, groupID, pm)
+	return lm.svc.ListMembers(ctx, token, groupID,  pm)
 }

@@ -8,9 +8,9 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/go-redis/redis"
 	"github.com/mainflux/mainflux/logger"
 	"github.com/mainflux/mainflux/opcua"
-	"github.com/go-redis/redis"
 )
 
 const (

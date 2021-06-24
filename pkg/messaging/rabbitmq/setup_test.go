@@ -18,7 +18,7 @@ import (
 )
 
 var (
-	pubsub messaging.PubSub
+	pubsub    messaging.PubSub
 )
 
 func TestMain(m *testing.M) {

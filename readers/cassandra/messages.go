@@ -7,11 +7,11 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/gocql/gocql"
 	"github.com/mainflux/mainflux/pkg/errors"
 	jsont "github.com/mainflux/mainflux/pkg/transformers/json"
 	"github.com/mainflux/mainflux/pkg/transformers/senml"
 	"github.com/mainflux/mainflux/readers"
-	"github.com/gocql/gocql"
 )
 
 var errReadMessages = errors.New("failed to read messages from cassandra database")

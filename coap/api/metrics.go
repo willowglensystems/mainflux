@@ -9,9 +9,9 @@ import (
 	"context"
 	"time"
 
+	"github.com/go-kit/kit/metrics"
 	"github.com/mainflux/mainflux/coap"
 	"github.com/mainflux/mainflux/pkg/messaging"
-	"github.com/go-kit/kit/metrics"
 )
 
 var _ coap.Service = (*metricsMiddleware)(nil)

@@ -5,9 +5,9 @@ import (
 	"database/sql"
 	"time"
 
+	"github.com/lib/pq"
 	"github.com/mainflux/mainflux/auth"
 	"github.com/mainflux/mainflux/pkg/errors"
-	"github.com/lib/pq"
 )
 
 var (

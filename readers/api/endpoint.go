@@ -6,8 +6,8 @@ package api
 import (
 	"context"
 
-	"github.com/mainflux/mainflux/readers"
 	"github.com/go-kit/kit/endpoint"
+	"github.com/mainflux/mainflux/readers"
 )
 
 func listMessagesEndpoint(svc readers.MessageRepository) endpoint.Endpoint {

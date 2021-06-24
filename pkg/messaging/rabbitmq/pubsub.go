@@ -12,16 +12,16 @@ import (
 	"time"
 
 	log "github.com/mainflux/mainflux/logger"
-	"github.com/mainflux/mainflux/pkg/messaging"
-	queueConfiguration "github.com/mainflux/mainflux/pkg/messaging/queue-configuration"
-	"github.com/Azure/go-amqp"
 	"github.com/gogo/protobuf/proto"
+	"github.com/mainflux/mainflux/pkg/messaging"
+	"github.com/mainflux/mainflux/pkg/messaging/queue-configuration"
+	"github.com/Azure/go-amqp"
 )
 
 const (
-	maxMessages    = 10
-	pubTimeout     = 5
-	receiveTimeout = 1
+	maxMessages            = 10
+	pubTimeout             = 5
+	receiveTimeout         = 1
 )
 
 const SubjectAllChannels = "channels.*"
@@ -99,7 +99,7 @@ func (pubsub *pubsub) Publish(topic string, msg messaging.Message) error {
 		return err
 	}
 
-	ctx, cancel := context.WithTimeout(ctx, pubTimeout*time.Second)
+	ctx, cancel := context.WithTimeout(ctx, pubTimeout * time.Second)
 
 	message, err := createMessage(topic, &msg, pubsub.configs)
 
@@ -157,7 +157,7 @@ func (pubsub *pubsub) handleMessages(messages chan *amqp.Message, handler messag
 		if err := proto.Unmarshal(message.GetData(), &msg); err != nil {
 			pubsub.logger.Warn(fmt.Sprintf("Failed to unmarshal received message: %s", err))
 		} else {
-			handler(msg)
+			handler( msg )
 		}
 	}
 }
@@ -166,10 +166,11 @@ func (pubsub *pubsub) receiveMessages(topic string, messages chan *amqp.Message,
 	ctx := context.Background()
 
 	defer func() {
-		ctx, cancel := context.WithTimeout(ctx, receiveTimeout*time.Second)
+		ctx, cancel := context.WithTimeout(ctx, receiveTimeout * time.Second)
 		receiver.Close(ctx)
 		cancel()
 	}()
+
 
 	for pubsub.subscriptions[topic] {
 		msg, err := receiver.Receive(ctx)
@@ -203,7 +204,7 @@ func (pubsub *pubsub) Unsubscribe(topic string) error {
 
 func (pubsub *pubsub) Close() {
 	ctx := context.Background()
-	ctx, cancel := context.WithTimeout(ctx, receiveTimeout*time.Second)
+	ctx, cancel := context.WithTimeout(ctx, receiveTimeout * time.Second)
 	if err := pubsub.session.Close(ctx); err != nil {
 		fmt.Sprintf("Consumer cancel failed: %s", err)
 	}

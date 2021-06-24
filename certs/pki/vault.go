@@ -10,8 +10,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/mainflux/mainflux/pkg/errors"
 	"github.com/hashicorp/vault/api"
+	"github.com/mainflux/mainflux/pkg/errors"
 	"github.com/mitchellh/mapstructure"
 )
 

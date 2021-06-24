@@ -10,7 +10,7 @@ import (
 	log "github.com/mainflux/mainflux/logger"
 	"github.com/mainflux/mainflux/pkg/messaging"
 	"github.com/mainflux/mainflux/pkg/messaging/nats"
-	queueConfiguration "github.com/mainflux/mainflux/pkg/messaging/queue-configuration"
+	"github.com/mainflux/mainflux/pkg/messaging/queue-configuration"
 	"github.com/mainflux/mainflux/pkg/messaging/rabbitmq"
 )
 
@@ -63,7 +63,7 @@ func NewPubSub(queue string, logger log.Logger) (messaging.PubSub, error) {
 		}
 
 		if systemType == queueConfiguration.RabbitmqMessagingSystem {
-			return rabbitmq.NewPubSub(configs.RabbitmqURL, queue, logger, tlsConfig)
+			return rabbitmq.NewPubSub(configs.RabbitmqURL, queue, logger, tlsConfig )
 		} else if systemType == queueConfiguration.NatsMessagingSystem {
 			return nats.NewPubSub(configs.NatsURL, queue, logger, tlsConfig)
 		} else {
@@ -83,21 +83,21 @@ func NewPubSub(queue string, logger log.Logger) (messaging.PubSub, error) {
 }
 
 // Returns the string representing all channels
-func GetAllChannels() string {
+func GetAllChannels() (string) {
 	systemType := queueConfiguration.GetSystem()
 
 	if systemType == queueConfiguration.RabbitmqMessagingSystem {
-		return rabbitmq.SubjectAllChannels
+		return rabbitmq.SubjectAllChannels;
 	} else if systemType == queueConfiguration.NatsMessagingSystem {
-		return nats.SubjectAllChannels
+		return nats.SubjectAllChannels;
 	} else {
 		fmt.Println("Invalid messaging system type for creating a pubsub:", systemType)
-		return ""
+		return "";
 	}
 }
 
 // Takes in the file paths of a TLS Certificate Authority and a TLS Client Certificate and Key to generate a tls.Config object.
-func generateTLSConfig(systemType string, configs *queueConfiguration.Config) *tls.Config {
+func generateTLSConfig(systemType string, configs *queueConfiguration.Config) (*tls.Config) {
 	var caFile, certFile, keyFile string
 
 	if systemType == queueConfiguration.RabbitmqMessagingSystem {
@@ -126,9 +126,9 @@ func generateTLSConfig(systemType string, configs *queueConfiguration.Config) *t
 			return nil
 		}
 
-		return &tls.Config{
-			Certificates:       []tls.Certificate{cert},
-			RootCAs:            roots,
+		return &tls.Config {
+			Certificates: []tls.Certificate{cert},
+			RootCAs: roots,
 			InsecureSkipVerify: false,
 		}
 	} else {

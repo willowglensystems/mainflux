@@ -6,8 +6,8 @@ package redis
 import (
 	"fmt"
 
-	"github.com/mainflux/mainflux/lora"
 	"github.com/go-redis/redis"
+	"github.com/mainflux/mainflux/lora"
 )
 
 var _ lora.RouteMapRepository = (*routerMap)(nil)

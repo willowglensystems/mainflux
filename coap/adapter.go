@@ -11,8 +11,8 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/mainflux/mainflux/pkg/errors"
 	"github.com/gogo/protobuf/proto"
+	"github.com/mainflux/mainflux/pkg/errors"
 	broker "github.com/nats-io/nats.go"
 
 	"github.com/mainflux/mainflux"

@@ -7,12 +7,12 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/jmoiron/sqlx" // required for DB access
+	"github.com/lib/pq"
 	"github.com/mainflux/mainflux/pkg/errors"
 	jsont "github.com/mainflux/mainflux/pkg/transformers/json"
 	"github.com/mainflux/mainflux/pkg/transformers/senml"
 	"github.com/mainflux/mainflux/readers"
-	"github.com/jmoiron/sqlx" // required for DB access
-	"github.com/lib/pq"
 )
 
 const errInvalid = "invalid_text_representation"

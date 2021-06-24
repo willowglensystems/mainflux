@@ -9,12 +9,12 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/jmoiron/sqlx"
+	"github.com/lib/pq"
 	"github.com/mainflux/mainflux/certs"
 	"github.com/mainflux/mainflux/logger"
 	"github.com/mainflux/mainflux/pkg/errors"
 	"github.com/mainflux/mainflux/things"
-	"github.com/jmoiron/sqlx"
-	"github.com/lib/pq"
 )
 
 const duplicateErr = "unique_violation"

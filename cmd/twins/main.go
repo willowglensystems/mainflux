@@ -15,6 +15,8 @@ import (
 	"syscall"
 	"time"
 
+	kitprometheus "github.com/go-kit/kit/metrics/prometheus"
+	"github.com/go-redis/redis"
 	"github.com/mainflux/mainflux"
 	authapi "github.com/mainflux/mainflux/auth/api/grpc"
 	"github.com/mainflux/mainflux/logger"
@@ -28,8 +30,6 @@ import (
 	twmongodb "github.com/mainflux/mainflux/twins/mongodb"
 	rediscache "github.com/mainflux/mainflux/twins/redis"
 	"github.com/mainflux/mainflux/twins/tracing"
-	kitprometheus "github.com/go-kit/kit/metrics/prometheus"
-	"github.com/go-redis/redis"
 	opentracing "github.com/opentracing/opentracing-go"
 	stdprometheus "github.com/prometheus/client_golang/prometheus"
 	jconfig "github.com/uber/jaeger-client-go/config"

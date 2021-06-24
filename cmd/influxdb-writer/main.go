@@ -12,6 +12,8 @@ import (
 	"strings"
 	"syscall"
 
+	kitprometheus "github.com/go-kit/kit/metrics/prometheus"
+	influxdata "github.com/influxdata/influxdb/client/v2"
 	"github.com/mainflux/mainflux"
 	"github.com/mainflux/mainflux/consumers"
 	"github.com/mainflux/mainflux/consumers/writers/api"
@@ -21,8 +23,6 @@ import (
 	"github.com/mainflux/mainflux/pkg/transformers"
 	"github.com/mainflux/mainflux/pkg/transformers/json"
 	"github.com/mainflux/mainflux/pkg/transformers/senml"
-	kitprometheus "github.com/go-kit/kit/metrics/prometheus"
-	influxdata "github.com/influxdata/influxdb/client/v2"
 	stdprometheus "github.com/prometheus/client_golang/prometheus"
 )
 

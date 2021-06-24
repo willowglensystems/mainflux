@@ -7,9 +7,9 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/go-redis/redis"
 	"github.com/mainflux/mainflux/pkg/errors"
 	"github.com/mainflux/mainflux/twins"
-	"github.com/go-redis/redis"
 )
 
 const (

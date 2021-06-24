@@ -8,8 +8,8 @@ package api
 import (
 	"time"
 
-	"github.com/mainflux/mainflux/readers"
 	"github.com/go-kit/kit/metrics"
+	"github.com/mainflux/mainflux/readers"
 )
 
 var _ readers.MessageRepository = (*metricsMiddleware)(nil)

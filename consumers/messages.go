@@ -7,12 +7,12 @@ import (
 	"fmt"
 	"io/ioutil"
 
+	"github.com/BurntSushi/toml"
 	"github.com/mainflux/mainflux/logger"
 	"github.com/mainflux/mainflux/pkg/errors"
 	"github.com/mainflux/mainflux/pkg/messaging"
 	pubsub "github.com/mainflux/mainflux/pkg/messaging/nats"
 	"github.com/mainflux/mainflux/pkg/transformers"
-	"github.com/BurntSushi/toml"
 )
 
 var (

@@ -14,17 +14,17 @@ import (
 	"syscall"
 	"time"
 
+	r "github.com/go-redis/redis"
 	"github.com/mainflux/mainflux"
 	"github.com/mainflux/mainflux/logger"
 	"github.com/mainflux/mainflux/lora"
 	"github.com/mainflux/mainflux/lora/api"
 	"github.com/mainflux/mainflux/pkg/messaging"
-	"github.com/mainflux/mainflux/pkg/messaging/factory"
 	"github.com/mainflux/mainflux/pkg/messaging/mqtt"
-	r "github.com/go-redis/redis"
+	"github.com/mainflux/mainflux/pkg/messaging/factory"
 
-	"github.com/mainflux/mainflux/lora/redis"
 	kitprometheus "github.com/go-kit/kit/metrics/prometheus"
+	"github.com/mainflux/mainflux/lora/redis"
 	stdprometheus "github.com/prometheus/client_golang/prometheus"
 )
 

@@ -11,9 +11,9 @@ import (
 	"github.com/mainflux/mainflux/pkg/errors"
 	"github.com/mainflux/mainflux/readers"
 
+	influxdata "github.com/influxdata/influxdb/client/v2"
 	jsont "github.com/mainflux/mainflux/pkg/transformers/json"
 	"github.com/mainflux/mainflux/pkg/transformers/senml"
-	influxdata "github.com/influxdata/influxdb/client/v2"
 )
 
 const (

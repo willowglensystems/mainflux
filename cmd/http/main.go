@@ -17,13 +17,13 @@ import (
 
 	"google.golang.org/grpc/credentials"
 
+	kitprometheus "github.com/go-kit/kit/metrics/prometheus"
 	"github.com/mainflux/mainflux"
 	adapter "github.com/mainflux/mainflux/http"
 	"github.com/mainflux/mainflux/http/api"
 	"github.com/mainflux/mainflux/logger"
 	"github.com/mainflux/mainflux/pkg/messaging/factory"
 	thingsapi "github.com/mainflux/mainflux/things/api/auth/grpc"
-	kitprometheus "github.com/go-kit/kit/metrics/prometheus"
 	"github.com/opentracing/opentracing-go"
 	stdprometheus "github.com/prometheus/client_golang/prometheus"
 	jconfig "github.com/uber/jaeger-client-go/config"

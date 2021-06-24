@@ -6,8 +6,8 @@ package api
 import (
 	"context"
 
-	notifiers "github.com/mainflux/mainflux/consumers/notifiers"
 	"github.com/go-kit/kit/endpoint"
+	notifiers "github.com/mainflux/mainflux/consumers/notifiers"
 )
 
 func createSubscriptionEndpoint(svc notifiers.Service) endpoint.Endpoint {

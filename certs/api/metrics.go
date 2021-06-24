@@ -7,8 +7,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/mainflux/mainflux/certs"
 	"github.com/go-kit/kit/metrics"
+	"github.com/mainflux/mainflux/certs"
 )
 
 var _ certs.Service = (*metricsMiddleware)(nil)

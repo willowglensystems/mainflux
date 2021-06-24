@@ -9,12 +9,12 @@ import (
 	"testing"
 	"time"
 
+	"github.com/gofrs/uuid"
+	influxdata "github.com/influxdata/influxdb/client/v2"
 	writer "github.com/mainflux/mainflux/consumers/writers/influxdb"
 	log "github.com/mainflux/mainflux/logger"
 	"github.com/mainflux/mainflux/pkg/transformers/json"
 	"github.com/mainflux/mainflux/pkg/transformers/senml"
-	"github.com/gofrs/uuid"
-	influxdata "github.com/influxdata/influxdb/client/v2"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
