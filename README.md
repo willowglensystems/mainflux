@@ -1,8 +1,5 @@
 # Mainflux
 
-<<<<<<< HEAD
-Custom build of Mainflux used in SQ. This is a downstream fork of WSI/Mainflux on Github.
-=======
 [![build][ci-badge]][ci-url]
 [![go report card][grc-badge]][grc-url]
 [![coverage][cov-badge]][cov-url]
@@ -188,4 +185,3 @@ please head to company's [careers page][careers] or shoot us an e-mail at <caree
 [kole]: https://github.com/chombium
 [dusanm]: https://github.com/malidukica
 [mirko]: https://github.com/mteodor
->>>>>>> e04d94ecc7f5980b8debfca958859b8bfd810aa0
