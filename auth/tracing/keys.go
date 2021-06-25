@@ -8,7 +8,7 @@ package tracing
 import (
 	"context"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/auth"
+	"github.com/mainflux/mainflux/auth"
 	opentracing "github.com/opentracing/opentracing-go"
 )
 
@@ -35,6 +35,7 @@ func New(repo auth.KeyRepository, tracer opentracing.Tracer) auth.KeyRepository 
 		repo:   repo,
 	}
 }
+
 
 func (krm keyRepositoryMiddleware) Save(ctx context.Context, key auth.Key) (string, error) {
 	span := createSpan(ctx, krm.tracer, saveOp)

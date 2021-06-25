@@ -3,7 +3,7 @@
 
 package cli
 
-import mfxsdk "git.willowglen.ca/sq/third-party/mainflux.git/pkg/sdk/go"
+import mfxsdk "github.com/mainflux/mainflux/pkg/sdk/go"
 
 // Keep SDK handle in global var
 var sdk mfxsdk.SDK

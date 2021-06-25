@@ -6,8 +6,8 @@ package auth
 import (
 	"context"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git"
 	"github.com/go-redis/redis"
+	"github.com/mainflux/mainflux"
 )
 
 // Client represents Auth cache.

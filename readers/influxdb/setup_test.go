@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
-	log "git.willowglen.ca/sq/third-party/mainflux.git/logger"
 	influxdata "github.com/influxdata/influxdb/client/v2"
 	influxdb "github.com/influxdata/influxdb/client/v2"
+	log "github.com/mainflux/mainflux/logger"
 	dockertest "github.com/ory/dockertest/v3"
 )
 

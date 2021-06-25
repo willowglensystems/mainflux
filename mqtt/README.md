@@ -1,7 +1,7 @@
 # MQTT adapter
 
 MQTT adapter provides an MQTT API for sending messages through the platform.
-MQTT adapter uses [mProxy](https://git.willowglen.ca/sq/third-party/mproxy) for proxying
+MQTT adapter uses [mProxy](https://github.com/mainflux/mproxy) for proxying
 traffic between client and MQTT broker.
 
 ## Configuration
@@ -38,14 +38,14 @@ default values.
 
 ## Deployment
 
-The service itself is distributed as Docker container. Check the [`mqtt-adapter`](https://git.willowglen.ca/sq/third-party/mainflux.git/blob/master/docker/docker-compose.yml#L219-L243) service section in 
+The service itself is distributed as Docker container. Check the [`mqtt-adapter`](https://github.com/mainflux/mainflux/blob/master/docker/docker-compose.yml#L219-L243) service section in 
 docker-compose to see how service is deployed.
 
 To start the service outside of the container, execute the following shell script:
 
 ```bash
 # download the latest version of the service
-git clone https://git.willowglen.ca/sq/third-party/mainflux.git
+git clone https://github.com/mainflux/mainflux
 
 cd mainflux
 

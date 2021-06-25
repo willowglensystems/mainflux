@@ -9,12 +9,12 @@ import (
 	"io"
 	"net/http"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git"
-	"git.willowglen.ca/sq/third-party/mainflux.git/certs"
-	"git.willowglen.ca/sq/third-party/mainflux.git/internal/httputil"
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
 	kithttp "github.com/go-kit/kit/transport/http"
 	"github.com/go-zoo/bone"
+	"github.com/mainflux/mainflux"
+	"github.com/mainflux/mainflux/certs"
+	"github.com/mainflux/mainflux/internal/httputil"
+	"github.com/mainflux/mainflux/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 

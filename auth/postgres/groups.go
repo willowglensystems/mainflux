@@ -14,10 +14,10 @@ import (
 	"github.com/gofrs/uuid"
 	"github.com/jmoiron/sqlx"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/auth"
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
-	"git.willowglen.ca/sq/third-party/mainflux.git/users"
 	"github.com/lib/pq"
+	"github.com/mainflux/mainflux/auth"
+	"github.com/mainflux/mainflux/pkg/errors"
+	"github.com/mainflux/mainflux/users"
 )
 
 var (

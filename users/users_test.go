@@ -8,8 +8,8 @@ import (
 	"math/rand"
 	"testing"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
-	"git.willowglen.ca/sq/third-party/mainflux.git/users"
+	"github.com/mainflux/mainflux/pkg/errors"
+	"github.com/mainflux/mainflux/users"
 	"github.com/stretchr/testify/assert"
 )
 

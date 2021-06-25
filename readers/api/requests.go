@@ -4,8 +4,8 @@
 package api
 
 import (
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
-	"git.willowglen.ca/sq/third-party/mainflux.git/readers"
+	"github.com/mainflux/mainflux/pkg/errors"
+	"github.com/mainflux/mainflux/readers"
 )
 
 type apiReq interface {

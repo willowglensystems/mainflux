@@ -98,7 +98,7 @@ Additional details on using the CLI can be found in the [CLI documentation](http
 
 ## Documentation
 
-Official documentation is hosted at [Mainflux Read The Docs page][docs]. Documentation is auto-generated, checkout the instructions on [official docs repository](https://git.willowglen.ca/sq/third-party/docs):
+Official documentation is hosted at [Mainflux Read The Docs page][docs]. Documentation is auto-generated, checkout the instructions on [official docs repository](https://github.com/mainflux/docs):
 
 If you spot an error or a need for corrections, please let us know - or even better: send us a PR.
 
@@ -126,7 +126,7 @@ and [@malidukica][dusanm] for his effort on implementing the initial user interf
 
 Thank you for your interest in Mainflux and the desire to contribute!
 
-1. Take a look at our [open issues](https://git.willowglen.ca/sq/third-party/mainflux.git/issues). The [good-first-issue](https://git.willowglen.ca/sq/third-party/mainflux.git/labels/good-first-issue) label is specifically for issues that are great for getting started.
+1. Take a look at our [open issues](https://github.com/mainflux/mainflux/issues). The [good-first-issue](https://github.com/mainflux/mainflux/labels/good-first-issue) label is specifically for issues that are great for getting started.
 2. Checkout the [contribution guide](CONTRIBUTING.md) to learn more about our style and conventions.
 3. Make your changes compatible to our workflow.
 
@@ -149,7 +149,7 @@ please head to company's [careers page][careers] or shoot us an e-mail at <caree
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmainflux%2Fmainflux.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fmainflux%2Fmainflux?ref=badge_large)
 
-[banner]: https://git.willowglen.ca/sq/third-party/docs/blob/master/docs/img/gopherBanner.jpg
+[banner]: https://github.com/mainflux/docs/blob/master/docs/img/gopherBanner.jpg
 [ci-badge]: https://semaphoreci.com/api/v1/mainflux/mainflux/branches/master/badge.svg
 [ci-url]: https://semaphoreci.com/mainflux/mainflux
 [docs]: http://mainflux.readthedocs.io
@@ -157,18 +157,18 @@ please head to company's [careers page][careers] or shoot us an e-mail at <caree
 [forum]: https://groups.google.com/forum/#!forum/mainflux
 [gitter]: https://gitter.im/mainflux/mainflux?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 [gitter-badge]: https://badges.gitter.im/Join%20Chat.svg
-[grc-badge]: https://goreportcard.com/badge/git.willowglen.ca/sq/third-party/mainflux.git
-[grc-url]: https://goreportcard.com/report/git.willowglen.ca/sq/third-party/mainflux.git
+[grc-badge]: https://goreportcard.com/badge/github.com/mainflux/mainflux
+[grc-url]: https://goreportcard.com/report/github.com/mainflux/mainflux
 [cov-badge]: https://codecov.io/gh/mainflux/mainflux/branch/master/graph/badge.svg
 [cov-url]: https://codecov.io/gh/mainflux/mainflux
 [license]: https://img.shields.io/badge/license-Apache%20v2.0-blue.svg
 [twitter]: https://twitter.com/mainflux
 [lora]: https://lora-alliance.org/
 [opcua]: https://opcfoundation.org/about/opc-technologies/opc-ua/
-[agent]: https://git.willowglen.ca/sq/third-party/agent
-[export]: https://git.willowglen.ca/sq/third-party/export
+[agent]: https://github.com/mainflux/agent
+[export]: https://github.com/mainflux/export
 [kubernetes]: https://kubernetes.io/
-[rel]: https://git.willowglen.ca/sq/third-party/mainflux.git/releases
+[rel]: https://github.com/mainflux/mainflux/releases
 [careers]: https://www.mainflux.com/careers.html
 [lf]: https://www.linuxfoundation.org/
 [edgex]: https://www.edgexfoundry.org/

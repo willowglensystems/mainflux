@@ -3,7 +3,7 @@ package api
 import (
 	"net/http"
 
-	SDK "git.willowglen.ca/sq/third-party/mainflux.git/pkg/sdk/go"
+	SDK "github.com/mainflux/mainflux/pkg/sdk/go"
 )
 
 type provisionRes struct {

@@ -7,7 +7,7 @@ import (
 	"context"
 	"sync"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/auth"
+	"github.com/mainflux/mainflux/auth"
 )
 
 var _ auth.KeyRepository = (*keyRepositoryMock)(nil)

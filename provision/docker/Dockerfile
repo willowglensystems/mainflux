@@ -3,7 +3,7 @@ ARG SVC
 ARG GOARCH
 ARG GOARM
 
-WORKDIR /go/src/git.willowglen.ca/sq/third-party/license
+WORKDIR /go/src/github.com/mainflux/license
 COPY . .
 RUN apk update \
     && apk add make\

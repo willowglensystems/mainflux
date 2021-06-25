@@ -8,12 +8,12 @@ import (
 	"strings"
 	"time"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
-	"git.willowglen.ca/sq/third-party/mainflux.git/readers"
+	"github.com/mainflux/mainflux/pkg/errors"
+	"github.com/mainflux/mainflux/readers"
 
-	jsont "git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/json"
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/senml"
 	influxdata "github.com/influxdata/influxdb/client/v2"
+	jsont "github.com/mainflux/mainflux/pkg/transformers/json"
+	"github.com/mainflux/mainflux/pkg/transformers/senml"
 )
 
 const (

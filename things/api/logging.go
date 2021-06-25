@@ -10,8 +10,8 @@ import (
 	"fmt"
 	"time"
 
-	log "git.willowglen.ca/sq/third-party/mainflux.git/logger"
-	"git.willowglen.ca/sq/third-party/mainflux.git/things"
+	log "github.com/mainflux/mainflux/logger"
+	"github.com/mainflux/mainflux/things"
 )
 
 var _ things.Service = (*loggingMiddleware)(nil)
@@ -289,5 +289,5 @@ func (lm *loggingMiddleware) ListMembers(ctx context.Context, token, groupID str
 		lm.logger.Info(fmt.Sprintf("%s without errors.", message))
 	}(time.Now())
 
-	return lm.svc.ListMembers(ctx, token, groupID, pm)
+	return lm.svc.ListMembers(ctx, token, groupID,  pm)
 }

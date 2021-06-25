@@ -3,8 +3,8 @@ package groups
 import (
 	"context"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/auth"
 	"github.com/go-kit/kit/endpoint"
+	"github.com/mainflux/mainflux/auth"
 )
 
 func createGroupEndpoint(svc auth.Service) endpoint.Endpoint {

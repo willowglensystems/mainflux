@@ -68,14 +68,14 @@ The service is configured using the environment variables presented in the follo
 
 ## Deployment
 
-The service itself is distributed as Docker container. Check the [`boostrap`](https://git.willowglen.ca/sq/third-party/mainflux.git/blob/master/docker/addons/bootstrap/docker-compose.yml#L32-L56) service section in 
+The service itself is distributed as Docker container. Check the [`boostrap`](https://github.com/mainflux/mainflux/blob/master/docker/addons/bootstrap/docker-compose.yml#L32-L56) service section in 
 docker-compose to see how service is deployed.
 
 To start the service outside of the container, execute the following shell script:
 
 ```bash
 # download the latest version of the service
-git clone https://git.willowglen.ca/sq/third-party/mainflux.git
+git clone https://github.com/mainflux/mainflux
 
 cd mainflux
 

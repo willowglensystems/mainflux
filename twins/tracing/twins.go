@@ -6,7 +6,7 @@ package tracing
 import (
 	"context"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/twins"
+	"github.com/mainflux/mainflux/twins"
 	opentracing "github.com/opentracing/opentracing-go"
 )
 

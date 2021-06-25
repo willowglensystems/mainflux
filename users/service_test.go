@@ -9,12 +9,12 @@ import (
 	"regexp"
 	"testing"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git"
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/errors"
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/uuid"
-	"git.willowglen.ca/sq/third-party/mainflux.git/users"
+	"github.com/mainflux/mainflux"
+	"github.com/mainflux/mainflux/pkg/errors"
+	"github.com/mainflux/mainflux/pkg/uuid"
+	"github.com/mainflux/mainflux/users"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/users/mocks"
+	"github.com/mainflux/mainflux/users/mocks"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

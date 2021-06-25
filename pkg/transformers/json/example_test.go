@@ -7,7 +7,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	mfjson "git.willowglen.ca/sq/third-party/mainflux.git/pkg/transformers/json"
+	mfjson "github.com/mainflux/mainflux/pkg/transformers/json"
 )
 
 func ExampleParseFlat() {

@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
+	"github.com/mainflux/mainflux/pkg/messaging"
 )
 
 func TestToSQMessageEmpty(t *testing.T) {
@@ -58,7 +58,7 @@ func TestToSQMessageEmpty(t *testing.T) {
 func TestToSQMessage(t *testing.T) {
 	// test for nil as string metadata map
 	mfMsg := messaging.Message{
-		Metadata: map[string][]byte{
+		Metadata: map[string][]byte {
 			"Token": []byte(nil),
 		},
 	}
@@ -68,9 +68,9 @@ func TestToSQMessage(t *testing.T) {
 		t.Error("ToSGMessage with empty message failed, expected empty Token, got", sqMsg.Token)
 	}
 
-	// test for empty string in metadata map
+	// test for empty string in metadata map 
 	mfMsg = messaging.Message{
-		Metadata: map[string][]byte{
+		Metadata: map[string][]byte {
 			"Version": []byte(""),
 		},
 	}
@@ -80,12 +80,12 @@ func TestToSQMessage(t *testing.T) {
 		t.Error("ToSGMessage with empty message failed, expected empty Version, got", sqMsg.Version)
 	}
 
-	// test for negative value as priority in metadata map
+	// test for negative value as priority in metadata map 
 	mfPriority := make([]byte, 4)
 	binary.PutVarint(mfPriority, -4)
 
 	mfMsg = messaging.Message{
-		Metadata: map[string][]byte{
+		Metadata: map[string][]byte {
 			"Priority": mfPriority,
 		},
 	}
@@ -95,12 +95,12 @@ func TestToSQMessage(t *testing.T) {
 		t.Error("ToSGMessage with empty message failed, expected -4 as Priority, got", sqMsg.Priority)
 	}
 
-	// test for zero value as priority in metadata map
+	// test for zero value as priority in metadata map 
 	mfPriority = make([]byte, 4)
 	binary.PutVarint(mfPriority, 0)
 
 	mfMsg = messaging.Message{
-		Metadata: map[string][]byte{
+		Metadata: map[string][]byte {
 			"Priority": mfPriority,
 		},
 	}
@@ -110,12 +110,12 @@ func TestToSQMessage(t *testing.T) {
 		t.Error("ToSGMessage with empty message failed, expected 0 as Priority, got", sqMsg.Priority)
 	}
 
-	// test for positive value as priority in metadata map
+	// test for positive value as priority in metadata map 
 	mfPriority = make([]byte, 4)
 	binary.PutVarint(mfPriority, 5)
 
 	mfMsg = messaging.Message{
-		Metadata: map[string][]byte{
+		Metadata: map[string][]byte {
 			"Priority": mfPriority,
 		},
 	}
@@ -127,7 +127,7 @@ func TestToSQMessage(t *testing.T) {
 
 	// test for additional fields in metadata
 	mfMsg = messaging.Message{
-		Metadata: map[string][]byte{
+		Metadata: map[string][]byte {
 			"TestField": []byte("SomeTestData"),
 		},
 	}
@@ -196,6 +196,7 @@ func TestToMFMessageEmpty(t *testing.T) {
 		t.Error("ToSGMessage with empty message failed, expected empty Initiator, got", string(mfMsg.Metadata["Initiator"]))
 	}
 
+	
 }
 
 func TestToMFMessage(t *testing.T) {
@@ -244,7 +245,7 @@ func TestToMFMessage(t *testing.T) {
 
 	// test for metadata fields
 	sqMsg = SQMessage{
-		Metadata: map[string][]byte{
+		Metadata: map[string][]byte {
 			"TestField": []byte("TestData"),
 		},
 	}

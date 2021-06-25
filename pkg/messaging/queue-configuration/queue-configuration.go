@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git"
+	"github.com/mainflux/mainflux"
 )
 
 const (
@@ -47,8 +47,8 @@ const (
 	EnvNatsTLSKey             = "MF_NATS_TLS_KEY"
 	EnvNatsTLSCA              = "MF_NATS_TLS_CA"
 
-	NatsMessagingSystem     = "nats"
-	RabbitmqMessagingSystem = "rabbitmq"
+	NatsMessagingSystem       = "nats"
+	RabbitmqMessagingSystem   = "rabbitmq"
 )
 
 type Config struct {
@@ -69,7 +69,7 @@ type Config struct {
 	NatsTLSCA              string
 }
 
-// GetSystem returns the type of queue system.
+// GetSystem returns the type of queue system. 
 // If no queue system is specified, it returns the default system.
 func GetSystem() string {
 	systemType := mainflux.Env(EnvQueueSystem, DefQueueSystem)
@@ -92,12 +92,12 @@ func GetConfig() (*Config, map[string]string, error) {
 	}
 
 	if systemType == NatsMessagingSystem {
-		config := &Config{
-			EnableTLS:          enableTLSValue,
-			NatsURL:            mainflux.Env(EnvNatsURL, DefNatsURL),
+		config := &Config {
+			EnableTLS: enableTLSValue,
+			NatsURL: mainflux.Env(EnvNatsURL, DefNatsURL),
 			NatsTLSCertificate: mainflux.Env(EnvNatsTLSCertificate, DefNatsTLSCertificate),
-			NatsTLSKey:         mainflux.Env(EnvNatsTLSKey, DefNatsTLSKey),
-			NatsTLSCA:          mainflux.Env(EnvNatsTLSCA, DefNatsTLSCA),
+			NatsTLSKey: mainflux.Env(EnvNatsTLSKey, DefNatsTLSKey),
+			NatsTLSCA: mainflux.Env(EnvNatsTLSCA, DefNatsTLSCA),
 		}
 
 		return config, nil, nil
@@ -108,23 +108,23 @@ func GetConfig() (*Config, map[string]string, error) {
 			fmt.Println("Unable to parse Durable configuration, defaulting to false")
 			durableValue, _ = strconv.ParseBool(DefRabbitmqDurable)
 		}
-
+	
 		priorityValue, err := strconv.ParseUint(mainflux.Env(EnvRabbitmqPriority, DefRabbitmqPriority), 10, 64)
-
+	
 		if err != nil {
 			fmt.Println("Unable to parse Priority configuration, defaulting to 1")
 			priorityValue, _ = strconv.ParseUint(DefRabbitmqPriority, 10, 8)
 		}
-
+	
 		ttlValue, err := strconv.ParseUint(mainflux.Env(EnvRabbitmqTTL, DefRabbitmqTTL), 10, 8)
-
+	
 		if err != nil {
 			fmt.Println("Unable to parse TTL configuration, defaulting to 3600000 milliseconds")
 			ttlValue, _ = strconv.ParseUint(DefRabbitmqTTL, 10, 64)
 		}
-
+	
 		severityValue, err := strconv.ParseUint(mainflux.Env(EnvRabbitmqSeverity, DefRabbitmqSeverity), 10, 64)
-
+	
 		if err != nil {
 			fmt.Println("Unable to parse Severity configuration, defaulting to 6")
 			severityValue, _ = strconv.ParseUint(DefRabbitmqSeverity, 10, 8)
@@ -141,17 +141,17 @@ func GetConfig() (*Config, map[string]string, error) {
 		}
 
 		config := &Config{
-			EnableTLS:              enableTLSValue,
-			RabbitmqURL:            mainflux.Env(EnvRabbitmqURL, DefRabbitmqURL),
+			EnableTLS: enableTLSValue,
+			RabbitmqURL: mainflux.Env(EnvRabbitmqURL, DefRabbitmqURL),
 			RabbitmqTLSCertificate: mainflux.Env(EnvRabbitmqTLSCertificate, DefRabbitmqTLSCertificate),
-			RabbitmqTLSKey:         mainflux.Env(EnvRabbitmqTLSKey, DefRabbitmqTLSKey),
-			RabbitmqTLSCA:          mainflux.Env(EnvRabbitmqTLSCA, DefRabbitmqTLSCA),
-			RabbitmqDurable:        durableValue,
-			RabbitmqTTL:            time.Duration(ttlValue) * time.Millisecond,
-			RabbitmqPriority:       uint8(priorityValue),
-			RabbitmqContentType:    mainflux.Env(EnvRabbitmqContentType, DefRabbitmqContentType),
-			RabbitmqSubSystem:      mainflux.Env(EnvRabbitmqSubSystem, DefRabbitmqSubSystem),
-			RabbitmqSeverity:       uint8(severityValue),
+			RabbitmqTLSKey: mainflux.Env(EnvRabbitmqTLSKey, DefRabbitmqTLSKey),
+			RabbitmqTLSCA: mainflux.Env(EnvRabbitmqTLSCA, DefRabbitmqTLSCA),
+			RabbitmqDurable: durableValue,
+			RabbitmqTTL: time.Duration(ttlValue) * time.Millisecond,
+			RabbitmqPriority: uint8(priorityValue),
+			RabbitmqContentType: mainflux.Env(EnvRabbitmqContentType, DefRabbitmqContentType),
+			RabbitmqSubSystem: mainflux.Env(EnvRabbitmqSubSystem, DefRabbitmqSubSystem),
+			RabbitmqSeverity: uint8(severityValue),
 		}
 
 		return config, queue, nil

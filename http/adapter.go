@@ -8,8 +8,8 @@ package http
 import (
 	"context"
 
-	"git.willowglen.ca/sq/third-party/mainflux.git"
-	"git.willowglen.ca/sq/third-party/mainflux.git/pkg/messaging"
+	"github.com/mainflux/mainflux"
+	"github.com/mainflux/mainflux/pkg/messaging"
 )
 
 // Service specifies coap service API.

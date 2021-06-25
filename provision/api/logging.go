@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	log "git.willowglen.ca/sq/third-party/mainflux.git/logger"
-	"git.willowglen.ca/sq/third-party/mainflux.git/provision"
+	log "github.com/mainflux/mainflux/logger"
+	"github.com/mainflux/mainflux/provision"
 )
 
 var _ provision.Service = (*loggingMiddleware)(nil)
