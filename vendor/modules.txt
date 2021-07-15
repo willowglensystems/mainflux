@@ -1,3 +1,7 @@
+# github.com/Azure/go-amqp v0.13.7
+## explicit
+github.com/Azure/go-amqp
+github.com/Azure/go-amqp/internal/testconn
 # github.com/Azure/go-ansiterm v0.0.0-20170929234023-d6e3b3328b78
 github.com/Azure/go-ansiterm
 github.com/Azure/go-ansiterm/winterm
@@ -95,6 +99,8 @@ github.com/golang/protobuf/ptypes/empty
 github.com/golang/protobuf/ptypes/timestamp
 # github.com/golang/snappy v0.0.1
 github.com/golang/snappy
+# github.com/google/uuid v1.2.0
+## explicit
 # github.com/gopcua/opcua v0.1.6
 ## explicit
 github.com/gopcua/opcua
@@ -337,6 +343,8 @@ github.com/spf13/pflag
 # github.com/spf13/viper v1.7.0
 ## explicit
 github.com/spf13/viper
+# github.com/streadway/amqp v1.0.0
+## explicit
 # github.com/stretchr/testify v1.6.1
 ## explicit
 github.com/stretchr/testify/assert
@@ -407,7 +415,7 @@ go.mongodb.org/mongo-driver/x/mongo/driver/uuid
 go.mongodb.org/mongo-driver/x/mongo/driver/wiremessage
 # go.uber.org/atomic v1.6.0
 go.uber.org/atomic
-# golang.org/x/crypto v0.0.0-20200709230013-948cd5f35899
+# golang.org/x/crypto v0.0.0-20201002170205-7f63de1d35b0
 ## explicit
 golang.org/x/crypto/bcrypt
 golang.org/x/crypto/blowfish

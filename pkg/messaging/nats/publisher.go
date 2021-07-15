@@ -4,6 +4,7 @@
 package nats
 
 import (
+	"crypto/tls"
 	"fmt"
 
 	"github.com/gogo/protobuf/proto"
@@ -13,8 +14,11 @@ import (
 
 var _ messaging.Publisher = (*publisher)(nil)
 
+type PublisherOption func(*publisher)
+
 type publisher struct {
-	conn *broker.Conn
+	conn      *broker.Conn
+	tlsConfig *tls.Config
 }
 
 // Publisher wraps messaging Publisher exposing
@@ -25,14 +29,25 @@ type Publisher interface {
 }
 
 // NewPublisher returns NATS message Publisher.
-func NewPublisher(url string) (Publisher, error) {
-	conn, err := broker.Connect(url)
+func NewPublisher(url string, tlsConfig *tls.Config) (Publisher, error) {
+	var conn *broker.Conn
+	var err error
+
+	if tlsConfig != nil {
+		cfg := broker.Secure(tlsConfig)
+		conn, err = broker.Connect(url, cfg)
+	} else {
+		conn, err = broker.Connect(url)
+	}
+
 	if err != nil {
 		return nil, err
 	}
+
 	ret := &publisher{
 		conn: conn,
 	}
+
 	return ret, nil
 }
 

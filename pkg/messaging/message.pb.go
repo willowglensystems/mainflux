@@ -24,15 +24,16 @@ const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 // Message represents a message emitted by the Mainflux adapters layer.
 type Message struct {
-	Channel              string   `protobuf:"bytes,1,opt,name=channel,proto3" json:"channel,omitempty"`
-	Subtopic             string   `protobuf:"bytes,2,opt,name=subtopic,proto3" json:"subtopic,omitempty"`
-	Publisher            string   `protobuf:"bytes,3,opt,name=publisher,proto3" json:"publisher,omitempty"`
-	Protocol             string   `protobuf:"bytes,4,opt,name=protocol,proto3" json:"protocol,omitempty"`
-	Payload              []byte   `protobuf:"bytes,5,opt,name=payload,proto3" json:"payload,omitempty"`
-	Created              int64    `protobuf:"varint,6,opt,name=created,proto3" json:"created,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	Channel              string            `protobuf:"bytes,1,opt,name=channel,proto3" json:"channel,omitempty"`
+	Subtopic             string            `protobuf:"bytes,2,opt,name=subtopic,proto3" json:"subtopic,omitempty"`
+	Publisher            string            `protobuf:"bytes,3,opt,name=publisher,proto3" json:"publisher,omitempty"`
+	Protocol             string            `protobuf:"bytes,4,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	Payload              []byte            `protobuf:"bytes,5,opt,name=payload,proto3" json:"payload,omitempty"`
+	Created              int64             `protobuf:"varint,6,opt,name=created,proto3" json:"created,omitempty"`
+	Metadata             map[string][]byte `protobuf:"bytes,7,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
 }
 
 func (m *Message) Reset()         { *m = Message{} }
@@ -110,26 +111,39 @@ func (m *Message) GetCreated() int64 {
 	return 0
 }
 
+func (m *Message) GetMetadata() map[string][]byte {
+	if m != nil {
+		return m.Metadata
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*Message)(nil), "messaging.Message")
+	proto.RegisterMapType((map[string][]byte)(nil), "messaging.Message.MetadataEntry")
 }
 
 func init() { proto.RegisterFile("pkg/messaging/message.proto", fileDescriptor_e5e29d24c44e4762) }
 
 var fileDescriptor_e5e29d24c44e4762 = []byte{
-	// 187 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x2e, 0xc8, 0x4e, 0xd7,
-	0xcf, 0x4d, 0x2d, 0x2e, 0x4e, 0x4c, 0xcf, 0xcc, 0x83, 0xb1, 0x52, 0xf5, 0x0a, 0x8a, 0xf2, 0x4b,
-	0xf2, 0x85, 0x38, 0xe1, 0x12, 0x4a, 0x6b, 0x19, 0xb9, 0xd8, 0x7d, 0x21, 0x92, 0x42, 0x12, 0x5c,
-	0xec, 0xc9, 0x19, 0x89, 0x79, 0x79, 0xa9, 0x39, 0x12, 0x8c, 0x0a, 0x8c, 0x1a, 0x9c, 0x41, 0x30,
-	0xae, 0x90, 0x14, 0x17, 0x47, 0x71, 0x69, 0x52, 0x49, 0x7e, 0x41, 0x66, 0xb2, 0x04, 0x13, 0x58,
-	0x0a, 0xce, 0x17, 0x92, 0xe1, 0xe2, 0x2c, 0x28, 0x4d, 0xca, 0xc9, 0x2c, 0xce, 0x48, 0x2d, 0x92,
-	0x60, 0x06, 0x4b, 0x22, 0x04, 0x40, 0x3a, 0xc1, 0x76, 0x26, 0xe7, 0xe7, 0x48, 0xb0, 0x40, 0x74,
-	0xc2, 0xf8, 0x20, 0xfb, 0x0a, 0x12, 0x2b, 0x73, 0xf2, 0x13, 0x53, 0x24, 0x58, 0x15, 0x18, 0x35,
-	0x78, 0x82, 0x60, 0x5c, 0xb0, 0x4b, 0x8a, 0x52, 0x13, 0x4b, 0x52, 0x53, 0x24, 0xd8, 0x14, 0x18,
-	0x35, 0x98, 0x83, 0x60, 0x5c, 0x27, 0x81, 0x13, 0x8f, 0xe4, 0x18, 0x2f, 0x3c, 0x92, 0x63, 0x7c,
-	0xf0, 0x48, 0x8e, 0x71, 0xc6, 0x63, 0x39, 0x86, 0x24, 0x36, 0xb0, 0x79, 0xc6, 0x80, 0x00, 0x00,
-	0x00, 0xff, 0xff, 0xa9, 0x1e, 0x4a, 0xea, 0xf2, 0x00, 0x00, 0x00,
+	// 261 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x54, 0x8f, 0x41, 0x4e, 0x84, 0x30,
+	0x14, 0x86, 0x2d, 0x38, 0xc3, 0x50, 0xc7, 0x64, 0xd2, 0xb8, 0x68, 0x46, 0x43, 0x1a, 0x57, 0xac,
+	0x30, 0xd1, 0x8d, 0x51, 0x57, 0x26, 0x2e, 0x67, 0xd3, 0x1b, 0x14, 0x78, 0x99, 0x21, 0x53, 0x68,
+	0x03, 0xc5, 0x84, 0x9b, 0x78, 0x04, 0x8f, 0xe2, 0xd2, 0x23, 0x18, 0xbc, 0x88, 0xa1, 0x50, 0xcc,
+	0xec, 0xde, 0xd7, 0xbf, 0x7f, 0xde, 0xfb, 0xf0, 0xb5, 0x3e, 0xee, 0xef, 0x4a, 0x68, 0x1a, 0xb1,
+	0x2f, 0x2a, 0x37, 0x41, 0xa2, 0x6b, 0x65, 0x14, 0x09, 0xe7, 0xe0, 0xf6, 0xd3, 0xc3, 0xc1, 0x6e,
+	0x0c, 0x09, 0xc5, 0x41, 0x76, 0x10, 0x55, 0x05, 0x92, 0x22, 0x86, 0xe2, 0x90, 0x3b, 0x24, 0x5b,
+	0xbc, 0x6a, 0xda, 0xd4, 0x28, 0x5d, 0x64, 0xd4, 0xb3, 0xd1, 0xcc, 0xe4, 0x06, 0x87, 0xba, 0x4d,
+	0x65, 0xd1, 0x1c, 0xa0, 0xa6, 0xbe, 0x0d, 0xff, 0x1f, 0x86, 0xa6, 0xdd, 0x99, 0x29, 0x49, 0xcf,
+	0xc7, 0xa6, 0xe3, 0x61, 0x9f, 0x16, 0x9d, 0x54, 0x22, 0xa7, 0x0b, 0x86, 0xe2, 0x35, 0x77, 0x68,
+	0x2f, 0xa9, 0x41, 0x18, 0xc8, 0xe9, 0x92, 0xa1, 0xd8, 0xe7, 0x0e, 0xc9, 0x0b, 0x5e, 0x95, 0x60,
+	0x44, 0x2e, 0x8c, 0xa0, 0x01, 0xf3, 0xe3, 0x8b, 0x7b, 0x96, 0xcc, 0x36, 0xc9, 0x64, 0x92, 0xec,
+	0xa6, 0x2f, 0x6f, 0x95, 0xa9, 0x3b, 0x3e, 0x37, 0xb6, 0xcf, 0xf8, 0xf2, 0x24, 0x22, 0x1b, 0xec,
+	0x1f, 0xa1, 0x9b, 0x74, 0x87, 0x91, 0x5c, 0xe1, 0xc5, 0xbb, 0x90, 0x2d, 0x58, 0xcf, 0x35, 0x1f,
+	0xe1, 0xc9, 0x7b, 0x44, 0xaf, 0x9b, 0xaf, 0x3e, 0x42, 0xdf, 0x7d, 0x84, 0x7e, 0xfa, 0x08, 0x7d,
+	0xfc, 0x46, 0x67, 0xe9, 0xd2, 0xaa, 0x3c, 0xfc, 0x05, 0x00, 0x00, 0xff, 0xff, 0x8a, 0x61, 0x3c,
+	0xd5, 0x6d, 0x01, 0x00, 0x00,
 }
 
 func (m *Message) Marshal() (dAtA []byte, err error) {
@@ -155,6 +169,27 @@ func (m *Message) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	if m.XXX_unrecognized != nil {
 		i -= len(m.XXX_unrecognized)
 		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if len(m.Metadata) > 0 {
+		for k := range m.Metadata {
+			v := m.Metadata[k]
+			baseI := i
+			if len(v) > 0 {
+				i -= len(v)
+				copy(dAtA[i:], v)
+				i = encodeVarintMessage(dAtA, i, uint64(len(v)))
+				i--
+				dAtA[i] = 0x12
+			}
+			i -= len(k)
+			copy(dAtA[i:], k)
+			i = encodeVarintMessage(dAtA, i, uint64(len(k)))
+			i--
+			dAtA[i] = 0xa
+			i = encodeVarintMessage(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x3a
+		}
 	}
 	if m.Created != 0 {
 		i = encodeVarintMessage(dAtA, i, uint64(m.Created))
@@ -238,6 +273,18 @@ func (m *Message) Size() (n int) {
 	}
 	if m.Created != 0 {
 		n += 1 + sovMessage(uint64(m.Created))
+	}
+	if len(m.Metadata) > 0 {
+		for k, v := range m.Metadata {
+			_ = k
+			_ = v
+			l = 0
+			if len(v) > 0 {
+				l = 1 + len(v) + sovMessage(uint64(len(v)))
+			}
+			mapEntrySize := 1 + len(k) + sovMessage(uint64(len(k))) + l
+			n += mapEntrySize + 1 + sovMessage(uint64(mapEntrySize))
+		}
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -461,16 +508,141 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 					break
 				}
 			}
+		case 7:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Metadata", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMessage
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthMessage
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthMessage
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Metadata == nil {
+				m.Metadata = make(map[string][]byte)
+			}
+			var mapkey string
+			mapvalue := []byte{}
+			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
+				var wire uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowMessage
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					wire |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					var stringLenmapkey uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowMessage
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						stringLenmapkey |= uint64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					intStringLenmapkey := int(stringLenmapkey)
+					if intStringLenmapkey < 0 {
+						return ErrInvalidLengthMessage
+					}
+					postStringIndexmapkey := iNdEx + intStringLenmapkey
+					if postStringIndexmapkey < 0 {
+						return ErrInvalidLengthMessage
+					}
+					if postStringIndexmapkey > l {
+						return io.ErrUnexpectedEOF
+					}
+					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
+					iNdEx = postStringIndexmapkey
+				} else if fieldNum == 2 {
+					var mapbyteLen uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowMessage
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapbyteLen |= uint64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					intMapbyteLen := int(mapbyteLen)
+					if intMapbyteLen < 0 {
+						return ErrInvalidLengthMessage
+					}
+					postbytesIndex := iNdEx + intMapbyteLen
+					if postbytesIndex < 0 {
+						return ErrInvalidLengthMessage
+					}
+					if postbytesIndex > l {
+						return io.ErrUnexpectedEOF
+					}
+					mapvalue = make([]byte, mapbyteLen)
+					copy(mapvalue, dAtA[iNdEx:postbytesIndex])
+					iNdEx = postbytesIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipMessage(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if (skippy < 0) || (iNdEx+skippy) < 0 {
+						return ErrInvalidLengthMessage
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
+				}
+			}
+			m.Metadata[mapkey] = mapvalue
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipMessage(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
-			if skippy < 0 {
-				return ErrInvalidLengthMessage
-			}
-			if (iNdEx + skippy) < 0 {
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
 				return ErrInvalidLengthMessage
 			}
 			if (iNdEx + skippy) > l {

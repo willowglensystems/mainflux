@@ -3,6 +3,7 @@ module github.com/mainflux/mainflux
 go 1.14
 
 require (
+	github.com/Azure/go-amqp v0.13.7
 	github.com/BurntSushi/toml v0.3.1
 	github.com/cenkalti/backoff/v4 v4.1.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
@@ -16,6 +17,7 @@ require (
 	github.com/gofrs/uuid v3.3.0+incompatible
 	github.com/gogo/protobuf v1.3.1
 	github.com/golang/protobuf v1.4.2
+	github.com/google/uuid v1.2.0 // indirect
 	github.com/gopcua/opcua v0.1.6
 	github.com/hashicorp/vault/api v1.0.4
 	github.com/hokaccha/go-prettyjson v0.0.0-20190818114111-108c894c2c0e
@@ -40,11 +42,12 @@ require (
 	github.com/spf13/cobra v1.0.0
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.7.0
+	github.com/streadway/amqp v1.0.0 // indirect
 	github.com/stretchr/testify v1.6.1
 	github.com/subosito/gotenv v1.2.0
 	github.com/uber/jaeger-client-go v2.24.0+incompatible
 	go.mongodb.org/mongo-driver v1.3.5
-	golang.org/x/crypto v0.0.0-20200709230013-948cd5f35899
+	golang.org/x/crypto v0.0.0-20201002170205-7f63de1d35b0
 	golang.org/x/net v0.0.0-20200707034311-ab3426394381
 	golang.org/x/tools v0.0.0-20200502202811-ed308ab3e770 // indirect
 	gonum.org/v1/gonum v0.7.0
